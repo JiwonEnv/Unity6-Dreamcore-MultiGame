@@ -1,0 +1,14 @@
+{
+    "name": "DreamMovers.Editor",
+    "rootNamespace": "DreamMovers.Editor",
+    "references": [
+        "Unity.RenderPipelines.Universal.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true,
+    "noEngineReferences": false
+}
