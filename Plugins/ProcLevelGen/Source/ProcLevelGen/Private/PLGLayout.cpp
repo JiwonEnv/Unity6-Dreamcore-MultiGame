@@ -93,10 +93,12 @@ namespace PLG
 					return false;
 				}
 
-				// The end room goes as deep as it fits.
+				// The end room goes behind the open door farthest from the start. Loops can make a module closer than
+				// the branch it was placed on, so distances are measured over the doors as they are now.
+				const TArray<int32> Distance = DoorDistances(Layout);
 				TArray<FIntPoint> Deepest = Open;
 				Shuffle(Deepest, Rng);
-				Deepest.StableSort([this](const FIntPoint& A, const FIntPoint& B) { return Layout.Modules[A.X].Depth > Layout.Modules[B.X].Depth; });
+				Deepest.StableSort([&Distance](const FIntPoint& A, const FIntPoint& B) { return Distance[A.X] > Distance[B.X]; });
 				if (!PlaceRoleAtAny(EPLGRole::End, Deepest))
 				{
 					OutFailure = TEXT("the end room does not fit on any open door");
@@ -105,6 +107,11 @@ namespace PLG
 
 				PruneDeadEndCorridors();
 				AssignThemes();
+				const TArray<int32> Final = DoorDistances(Layout);
+				for (int32 i = 0; i < Layout.Modules.Num(); ++i)
+				{
+					Layout.Modules[i].Depth = Final[i];
+				}
 				return true;
 			}
 
@@ -321,6 +328,165 @@ namespace PLG
 		};
 	}
 
+	TArray<int32> DoorDistances(const FPLGLayout& Layout)
+	{
+		TArray<int32> Distance;
+		Distance.Init(INDEX_NONE, Layout.Modules.Num());
+		if (Layout.Modules.Num() == 0 || Layout.Modules[0].bRemoved)
+		{
+			return Distance;
+		}
+		TArray<int32> Queue = { 0 };
+		Distance[0] = 0;
+		for (int32 Head = 0; Head < Queue.Num(); ++Head)
+		{
+			const int32 Current = Queue[Head];
+			for (int32 Next : Layout.Modules[Current].Links)
+			{
+				if (Layout.Modules.IsValidIndex(Next) && !Layout.Modules[Next].bRemoved && Distance[Next] == INDEX_NONE)
+				{
+					Distance[Next] = Distance[Current] + 1;
+					Queue.Add(Next);
+				}
+			}
+		}
+		return Distance;
+	}
+
+	TArray<FString> ValidateLayout(const TArray<FPLGModuleDef>& Modules, const FPLGLayout& Layout, int32 RoomCount)
+	{
+		TArray<FString> Problems;
+		TArray<int32> Live;
+		for (int32 i = 0; i < Layout.Modules.Num(); ++i)
+		{
+			const FPLGPlacedModule& Placed = Layout.Modules[i];
+			if (!Modules.IsValidIndex(Placed.Def))
+			{
+				Problems.Add(FString::Printf(TEXT("module %d has no definition"), i));
+				return Problems;
+			}
+			if (!Placed.bRemoved)
+			{
+				Live.Add(i);
+			}
+		}
+		if (Live.Num() == 0 || Live[0] != 0)
+		{
+			Problems.Add(TEXT("no start module at index 0"));
+			return Problems;
+		}
+
+		int32 Counts[NumRoles] = {};
+		for (int32 i : Live)
+		{
+			++Counts[int32(Modules[Layout.Modules[i].Def].Role)];
+		}
+		struct FExpected
+		{
+			EPLGRole Role;
+			int32 Count;
+		};
+		const FExpected Expected[] = { { EPLGRole::Start, 1 }, { EPLGRole::Hub, 1 }, { EPLGRole::End, 1 }, { EPLGRole::Room, RoomCount } };
+		for (const FExpected& Want : Expected)
+		{
+			if (Counts[int32(Want.Role)] != Want.Count)
+			{
+				Problems.Add(FString::Printf(TEXT("%d module(s) with role %d, expected %d"), Counts[int32(Want.Role)], int32(Want.Role), Want.Count));
+			}
+		}
+
+		for (int32 a = 0; a < Live.Num(); ++a)
+		{
+			const FBox2D BoxA = Footprint(Modules[Layout.Modules[Live[a]].Def], Layout.Modules[Live[a]]).ExpandBy(-MatchTolerance);
+			for (int32 b = a + 1; b < Live.Num(); ++b)
+			{
+				if (BoxA.Intersect(Footprint(Modules[Layout.Modules[Live[b]].Def], Layout.Modules[Live[b]]).ExpandBy(-MatchTolerance)))
+				{
+					Problems.Add(FString::Printf(TEXT("modules %d and %d overlap"), Live[a], Live[b]));
+				}
+			}
+		}
+
+		for (int32 i : Live)
+		{
+			const FPLGPlacedModule& Placed = Layout.Modules[i];
+			const FPLGModuleDef& Def = Modules[Placed.Def];
+			if (Placed.Links.Num() != Def.Sockets.Num())
+			{
+				Problems.Add(FString::Printf(TEXT("module %d has %d links for %d sockets"), i, Placed.Links.Num(), Def.Sockets.Num()));
+				continue;
+			}
+			int32 NumLinks = 0;
+			for (int32 S = 0; S < Placed.Links.Num(); ++S)
+			{
+				const int32 Other = Placed.Links[S];
+				if (Other == INDEX_NONE)
+				{
+					continue;
+				}
+				++NumLinks;
+				if (!Layout.Modules.IsValidIndex(Other) || Layout.Modules[Other].bRemoved)
+				{
+					Problems.Add(FString::Printf(TEXT("door %d:%d leads to a missing module %d"), i, S, Other));
+					continue;
+				}
+				const FPLGPlacedModule& OtherPlaced = Layout.Modules[Other];
+				const FPLGModuleDef& OtherDef = Modules[OtherPlaced.Def];
+				const FVector2D Point = SocketWorldPoint(Def, Placed, Def.Sockets[S]);
+				bool bMeets = false;
+				for (int32 B = 0; B < OtherPlaced.Links.Num() && B < OtherDef.Sockets.Num(); ++B)
+				{
+					bMeets |= OtherPlaced.Links[B] == i && FVector2D::Distance(SocketWorldPoint(OtherDef, OtherPlaced, OtherDef.Sockets[B]), Point) < MatchTolerance;
+				}
+				if (!bMeets)
+				{
+					Problems.Add(FString::Printf(TEXT("door %d:%d -> %d does not meet a door back"), i, S, Other));
+				}
+			}
+			if (Def.Role == EPLGRole::Corridor && NumLinks < 2)
+			{
+				Problems.Add(FString::Printf(TEXT("dead-end corridor %d"), i));
+			}
+		}
+
+		const TArray<int32> Distance = DoorDistances(Layout);
+		for (int32 i : Live)
+		{
+			if (Distance[i] == INDEX_NONE)
+			{
+				Problems.Add(FString::Printf(TEXT("module %d is unreachable from the start"), i));
+			}
+			else if (Layout.Modules[i].Depth != Distance[i])
+			{
+				Problems.Add(FString::Printf(TEXT("module %d depth %d, door distance %d"), i, Layout.Modules[i].Depth, Distance[i]));
+			}
+		}
+		return Problems;
+	}
+
+	uint32 HashLayout(const FPLGLayout& Layout)
+	{
+		uint32 Hash = GetTypeHash(Layout.Modules.Num());
+		for (const FPLGPlacedModule& Placed : Layout.Modules)
+		{
+			Hash = HashCombineFast(Hash, GetTypeHash(Placed.bRemoved));
+			if (Placed.bRemoved)
+			{
+				continue;
+			}
+			Hash = HashCombineFast(Hash, GetTypeHash(Placed.Def));
+			Hash = HashCombineFast(Hash, GetTypeHash(FMath::RoundToInt(Placed.Location.X)));
+			Hash = HashCombineFast(Hash, GetTypeHash(FMath::RoundToInt(Placed.Location.Y)));
+			Hash = HashCombineFast(Hash, GetTypeHash(Placed.Quarter));
+			Hash = HashCombineFast(Hash, GetTypeHash(Placed.Theme));
+			for (int32 Link : Placed.Links)
+			{
+				Hash = HashCombineFast(Hash, GetTypeHash(Link));
+			}
+		}
+		return Hash;
+	}
+
 	FVector2D Rotate(const FVector2D& V, int32 Quarter)
 	{
 		switch (((Quarter % 4) + 4) % 4)
@@ -467,16 +633,33 @@ namespace PLG
 			return Point;
 		};
 		// Desk on four legs with 80 cm under the top: a crouched 60 cm doll fits, a standing one does not.
+		// A tablecloth hangs on all four sides down to 65 cm, so a doll fully under the top is covered from the low
+		// angles the candlelight reaches it at from a few meters away; one that sticks out past the edge is not.
 		auto Desk = [](float X, float Y, float SizeX, float SizeY)
 		{
 			constexpr float Clearance = 80.f;
 			constexpr float Top = 5.f;
 			constexpr float Leg = 8.f;
+			constexpr float ClothBottom = 65.f;
+			constexpr float Cloth = 3.f;
 			TArray<FPLGPropBox> Boxes;
 			FPLGPropBox Board;
 			Board.Center = FVector(X, Y, Clearance + Top * 0.5f);
 			Board.Size = FVector(SizeX, SizeY, Top);
 			Boxes.Add(Board);
+			const float ClothZ = (ClothBottom + Clearance) * 0.5f;
+			const float ClothHeight = Clearance - ClothBottom;
+			for (const float Side : { -1.f, 1.f })
+			{
+				FPLGPropBox Long;
+				Long.Center = FVector(X, Y + Side * (SizeY - Cloth) * 0.5f, ClothZ);
+				Long.Size = FVector(SizeX, Cloth, ClothHeight);
+				Boxes.Add(Long);
+				FPLGPropBox Short;
+				Short.Center = FVector(X + Side * (SizeX - Cloth) * 0.5f, Y, ClothZ);
+				Short.Size = FVector(Cloth, SizeY - 2.f * Cloth, ClothHeight);
+				Boxes.Add(Short);
+			}
 			const FVector2D Corners[] = { FVector2D(-1.f, -1.f), FVector2D(-1.f, 1.f), FVector2D(1.f, -1.f), FVector2D(1.f, 1.f) };
 			for (const FVector2D& Corner : Corners)
 			{

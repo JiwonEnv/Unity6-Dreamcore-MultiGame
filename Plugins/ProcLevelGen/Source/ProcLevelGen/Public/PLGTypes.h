@@ -148,7 +148,7 @@ struct PROCLEVELGEN_API FPLGPlacedModule
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Layout")
 	int32 Quarter = 0;
 
-	/** Doors away from the start module. */
+	/** Shortest distance from the start module, counted in doors (loops included). INDEX_NONE when removed. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Layout")
 	int32 Depth = 0;
 

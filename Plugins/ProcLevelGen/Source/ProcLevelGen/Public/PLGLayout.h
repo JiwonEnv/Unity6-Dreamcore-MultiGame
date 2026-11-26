@@ -33,13 +33,27 @@ namespace PLG
 
 	PROCLEVELGEN_API FBox2D Footprint(const FPLGModuleDef& Def, const FPLGPlacedModule& Placed);
 
+	/** Shortest distance from the start module (index 0) to every module, counted in doors; INDEX_NONE if unreachable or removed. */
+	PROCLEVELGEN_API TArray<int32> DoorDistances(const FPLGLayout& Layout);
+
+	/**
+	 * Independent check of a finished layout, one line per problem (empty when valid): one start, hub and end,
+	 * RoomCount rooms, no overlapping footprints, every door link two-way and meeting at one point, everything
+	 * reachable from the start, no dead-end corridors, and Depth equal to the door distance.
+	 */
+	PROCLEVELGEN_API TArray<FString> ValidateLayout(const TArray<FPLGModuleDef>& Modules, const FPLGLayout& Layout, int32 RoomCount);
+
+	/** Hash of what the layout builds (modules, placement, themes, links); equal layouts give equal hashes. */
+	PROCLEVELGEN_API uint32 HashLayout(const FPLGLayout& Layout);
+
 	/** Grid and socket rule violations, one line each (empty when the catalog follows the spec). */
 	PROCLEVELGEN_API TArray<FString> ValidateModules(const TArray<FPLGModuleDef>& Modules, float Grid);
 
 	/**
 	 * Start at the origin, the hub on one of its doors, then rooms and corridors on random open doors until
-	 * RoomCount rooms are in, then the end room as deep as it fits. Dead-end corridors are removed and rooms get
-	 * themes. Retries with derived seeds; returns false (and why in OutReport) if no attempt succeeds.
+	 * RoomCount rooms are in, then the end room on the open door farthest from the start (shortest distance in doors,
+	 * loops included) where it fits. Dead-end corridors are removed and rooms get themes. Retries with derived seeds;
+	 * returns false (and why in OutReport) if no attempt succeeds.
 	 */
 	PROCLEVELGEN_API bool GenerateLayout(const FPLGLayoutSettings& Settings, int32 Seed, FPLGLayout& OutLayout, FString& OutReport);
 

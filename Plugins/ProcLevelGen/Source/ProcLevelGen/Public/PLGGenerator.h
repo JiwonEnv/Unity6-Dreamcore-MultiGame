@@ -8,11 +8,13 @@
 
 class APLGGenerator;
 class UInstancedStaticMeshComponent;
+class UNavigationSystemV1;
 class UMaterialInterface;
 class UStaticMesh;
 class UTextRenderComponent;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPLGOnGenerated, APLGGenerator*, Generator);
+/** bSucceeded is false when no seed produced a valid layout; nothing was built then. */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPLGOnGenerated, APLGGenerator*, Generator, bool, bSucceeded);
 
 /**
  * Drop one in a level: on BeginPlay it assembles the module kit from a seed and builds graybox floors and walls.
@@ -41,6 +43,22 @@ public:
 	void ClearPreview();
 
 	const FPLGLayout& GetLayout() const { return Layout; }
+	/** The last generation produced a layout that passed PLG::ValidateLayout and was built. */
+	bool IsGenerated() const { return bGenerationSucceeded; }
+	uint32 GetLayoutHash() const;
+
+	/**
+	 * Server: the navmesh covers the built layout. Nav data exists, no build is pending, and every module has navmesh
+	 * near its pivot (within a quarter of its size, inside its own footprint). Says what is missing otherwise.
+	 */
+	bool IsNavigationReady(FString& OutWhy) const;
+
+	/**
+	 * Checks the built layout and reports each result: generation succeeded, the layout is valid, graybox exists,
+	 * the first player stands on generated floor, and navigation reaches every module from the start.
+	 * A module with no navmesh near its pivot counts as not reached. Returns the number of failures.
+	 */
+	int32 RunGenerationChecks(TFunctionRef<void(bool /*bPassed*/, const FString& /*What*/)> Report) const;
 	const TArray<FPLGModuleDef>& GetModules() const { return Modules; }
 	const TArray<FPLGTheme>& GetThemes() const { return Themes; }
 	int32 GetSeed() const { return Seed; }
@@ -56,7 +74,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Generation")
 	FTransform GetModuleTransform(int32 PlacedIndex) const;
 
-	/** Fired on every machine after a layout is built. Content spawning hooks in here. */
+	/** Fired on every machine after generation, successful or not. Content spawning hooks in here. */
 	UPROPERTY(BlueprintAssignable, Category = "Generation")
 	FPLGOnGenerated OnGenerated;
 
@@ -74,6 +92,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Generation", meta = (ClampMin = "0", ClampMax = "1"))
 	float CorridorChance = 0.45f;
+
+	/** Server: further seeds tried when a seed gives no valid layout (each seed already retries internally). */
+	UPROPERTY(EditAnywhere, Category = "Generation", meta = (ClampMin = "0", ClampMax = "16"))
+	int32 MaxSeedRetries = 3;
 
 	/** Modules stay within this distance (cm) of the generator, so one nav bounds volume can cover the house. */
 	UPROPERTY(EditAnywhere, Category = "Generation", meta = (ClampMin = "1000"))
@@ -126,9 +148,16 @@ private:
 	UFUNCTION()
 	void OnRep_Seed();
 
-	void Generate();
+	/** Builds the layout for Seed. With bAllowReseed (server), tries up to MaxSeedRetries more seeds and keeps the one that worked. */
+	void Generate(bool bAllowReseed);
+
+	UPROPERTY(VisibleInstanceOnly, Transient, Category = "Generation")
+	bool bGenerationSucceeded = false;
 	void BuildGraybox();
 	void AddModuleGeometry(const FPLGPlacedModule& Placed, const FTransform& ModuleToWorld);
+
+	/** Navmesh point near a module's pivot and inside its footprint (see IsNavigationReady). */
+	bool ProjectIntoModule(UNavigationSystemV1& Nav, int32 PlacedIndex, FVector& OutPoint) const;
 
 	/** Graybox mesh for one color, created on demand. */
 	UInstancedStaticMeshComponent* GetBoxes(const FLinearColor& Color);

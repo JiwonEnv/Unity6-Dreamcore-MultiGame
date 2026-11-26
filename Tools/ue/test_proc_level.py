@@ -2,9 +2,11 @@
 
   UnrealEditor-Cmd.exe DreamMovers.uproject -ExecutePythonScript="Tools/ue/test_proc_level.py"
 
-For every seed: one start / hub / end, RoomCount rooms, no overlapping footprints, every door link is two-way and
-meets at the same point, everything is reachable from the start, no dead-end corridors, the first rooms do not repeat
-a theme, and graybox instances were built. Prints [PLGTest] PASS/FAIL lines; nothing is saved.
+For every seed: generation succeeded, one start / hub / end, RoomCount rooms, no overlapping footprints, every door
+link is two-way and meets at the same point, everything is reachable from the start, Depth equals the shortest
+distance in doors (loops included), no dead-end corridors, the first rooms do not repeat a theme, graybox instances
+were built, and building the same seed again gives exactly the same layout. Prints [PLGTest] PASS/FAIL lines;
+nothing is saved.
 """
 import unreal
 
@@ -44,7 +46,27 @@ def overlaps(a, b):
     return not (a[0] > b[2] or b[0] > a[2] or a[1] > b[3] or b[1] > a[3])
 
 
+def signature(gen):
+    """Everything the layout builds, for comparing two runs of the same seed."""
+    return [(m.def_, round(m.location.x), round(m.location.y), m.quarter, m.theme, tuple(m.links), m.removed, m.depth)
+            for m in gen.get_editor_property("layout").modules]
+
+
+def door_distances(mods):
+    dist = {0: 0}
+    queue = [0]
+    while queue:
+        i = queue.pop(0)
+        for o in mods[i].links:
+            if o >= 0 and not mods[o].removed and o not in dist:
+                dist[o] = dist[i] + 1
+                queue.append(o)
+    return dist
+
+
 def check(gen, defs, room_count, num_themes):
+    if not gen.get_editor_property("generation_succeeded"):
+        return "generation did not succeed"
     mods = list(gen.get_editor_property("layout").modules)
     live = [i for i, m in enumerate(mods) if not m.removed]
     if not live:
@@ -83,6 +105,10 @@ def check(gen, defs, room_count, num_themes):
                 stack.append(o)
     if seen != set(live):
         return f"{len(set(live) - seen)} module(s) unreachable from the start"
+    dist = door_distances(mods)
+    for i in live:
+        if mods[i].depth != dist.get(i, -1):
+            return f"module {i} depth {mods[i].depth} but {dist.get(i, -1)} doors from the start"
     themes = [mods[i].theme for i in live if defs[mods[i].def_].role == R.ROOM]
     first = themes[:num_themes]
     if len(set(first)) != len(first):
@@ -108,6 +134,11 @@ def main():
         gen.set_editor_property("seed", seed)
         gen.preview()
         problem = check(gen, defs, room_count, num_themes)
+        if not problem:
+            first = signature(gen)
+            gen.preview()
+            if signature(gen) != first:
+                problem = "the same seed built a different layout the second time"
         if problem:
             failures += 1
             log(f"FAIL seed {seed}: {problem}")

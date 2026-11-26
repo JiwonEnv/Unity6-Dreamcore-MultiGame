@@ -11,6 +11,7 @@
 #include "Misc/CommandLine.h"
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
+#include "NavMesh/RecastNavMesh.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
 #include "Net/UnrealNetwork.h"
@@ -58,7 +59,29 @@ void APLGGenerator::BeginPlay()
 		{
 			Seed = FMath::RandRange(1, MAX_int32 - 1);
 		}
-		Generate();
+#if !UE_BUILD_SHIPPING
+		// Test hooks: -plgseed=N fixes the seed, -plgtestkit=empty|impossible makes generation fail on purpose.
+		int32 ForcedSeed = 0;
+		if (FParse::Value(FCommandLine::Get(), TEXT("plgseed="), ForcedSeed) && ForcedSeed != 0)
+		{
+			Seed = ForcedSeed;
+		}
+		FString TestKit;
+		if (FParse::Value(FCommandLine::Get(), TEXT("plgtestkit="), TestKit))
+		{
+			if (TestKit == TEXT("empty"))
+			{
+				Modules.Reset();
+			}
+			else if (TestKit == TEXT("impossible"))
+			{
+				// The start and the hub alone need more room than this.
+				MaxHalfExtent = 1000.f;
+			}
+			UE_LOG(LogProcLevelGen, Warning, TEXT("%s: test kit '%s'"), *GetName(), *TestKit);
+		}
+#endif
+		Generate(true);
 #if !UE_BUILD_SHIPPING
 		if (FParse::Param(FCommandLine::Get(), TEXT("plgselftest")))
 		{
@@ -70,13 +93,14 @@ void APLGGenerator::BeginPlay()
 	else if (!bNewSeedEachRun)
 	{
 		// The saved seed is the server's seed too, so OnRep may never fire.
-		Generate();
+		Generate(false);
 	}
 }
 
 void APLGGenerator::OnRep_Seed()
 {
-	Generate();
+	// Clients build exactly the seed the server settled on.
+	Generate(false);
 }
 
 void APLGGenerator::Preview()
@@ -85,13 +109,13 @@ void APLGGenerator::Preview()
 	{
 		Seed = 1;
 	}
-	Generate();
+	Generate(false);
 }
 
 void APLGGenerator::PreviewNewSeed()
 {
 	Seed = FMath::RandRange(1, MAX_int32 - 1);
-	Generate();
+	Generate(false);
 }
 
 void APLGGenerator::ClearPreview()
@@ -143,7 +167,12 @@ FRandomStream APLGGenerator::MakeContentStream() const
 	return FRandomStream(int32(HashCombineFast(uint32(Seed), 0x5EEDC0DEu)));
 }
 
-void APLGGenerator::Generate()
+uint32 APLGGenerator::GetLayoutHash() const
+{
+	return PLG::HashLayout(Layout);
+}
+
+void APLGGenerator::Generate(bool bAllowReseed)
 {
 	for (const FString& Problem : PLG::ValidateModules(Modules, GridSize))
 	{
@@ -157,10 +186,29 @@ void APLGGenerator::Generate()
 	Settings.CorridorChance = CorridorChance;
 	Settings.MaxHalfExtent = MaxHalfExtent;
 
-	FString Report;
-	if (PLG::GenerateLayout(Settings, Seed, Layout, Report))
+	bGenerationSucceeded = false;
+	const int32 FirstSeed = Seed;
+	const int32 Tries = 1 + (bAllowReseed ? MaxSeedRetries : 0);
+	for (int32 Try = 0; Try < Tries && !bGenerationSucceeded; ++Try)
 	{
-		UE_LOG(LogProcLevelGen, Log, TEXT("%s: %s"), *GetName(), *Report);
+		const int32 TrySeed = Try == 0 ? FirstSeed : FMath::Max(1, int32(HashCombineFast(uint32(FirstSeed), uint32(0xA11CE + Try)) & 0x7FFFFFFF));
+		FString Report;
+		if (!PLG::GenerateLayout(Settings, TrySeed, Layout, Report))
+		{
+			UE_LOG(LogProcLevelGen, Error, TEXT("%s: %s"), *GetName(), *Report);
+			continue;
+		}
+		// Check the result on its own before trusting it, also when a fallback seed made it.
+		const TArray<FString> Problems = PLG::ValidateLayout(Modules, Layout, RoomCount);
+		if (Problems.Num() > 0)
+		{
+			UE_LOG(LogProcLevelGen, Error, TEXT("%s: seed %d gave an invalid layout: %s"), *GetName(), TrySeed, *FString::Join(Problems, TEXT("; ")));
+			continue;
+		}
+		Seed = TrySeed;
+		bGenerationSucceeded = true;
+		UE_LOG(LogProcLevelGen, Log, TEXT("%s: %s, layout hash %08x%s"), *GetName(), *Report, GetLayoutHash(),
+			Try > 0 ? *FString::Printf(TEXT(" (fallback %d after seed %d failed)"), Try, FirstSeed) : TEXT(""));
 		for (int32 i = 0; i < Layout.Modules.Num(); ++i)
 		{
 			const FPLGPlacedModule& Placed = Layout.Modules[i];
@@ -171,13 +219,168 @@ void APLGGenerator::Generate()
 			}
 		}
 	}
-	else
+	if (!bGenerationSucceeded)
 	{
-		UE_LOG(LogProcLevelGen, Error, TEXT("%s: %s"), *GetName(), *Report);
+		Layout = FPLGLayout();
+		UE_LOG(LogProcLevelGen, Error, TEXT("%s: generation failed after %d seed(s), starting from seed %d; nothing was built"), *GetName(), Tries, FirstSeed);
 	}
 
 	BuildGraybox();
-	OnGenerated.Broadcast(this);
+	if (bGenerationSucceeded && GetWorld()->IsGameWorld())
+	{
+		// The whole house just appeared: rebuild the navmesh over all of it rather than relying on per-instance updates.
+		if (UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld()))
+		{
+			FBox2D Area(ForceInit);
+			for (const FPLGPlacedModule& Placed : Layout.Modules)
+			{
+				if (!Placed.bRemoved)
+				{
+					Area += PLG::Footprint(Modules[Placed.Def], Placed);
+				}
+			}
+			const FBox Local(FVector(Area.Min, -FloorThickness - 10.f), FVector(Area.Max, WallHeight + 10.f));
+			Nav->AddDirtyArea(Local.TransformBy(GetActorTransform()), ENavigationDirtyFlag::All, TEXT("PLGLayoutBuilt"));
+		}
+	}
+	OnGenerated.Broadcast(this, bGenerationSucceeded);
+}
+
+bool APLGGenerator::IsNavigationReady(FString& OutWhy) const
+{
+	UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	if (!Nav || !Nav->GetDefaultNavDataInstance(FNavigationSystem::DontCreate))
+	{
+		OutWhy = TEXT("no navigation data");
+		return false;
+	}
+	if (Nav->IsNavigationBuildInProgress())
+	{
+		OutWhy = TEXT("navmesh build in progress");
+		return false;
+	}
+	for (int32 i = 0; i < Layout.Modules.Num(); ++i)
+	{
+		FVector OnNav;
+		if (!Layout.Modules[i].bRemoved && !ProjectIntoModule(*Nav, i, OnNav))
+		{
+			const ARecastNavMesh* Recast = Cast<ARecastNavMesh>(Nav->GetDefaultNavDataInstance(FNavigationSystem::DontCreate));
+			OutWhy = FString::Printf(TEXT("module %d has no navmesh near its pivot yet (%s, %d tiles)"), i, *GetNameSafe(Recast), Recast ? Recast->GetNavMeshTilesCount() : -1);
+			return false;
+		}
+	}
+	OutWhy.Reset();
+	return true;
+}
+
+bool APLGGenerator::ProjectIntoModule(UNavigationSystemV1& Nav, int32 PlacedIndex, FVector& OutPoint) const
+{
+	// Within a quarter of the module's size of its pivot, so furniture on the pivot does not matter,
+	// and inside its own footprint, so a neighbor's navmesh does not count.
+	const FPLGPlacedModule& Placed = Layout.Modules[PlacedIndex];
+	const FPLGModuleDef& Def = Modules[Placed.Def];
+	const float Reach = FMath::Min(Def.Size.X, Def.Size.Y) * 0.25f;
+	FNavLocation OnNav;
+	if (!Nav.ProjectPointToNavigation(GetModuleTransform(PlacedIndex).GetLocation(), OnNav, FVector(Reach, Reach, 150.f)))
+	{
+		return false;
+	}
+	const FVector Local = GetActorTransform().InverseTransformPosition(OnNav.Location);
+	if (!PLG::Footprint(Def, Placed).IsInside(FVector2D(Local.X, Local.Y)))
+	{
+		return false;
+	}
+	OutPoint = OnNav.Location;
+	return true;
+}
+
+int32 APLGGenerator::RunGenerationChecks(TFunctionRef<void(bool, const FString&)> Report) const
+{
+	int32 Failures = 0;
+	auto Check = [&](bool bPassed, const FString& What)
+	{
+		Failures += bPassed ? 0 : 1;
+		Report(bPassed, What);
+	};
+
+	int32 Live = 0;
+	for (const FPLGPlacedModule& Placed : Layout.Modules)
+	{
+		Live += Placed.bRemoved ? 0 : 1;
+	}
+	Check(bGenerationSucceeded && Live > 0, FString::Printf(TEXT("generation succeeded: seed %d, %d modules, layout hash %08x"), Seed, Live, GetLayoutHash()));
+	if (!bGenerationSucceeded)
+	{
+		return Failures;
+	}
+	const TArray<FString> Problems = PLG::ValidateLayout(Modules, Layout, RoomCount);
+	Check(Problems.Num() == 0, Problems.Num() == 0 ? FString(TEXT("layout passes ValidateLayout")) : FString::Printf(TEXT("layout invalid: %s"), *FString::Join(Problems, TEXT("; "))));
+
+	int32 Instances = 0;
+	for (const UInstancedStaticMeshComponent* Component : Boxes)
+	{
+		Instances += Component ? Component->GetInstanceCount() : 0;
+	}
+	Check(Instances > 0, FString::Printf(TEXT("%d graybox boxes built"), Instances));
+
+	// The player spawned in the start module and stands on generated floor, not falling through.
+	const APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	const APawn* Pawn = PC ? PC->GetPawn() : nullptr;
+	if (Pawn)
+	{
+		FHitResult Hit;
+		FCollisionQueryParams Params(SCENE_QUERY_STAT(PLGSelfTest), false, Pawn);
+		const FVector From = Pawn->GetActorLocation();
+		const bool bFloor = GetWorld()->LineTraceSingleByChannel(Hit, From, From - FVector(0.f, 0.f, 300.f), ECC_Visibility, Params) && Hit.GetActor() == this;
+		Check(bFloor && FMath::Abs(Pawn->GetVelocity().Z) < 10.f,
+			FString::Printf(TEXT("player stands on the generated floor (z %.0f, vz %.0f)"), From.Z, Pawn->GetVelocity().Z));
+	}
+	else
+	{
+		Check(false, TEXT("player has a pawn"));
+	}
+
+	// Navigation from the start module reaches every module. A module with no navmesh near its pivot is a failure, not skipped.
+	UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	if (!Nav)
+	{
+		Check(false, TEXT("navigation system exists"));
+		return Failures;
+	}
+	FVector StartOnNav;
+	if (!ProjectIntoModule(*Nav, 0, StartOnNav))
+	{
+		Check(false, TEXT("start module has navmesh near its pivot"));
+		return Failures;
+	}
+	int32 Reached = 0;
+	FString Missed;
+	for (int32 i = 1; i < Layout.Modules.Num(); ++i)
+	{
+		if (Layout.Modules[i].bRemoved)
+		{
+			continue;
+		}
+		const FString Name = FString::Printf(TEXT("%s[%d]"), *Modules[Layout.Modules[i].Def].Name.ToString(), i);
+		FVector GoalOnNav;
+		if (!ProjectIntoModule(*Nav, i, GoalOnNav))
+		{
+			Missed += TEXT(" ") + Name + TEXT("(no navmesh near its pivot)");
+			continue;
+		}
+		const UNavigationPath* Path = Nav->FindPathToLocationSynchronously(GetWorld(), StartOnNav, GoalOnNav);
+		if (Path && Path->IsValid() && !Path->IsPartial())
+		{
+			++Reached;
+		}
+		else
+		{
+			Missed += TEXT(" ") + Name + (Path && Path->IsValid() ? TEXT("(partial path)") : TEXT("(no path)"));
+		}
+	}
+	Check(Missed.IsEmpty(), FString::Printf(TEXT("navigation reaches %d/%d modules from the start%s"), Reached, Live - 1,
+		Missed.IsEmpty() ? TEXT("") : *(TEXT(", missed:") + Missed)));
+	return Failures;
 }
 
 UInstancedStaticMeshComponent* APLGGenerator::GetBoxes(const FLinearColor& Color)
@@ -230,7 +433,8 @@ void APLGGenerator::BuildGraybox()
 		const FTransform ModuleToWorld = GetModuleTransform(i);
 		AddModuleGeometry(Placed, ModuleToWorld);
 
-		if (bShowLabels)
+		// Labels are for the editor's top view only; in a game they would just be extra primitives on the floor.
+		if (bShowLabels && !GetWorld()->IsGameWorld())
 		{
 			FString Text = Modules[Placed.Def].Name.ToString();
 			if (Themes.IsValidIndex(Placed.Theme))
@@ -247,6 +451,9 @@ void APLGGenerator::BuildGraybox()
 			Label->SetTextRenderColor(FColor::Black);
 			// Readable from the editor's top view; players never see it.
 			Label->SetHiddenInGame(true);
+			// A label must not cut a hole in the navmesh at every module pivot.
+			Label->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			Label->SetCanEverAffectNavigation(false);
 			Label->SetupAttachment(GetRootComponent());
 			Label->SetWorldLocationAndRotation(ModuleToWorld.TransformPosition(FVector(0.f, 0.f, 10.f)), FRotator(90.f, ModuleToWorld.Rotator().Yaw, 0.f));
 			Label->RegisterComponent();
@@ -345,92 +552,7 @@ void APLGGenerator::SelfTestCheck(bool bPassed, const FString& What)
 
 void APLGGenerator::RunSelfTestChecks()
 {
-	int32 Live = 0;
-	int32 StartIndex = INDEX_NONE;
-	for (int32 i = 0; i < Layout.Modules.Num(); ++i)
-	{
-		if (!Layout.Modules[i].bRemoved)
-		{
-			++Live;
-			StartIndex = StartIndex == INDEX_NONE ? i : StartIndex;
-		}
-	}
-	SelfTestCheck(Live > 0, FString::Printf(TEXT("seed %d built %d modules"), Seed, Live));
-
-	int32 Instances = 0;
-	for (const UInstancedStaticMeshComponent* Component : Boxes)
-	{
-		Instances += Component ? Component->GetInstanceCount() : 0;
-	}
-	SelfTestCheck(Instances > 0, FString::Printf(TEXT("%d graybox boxes"), Instances));
-
-	// The player spawned in the start module and is standing on generated floor, not falling through.
-	const APlayerController* PC = GetWorld()->GetFirstPlayerController();
-	const APawn* Pawn = PC ? PC->GetPawn() : nullptr;
-	if (Pawn)
-	{
-		FHitResult Hit;
-		FCollisionQueryParams Params(SCENE_QUERY_STAT(PLGSelfTest), false, Pawn);
-		const FVector From = Pawn->GetActorLocation();
-		const bool bFloor = GetWorld()->LineTraceSingleByChannel(Hit, From, From - FVector(0.f, 0.f, 300.f), ECC_Visibility, Params) && Hit.GetActor() == this;
-		SelfTestCheck(bFloor && FMath::Abs(Pawn->GetVelocity().Z) < 10.f,
-			FString::Printf(TEXT("player stands on the generated floor (z %.0f, vz %.0f)"), From.Z, Pawn->GetVelocity().Z));
-	}
-	else
-	{
-		SelfTestCheck(false, TEXT("player has a pawn"));
-	}
-
-	// Navigation from the start pivot reaches every module's pivot.
-	UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
-	if (Nav)
-	{
-		const ANavigationData* NavData = Nav->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
-		FNavLocation Projected;
-		const bool bOnNav = Nav->ProjectPointToNavigation(GetModuleTransform(StartIndex).GetLocation(), Projected, FVector(100.f, 100.f, 200.f));
-		UE_LOG(LogProcLevelGen, Display, TEXT("[PLGSelfTest] nav data %s, build in progress %d, start on navmesh %d"),
-			NavData ? *NavData->GetName() : TEXT("none"), Nav->IsNavigationBuildInProgress() ? 1 : 0, bOnNav ? 1 : 0);
-	}
-	if (Nav && StartIndex != INDEX_NONE)
-	{
-		// Path queries want points on the navmesh; module pivots sit on the floor top.
-		const FVector QueryExtent(100.f, 100.f, 200.f);
-		FNavLocation StartOnNav;
-		Nav->ProjectPointToNavigation(GetModuleTransform(StartIndex).GetLocation(), StartOnNav, QueryExtent);
-		const FVector Start = StartOnNav.Location;
-		int32 Reached = 0;
-		FString Missed;
-		for (int32 i = 0; i < Layout.Modules.Num(); ++i)
-		{
-			if (Layout.Modules[i].bRemoved || i == StartIndex)
-			{
-				continue;
-			}
-			FNavLocation GoalProjected;
-			Nav->ProjectPointToNavigation(GetModuleTransform(i).GetLocation(), GoalProjected, QueryExtent);
-			const FVector Goal = GoalProjected.Location;
-			const UNavigationPath* Path = Nav->FindPathToLocationSynchronously(GetWorld(), Start, Goal);
-			if (Path && Path->IsValid() && !Path->IsPartial())
-			{
-				++Reached;
-			}
-			else
-			{
-				Missed += FString::Printf(TEXT(" %s[%d]"), *Modules[Layout.Modules[i].Def].Name.ToString(), i);
-				FNavLocation GoalOnNav;
-				UE_LOG(LogProcLevelGen, Display, TEXT("[PLGSelfTest]   %s[%d]: path %s, %d points, goal on navmesh %d"), *Modules[Layout.Modules[i].Def].Name.ToString(), i,
-					!Path ? TEXT("null") : (!Path->IsValid() ? TEXT("invalid") : TEXT("partial")), Path ? Path->PathPoints.Num() : 0,
-					Nav->ProjectPointToNavigation(Goal, GoalOnNav, QueryExtent) ? 1 : 0);
-			}
-		}
-		SelfTestCheck(Missed.IsEmpty(), FString::Printf(TEXT("navigation reaches %d/%d modules from the start%s"), Reached, Live - 1,
-			Missed.IsEmpty() ? TEXT("") : *(TEXT(", missed:") + Missed)));
-	}
-	else
-	{
-		SelfTestCheck(false, TEXT("navigation system exists"));
-	}
-
+	RunGenerationChecks([this](bool bPassed, const FString& What) { SelfTestCheck(bPassed, What); });
 	FScreenshotRequest::RequestScreenshot(TEXT("PLGSelfTest_Player"), false, false);
 	FTimerHandle Handle;
 	GetWorldTimerManager().SetTimer(Handle, this, &APLGGenerator::TakeTopDownShot, 1.f, false);
@@ -470,7 +592,8 @@ void APLGGenerator::TakeTopDownShot()
 	GetWorldTimerManager().SetTimer(QuitHandle, FTimerDelegate::CreateWeakLambda(this, [this]()
 	{
 		UE_LOG(LogProcLevelGen, Display, TEXT("[PLGSelfTest] %s, %d failure(s)"), SelfTestFailures == 0 ? TEXT("ALL PASSED") : TEXT("FAILED"), SelfTestFailures);
-		FPlatformMisc::RequestExit(false);
+		// Non-zero exit code on failure. Forced: a normal exit request ignores the code in the editor executable.
+		FPlatformMisc::RequestExitWithStatus(true, SelfTestFailures == 0 ? 0 : 1);
 	}), 3.f, false);
 }
 #endif
