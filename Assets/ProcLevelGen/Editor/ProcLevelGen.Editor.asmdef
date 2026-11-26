@@ -1,0 +1,14 @@
+{
+    "name": "ProcLevelGen.Editor",
+    "rootNamespace": "ProcLevelGen.Editor",
+    "references": [
+        "ProcLevelGen"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true,
+    "noEngineReferences": false
+}

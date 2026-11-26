@@ -1,0 +1,12 @@
+{
+    "name": "ProcLevelGen",
+    "rootNamespace": "ProcLevelGen",
+    "references": [
+        "Unity.AI.Navigation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true,
+    "noEngineReferences": false
+}
