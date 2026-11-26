@@ -1,9 +1,10 @@
-# Unreal Engine 5 Oil Pastel Dreamcore Game
+# Unity6 Dreamcore MultiGame
 
-Unreal Engine 5 오일 파스텔·색연필 포스트 프로세스 연구 · Tripo 에셋의 텍스처 이음새를 종이 질감과 그레인으로 정리하고, 꿈이 깨질수록 연필 스케치만 남는 연출 실험 | 드림코어 저택 환경 아트 포트폴리오
+Unity 6 멀티플레이 드림코어 게임 · Tripo로 만든 에셋에 오일 파스텔·색연필 풀스크린 셰이더를 입히고, 꿈이 깨질수록 연필 스케치만 남는 연출 | 드림코어 저택 환경 아트 포트폴리오
 
-> **진행 중 · 현재 0단계 (기술 검증)**
-> 지금 화면은 박스와 기본 머티리얼로 만든 테스트 맵입니다. Tripo 에셋과 저택 환경은 다음 단계에서 들어갑니다.
+> **Unity로 이전 중**
+> Unreal Engine 5로 0단계(기술 검증)까지 진행한 뒤 Unity 6.3 LTS + URP로 옮기고 있습니다. 지금 Unity 쪽은 빈 프로젝트 뼈대만 있습니다.
+> UE5 버전은 태그 [`ue5-final`](../../tree/ue5-final)에 그대로 남아 있습니다. 아래 스크린샷과 셰이더 설명은 UE5 버전 기준입니다.
 
 ![테스트 맵 전체](Docs/proposal_images/1_test_map_overview.png)
 
@@ -17,7 +18,7 @@ Unreal Engine 5 오일 파스텔·색연필 포스트 프로세스 연구 · Tri
 
 ## 오일 파스텔 포스트 프로세스
 
-전체 화면 포스트 프로세스 머티리얼 하나에 다섯 단계를 넣었습니다. ([oil_pastel.hlsl](Tools/ue/oil_pastel.hlsl))
+UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯 단계를 넣었습니다. ([oil_pastel.hlsl](../../blob/ue5-final/Tools/ue/oil_pastel.hlsl)) Unity에서는 URP Full Screen Pass Renderer Feature로 다시 구현합니다.
 
 1. **Kuwahara 필터**: 색을 붓 터치 크기의 덩어리로 뭉개 유화처럼 보이게 합니다.
 2. **종이 결 위의 안료**: 절차적 종이 질감과 표면 방향을 따르는 해칭을 씌웁니다. 어두운 색은 결을 채우고, 밝은 색은 종이가 비쳐 보입니다.
@@ -28,8 +29,6 @@ Unreal Engine 5 오일 파스텔·색연필 포스트 프로세스 연구 · Tri
 | 1인칭 (잡기) | 뒷방 |
 |---|---|
 | ![1인칭 잡기](Docs/proposal_images/2_grab_first_person.png) | ![뒷방](Docs/proposal_images/3_back_room.png) |
-
-`Tools/ue/build_shader.py`가 HLSL을 머티리얼 Custom 노드에 붙여 넣고 파라미터를 연결합니다. 셰이더를 고칠 때는 HLSL을 수정한 뒤 스크립트를 다시 실행합니다.
 
 ## 환경 아트 계획
 
@@ -45,8 +44,8 @@ Unreal Engine 5 오일 파스텔·색연필 포스트 프로세스 연구 · Tri
 | 성물 예배실 | 어둡고 촛불이 많은 방 (저조도 셰이더 테스트) |
 | 다락 침실 | 2층, 계단 이동 |
 
-- **구조물**: 벽·바닥·계단·선반은 언리얼 모델링 모드로 직접 제작합니다.
-- **소품·캐릭터**: Tripo로 생성합니다. 운반 골동품은 3천 tri 이하로 리토폴로지하고, 랜드마크는 Nanite를 씁니다. ([Tripo_Asset_List.md](Docs/Tripo_Asset_List.md))
+- **구조물**: 벽·바닥·계단·선반은 직접 모델링합니다. (UE5에서는 모델링 모드를 썼고, Unity에서 쓸 도구는 다시 정합니다)
+- **소품·캐릭터**: Tripo로 생성합니다. 운반 골동품은 3천 tri 이하로 리토폴로지하고, 랜드마크는 고폴리곤을 유지합니다. (UE5 계획은 Nanite) ([Tripo_Asset_List.md](Docs/Tripo_Asset_List.md))
 - **스타일 통일**: 공통 프롬프트 문구와 같은 컨셉 이미지 세트로 생성하고, 남은 차이는 셰이더로 정리합니다.
 
 ## 게임: 꿈 수거반 (Dream Movers, 가제)
@@ -71,15 +70,18 @@ Unreal Engine 5 오일 파스텔·색연필 포스트 프로세스 연구 · Tri
 
 ## 실행
 
-- Unreal Engine 5.8, Visual Studio (C++ 빌드)
-- `DreamMovers.uproject`를 열고 모듈을 다시 빌드할지 물으면 **예**를 누릅니다.
-- 시작 맵은 `Content/Maps/Lvl_Proto`입니다. 멀티 테스트 방법은 [Phase0_Test_Guide.md](Docs/Phase0_Test_Guide.md)에 있습니다.
+- Unity 6.3 LTS (6000.3.9f1), URP
+- Unity Hub에서 이 폴더를 추가해 엽니다. 시작 씬은 `Assets/_Project/Scenes/Sandbox.unity`입니다.
+- 프로젝트 설정 검사 (배치모드):
+  `Unity.exe -batchmode -projectPath . -executeMethod DreamMovers.Editor.ProjectCheck.Run -quit`
 
 ## 폴더 구성
 
 | 폴더 | 내용 |
 |---|---|
-| `Source/DreamMovers` | 게임 C++ (잡기, 내구도, 정산, 몬스터) |
-| `Content` | 테스트 맵, 프로토 머티리얼, 오일 파스텔 포스트 프로세스 |
-| `Tools/ue` | 셰이더 HLSL, 머티리얼·레벨 생성 스크립트 |
-| `Docs` | 기획서, 테스트 가이드, Tripo 에셋 목록 |
+| `Assets/_Project/Scenes` | 씬 |
+| `Assets/_Project/Settings` | URP 렌더 파이프라인 에셋, 렌더러, 볼륨 프로필 |
+| `Assets/_Project/Input` | Input System 액션 |
+| `Assets/_Project/Scripts/Editor` | 에디터 도구와 검사 스크립트 |
+| `Docs` | 기획서, Tripo 에셋 목록, UE5 테스트 가이드 |
+| `TestEvidence` | UE5 버전 테스트 로그와 스크린샷 |
