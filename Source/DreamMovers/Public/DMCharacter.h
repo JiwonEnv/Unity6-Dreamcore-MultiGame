@@ -23,6 +23,9 @@ class DREAMMOVERS_API ADMCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	/** Drives input-only paths (interact, sprint) from the server in -dmproctest. */
+	friend class ADMProcSelfTest;
+
 public:
 	ADMCharacter();
 
@@ -45,6 +48,13 @@ public:
 	void EnterHiding(ADMHidingSpot* Spot, const FVector& Location, const FRotator& Facing);
 	void LeaveHiding(const FVector& ExitLocation);
 	bool IsHiding() const { return HidingSpot != nullptr; }
+
+	/**
+	 * Points a monster can look at or grab: the eyes, plus every point around the body (at its middle) that has
+	 * nothing solid within 60 cm above it. A doll fully under a desk gives only its eyes; one sticking out past the
+	 * edge also gives the part that sticks out.
+	 */
+	void GetExposedPoints(TArray<FVector>& OutPoints) const;
 	ADMHidingSpot* GetHidingSpot() const { return HidingSpot; }
 
 protected:

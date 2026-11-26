@@ -1,7 +1,9 @@
 #include "DMHidingSpot.h"
 
 #include "Components/StaticMeshComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "DMCharacter.h"
+#include "DreamMovers.h"
 #include "DMNoiseSubsystem.h"
 #include "Engine/CollisionProfile.h"
 #include "Engine/StaticMesh.h"
@@ -72,11 +74,22 @@ ADMHidingSpot* ADMHidingSpot::FindReachable(const ADMCharacter* Doll)
 		const FVector Local = It->GetActorTransform().InverseTransformPosition(Doll->GetActorLocation());
 		const float Front = Local.X - It->Size.X * 0.5f;
 		const bool bInFront = Front > -10.f && Front < It->ReachDistance && FMath::Abs(Local.Y) < It->Size.Y * 0.5f + 30.f;
-		if (bInFront && Front < BestDistance)
+		// Standing (or crouching) on the wardrobe's own floor, not on something above or below it.
+		const bool bSameFloor = Local.Z > 0.f && Local.Z < It->Size.Z;
+		if (!bInFront || !bSameFloor || Front >= BestDistance)
 		{
-			Best = *It;
-			BestDistance = Front;
+			continue;
 		}
+		// Nothing between the doll and the doors.
+		const FVector Doors = It->GetActorTransform().TransformPosition(FVector(It->Size.X * 0.5f + 1.f, FMath::Clamp(Local.Y, -It->Size.Y * 0.5f, It->Size.Y * 0.5f), Local.Z));
+		FHitResult Hit;
+		FCollisionQueryParams Params(SCENE_QUERY_STAT(DMHidingReach), false, Doll);
+		if (Doll->GetWorld()->LineTraceSingleByChannel(Hit, Doll->GetActorLocation(), Doors, ECC_Visibility, Params) && Hit.GetActor() != *It)
+		{
+			continue;
+		}
+		Best = *It;
+		BestDistance = Front;
 	}
 	return Best;
 }
@@ -125,21 +138,58 @@ bool ADMHidingSpot::TryEnter(ADMCharacter* Doll)
 	return true;
 }
 
-void ADMHidingSpot::Leave(ADMCharacter* Doll)
+bool ADMHidingSpot::IsExitClear(const ADMCharacter* Doll, const FVector& Location) const
+{
+	const UCapsuleComponent* Capsule = Doll->GetCapsuleComponent();
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(DMHidingExit), false, Doll);
+	const FCollisionShape Shape = FCollisionShape::MakeCapsule(Capsule->GetUnscaledCapsuleRadius(), Capsule->GetUnscaledCapsuleHalfHeight());
+	if (GetWorld()->OverlapBlockingTestByChannel(Location, FQuat::Identity, ECC_Pawn, Shape, Params))
+	{
+		return false;
+	}
+	FHitResult Floor;
+	return GetWorld()->LineTraceSingleByChannel(Floor, Location, Location - FVector(0.f, 0.f, Capsule->GetUnscaledCapsuleHalfHeight() + 40.f), ECC_Visibility, Params);
+}
+
+bool ADMHidingSpot::Leave(ADMCharacter* Doll)
 {
 	if (!HasAuthority() || !Doll)
 	{
-		return;
+		return false;
 	}
 	const int32 Index = Occupants.IndexOfByKey(Doll);
 	if (Index == INDEX_NONE)
 	{
-		return;
+		return false;
 	}
 	const FVector Local = GetActorTransform().InverseTransformPosition(Doll->GetActorLocation());
 	const int32 Slot = Capacity > 1 && Local.Y > 0.f ? 1 : 0;
+	// Own side first, then the other side, then straight out and a step further.
+	TArray<FVector> Exits = { GetExitLocation(Slot) };
+	if (Capacity > 1)
+	{
+		Exits.Add(GetExitLocation(1 - Slot));
+	}
+	Exits.Add(GetActorTransform().TransformPosition(FVector(Size.X * 0.5f + 50.f, 0.f, 60.f)));
+	Exits.Add(GetActorTransform().TransformPosition(FVector(Size.X * 0.5f + 100.f, 0.f, 60.f)));
+	const FVector* Exit = Exits.FindByPredicate([this, Doll](const FVector& Location) { return IsExitClear(Doll, Location); });
+	if (!Exit)
+	{
+		// Leave state untouched: still inside, still hidden, still taking up the place.
+		UE_LOG(LogDreamMovers, Log, TEXT("%s: every exit of %s is blocked; staying inside"), *Doll->GetName(), *GetName());
+		return false;
+	}
 	Occupants.RemoveAt(Index);
 	NumOccupants = Occupants.Num();
 	UDMNoiseSubsystem::Report(this, GetActorLocation(), DoorNoiseRadius, this);
-	Doll->LeaveHiding(GetExitLocation(Slot));
+	Doll->LeaveHiding(*Exit);
+	return true;
+}
+
+void ADMHidingSpot::Release(ADMCharacter* Doll)
+{
+	if (HasAuthority() && Occupants.Remove(Doll) > 0)
+	{
+		NumOccupants = Occupants.Num();
+	}
 }

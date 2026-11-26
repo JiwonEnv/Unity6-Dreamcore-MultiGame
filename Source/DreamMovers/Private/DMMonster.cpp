@@ -112,22 +112,49 @@ double ADMMonster::StateAge() const
 	return GetWorld()->GetTimeSeconds() - StateStartTime;
 }
 
-void ADMMonster::MoveToLocation(const FVector& Goal, float Speed)
+void ADMMonster::MoveToLocation(const FVector& Goal, float Speed, bool bRightUpTo)
 {
 	GetCharacterMovement()->MaxWalkSpeed = Speed;
+	LastMoveGoal = Goal;
+	LastMoveGoalName.Reset();
 	if (AAIController* AI = Cast<AAIController>(GetController()))
 	{
-		AI->MoveToLocation(Goal, 40.f, true, true, true, false);
+		// bRightUpTo (chasing): all the way to the goal, not stopping a capsule short of it.
+		LastMoveResult = int32(AI->MoveToLocation(Goal, bRightUpTo ? 10.f : 40.f, !bRightUpTo, true, true, false));
 	}
 }
 
 void ADMMonster::MoveToActor(AActor* Goal, float Speed)
 {
 	GetCharacterMovement()->MaxWalkSpeed = Speed;
+	LastMoveGoal = Goal ? Goal->GetActorLocation() : FVector::ZeroVector;
+	LastMoveGoalName = GetNameSafe(Goal);
 	if (AAIController* AI = Cast<AAIController>(GetController()))
 	{
-		AI->MoveToActor(Goal, 20.f, true, true, false);
+		LastMoveResult = int32(AI->MoveToActor(Goal, 20.f, true, true, false));
 	}
+}
+
+FString ADMMonster::DescribeMove() const
+{
+	const AAIController* AI = Cast<AAIController>(GetController());
+	const TCHAR* Status = TEXT("no-ai");
+	if (AI)
+	{
+		switch (AI->GetMoveStatus())
+		{
+		case EPathFollowingStatus::Idle: Status = TEXT("Idle"); break;
+		case EPathFollowingStatus::Waiting: Status = TEXT("Waiting"); break;
+		case EPathFollowingStatus::Paused: Status = TEXT("Paused"); break;
+		case EPathFollowingStatus::Moving: Status = TEXT("Moving"); break;
+		default: break;
+		}
+	}
+	// EPathFollowingRequestResult: 0 Failed, 1 AlreadyAtGoal, 2 RequestSuccessful
+	static const TCHAR* Results[] = { TEXT("Failed"), TEXT("AlreadyAtGoal"), TEXT("RequestSuccessful") };
+	const TCHAR* Result = LastMoveResult >= 0 && LastMoveResult < 3 ? Results[LastMoveResult] : TEXT("none");
+	return FString::Printf(TEXT("move=%s last-request=%s goal=%s%s%s to-goal=%.0f"), Status, Result, *LastMoveGoal.ToCompactString(),
+		LastMoveGoalName.IsEmpty() ? TEXT("") : TEXT(" actor="), *LastMoveGoalName, FVector::Dist2D(GetActorLocation(), LastMoveGoal));
 }
 
 void ADMMonster::StopMoving()
@@ -144,19 +171,43 @@ bool ADMMonster::IsMoveDone() const
 	return !AI || AI->GetMoveStatus() == EPathFollowingStatus::Idle;
 }
 
+bool ADMMonster::CanCatch(const ADMCharacter* Doll) const
+{
+	if (!Doll || Doll->IsDowned() || Doll->IsHiding())
+	{
+		return false;
+	}
+	const FVector Delta = Doll->GetActorLocation() - GetActorLocation();
+	const float Reach = GetCapsuleComponent()->GetScaledCapsuleRadius() + Doll->GetCapsuleComponent()->GetScaledCapsuleRadius() + CatchRadius;
+	if (Delta.SizeSquared2D() > FMath::Square(Reach) || FMath::Abs(Delta.Z) >= 150.f)
+	{
+		return false;
+	}
+	// Reaching down from above: a wall or the top of a desk the doll crawled under is in the way.
+	// Only static geometry counts; carried antiques and other pawns do not shield anyone.
+	const FVector From = GetActorLocation() + FVector(0.f, 0.f, GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * 0.9f);
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(DMMonsterCatch), false, this);
+	Params.AddIgnoredActor(Doll);
+	// The middle of the body, or any part sticking out from under cover.
+	TArray<FVector> Points;
+	Doll->GetExposedPoints(Points);
+	Points[0] = Doll->GetActorLocation();
+	for (const FVector& Point : Points)
+	{
+		if (!GetWorld()->LineTraceTestByObjectType(From, Point, FCollisionObjectQueryParams(ECC_WorldStatic), Params))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 ADMCharacter* ADMMonster::TryCatch()
 {
-	const float MyRadius = GetCapsuleComponent()->GetScaledCapsuleRadius();
 	for (TActorIterator<ADMCharacter> It(GetWorld()); It; ++It)
 	{
 		ADMCharacter* Doll = *It;
-		if (Doll->IsDowned() || Doll->IsHiding())
-		{
-			continue;
-		}
-		const FVector Delta = Doll->GetActorLocation() - GetActorLocation();
-		const float Reach = MyRadius + Doll->GetCapsuleComponent()->GetScaledCapsuleRadius() + CatchRadius;
-		if (Delta.SizeSquared2D() <= FMath::Square(Reach) && FMath::Abs(Delta.Z) < 150.f)
+		if (CanCatch(Doll))
 		{
 			Doll->Down();
 			return Doll;

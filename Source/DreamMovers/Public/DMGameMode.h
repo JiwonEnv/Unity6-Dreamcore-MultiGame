@@ -26,6 +26,13 @@ public:
 	/** A cotton ball reached the extraction zone: give its player a fresh doll there. */
 	void RevivePlayer(AController* Controller, const FVector& Location);
 
+	/** Why the round was aborted (empty unless it was). */
+	const FString& GetAbortReason() const { return AbortReason; }
+	int32 GetMapValue() const { return MapValue; }
+	/** Generated maps: antiques that should be in the map, and how many spawn spots were already blocked. */
+	int32 GetExpectedAntiques() const { return ExpectedAntiques; }
+	int32 GetBlockedAntiqueSpawns() const { return BlockedAntiqueSpawns; }
+
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Round", meta = (ClampMin = "10"))
 	float RoundSeconds = 720.f;
@@ -40,9 +47,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Round", meta = (ClampMin = "1"))
 	float SummarySeconds = 8.f;
 
+	/** A generated map whose navmesh is not ready after this long aborts the round instead of starting it. */
+	UPROPERTY(EditDefaultsOnly, Category = "Round", meta = (ClampMin = "1"))
+	float NavReadyTimeoutSeconds = 30.f;
+
 private:
-	/** A generated map comes empty: put the antiques, wardrobes and monsters on its spawn points. */
+	/** A generated map comes empty: wardrobes and antiques go on its spawn points before the target is counted. */
 	void PopulateGeneratedLevel(APLGGenerator& Generator);
+	/** Monsters only once the navmesh covers the house, so their first moves do not fail. */
+	void SpawnGeneratedMonsters(APLGGenerator& Generator);
+	/** Polls the generated map's navmesh; starts the round when ready, aborts on timeout. */
+	void CheckMapReady();
+	void BeginRound();
+	void AbortRound(const FString& Reason);
 	void UpdateTarget(const AController* Leaving = nullptr);
 	void CheckRound();
 	bool AreAllPlayersDown() const;
@@ -50,6 +67,15 @@ private:
 
 	/** Value of every antique placed on the map when the round started. */
 	int32 MapValue = 0;
+
+	int32 ExpectedAntiques = 0;
+	int32 BlockedAntiqueSpawns = 0;
+	FString AbortReason;
+	double PrepareStartTime = 0.0;
+	/** The navmesh has to look ready on two polls in a row, so a build that is about to start is not mistaken for done. */
+	int32 NavReadyPolls = 0;
+	TWeakObjectPtr<APLGGenerator> GeneratedLevel;
+	FTimerHandle ReadyTimer;
 
 	FTimerHandle CheckTimer;
 	FTimerHandle RestartTimer;

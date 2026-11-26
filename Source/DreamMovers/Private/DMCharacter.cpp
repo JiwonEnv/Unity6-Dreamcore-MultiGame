@@ -98,6 +98,24 @@ void ADMCharacter::FitBodyToCapsule(bool bCrouched)
 	HeadMesh->SetRelativeScale3D(FVector(bCrouched ? 0.4f : 0.45f));
 }
 
+void ADMCharacter::GetExposedPoints(TArray<FVector>& OutPoints) const
+{
+	OutPoints.Reset();
+	OutPoints.Add(GetPawnViewLocation());
+	const FVector Center = GetActorLocation();
+	// Three quarters of the radius: a doll whose side pokes out a few centimeters still counts as under cover.
+	const float Radius = GetCapsuleComponent()->GetScaledCapsuleRadius() * 0.75f;
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(DMExposedPoints), false, this);
+	for (int32 Step = 0; Step < 8; ++Step)
+	{
+		const FVector Point = Center + FRotator(0.f, Step * 45.f, 0.f).Vector() * Radius;
+		if (!GetWorld()->LineTraceTestByObjectType(Point, Point + FVector(0.f, 0.f, 60.f), FCollisionObjectQueryParams(ECC_WorldStatic), Params))
+		{
+			OutPoints.Add(Point);
+		}
+	}
+}
+
 void ADMCharacter::OnStartCrouch(float HalfHeightAdjust, float ScaledHalfHeightAdjust)
 {
 	Super::OnStartCrouch(HalfHeightAdjust, ScaledHalfHeightAdjust);
@@ -146,7 +164,8 @@ void ADMCharacter::Down()
 	UE_LOG(LogDreamMovers, Log, TEXT("%s was caught"), *GetName());
 	if (HidingSpot)
 	{
-		HidingSpot->Leave(this);
+		HidingSpot->Release(this);
+		HidingSpot = nullptr;
 	}
 
 	FActorSpawnParameters Params;
@@ -373,7 +392,13 @@ void ADMCharacter::ServerInteract_Implementation()
 	}
 	if (HidingSpot)
 	{
-		HidingSpot->Leave(this);
+		if (!HidingSpot->Leave(this))
+		{
+			if (APlayerController* PC = Cast<APlayerController>(GetController()))
+			{
+				PC->ClientMessage(TEXT("Something is blocking the wardrobe doors."));
+			}
+		}
 		return;
 	}
 	// Climbing in with an antique on the thread is not allowed: let go first.
@@ -409,10 +434,10 @@ void ADMCharacter::LeaveHiding(const FVector& ExitLocation)
 	{
 		return;
 	}
+	// The wardrobe already checked that this spot is free and has floor under it.
 	HidingSpot = nullptr;
 	ApplyHiding();
-	// TeleportTo nudges the doll out of anything standing in front of the doors.
-	TeleportTo(ExitLocation, GetActorRotation());
+	SetActorLocation(ExitLocation, false, nullptr, ETeleportType::TeleportPhysics);
 }
 
 void ADMCharacter::OnRep_HidingSpot()

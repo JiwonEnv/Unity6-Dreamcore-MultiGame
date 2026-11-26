@@ -2,6 +2,7 @@
 
 #include "Components/CapsuleComponent.h"
 #include "DMNoiseSubsystem.h"
+#include "NavigationSystem.h"
 
 #define LOCTEXT_NAMESPACE "DreamMoversBellHorse"
 
@@ -67,7 +68,15 @@ void ADMBellHorse::OnNoise(const FVector& Location, float Radius, AActor* Source
 	{
 		return;
 	}
+	// Sounds come from wherever things hit (next to a wall, on a pivot under furniture): head for the nearest
+	// walkable spot, or the move fails and the horse never comes.
 	NoiseLocation = Location;
+	FNavLocation OnNav;
+	const UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	if (Nav && Nav->ProjectPointToNavigation(Location, OnNav, FVector(200.f, 200.f, 250.f)))
+	{
+		NoiseLocation = OnNav.Location;
+	}
 	SetMonsterState(EDMMonsterState::Charge);
 	MoveToLocation(NoiseLocation, ChargeSpeed);
 }

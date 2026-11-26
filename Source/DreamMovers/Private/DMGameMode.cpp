@@ -7,12 +7,14 @@
 #include "DMGameState.h"
 #include "DMHidingSpot.h"
 #include "DMHUD.h"
+#include "DMProcSelfTest.h"
 #include "DMSelfTest.h"
 #include "DMValuable.h"
 #include "DMValuableCatalog.h"
 #include "DreamMovers.h"
 #include "EngineUtils.h"
 #include "Misc/CommandLine.h"
+#include "NavigationSystem.h"
 #include "PLGGenerator.h"
 #include "TimerManager.h"
 
@@ -42,57 +44,101 @@ void ADMGameMode::StartPlay()
 {
 	Super::StartPlay();
 
-	// The generator built its layout during Super::StartPlay (BeginPlay); content goes in before the target is counted.
-	if (TActorIterator<APLGGenerator> Generator(GetWorld()); Generator && Generator->GetLayout().Modules.Num() > 0)
+#if !UE_BUILD_SHIPPING
+	if (FParse::Param(FCommandLine::Get(), TEXT("dmselftest")))
 	{
-		PopulateGeneratedLevel(**Generator);
+		GetWorld()->SpawnActor<ADMSelfTest>();
+	}
+	if (FParse::Param(FCommandLine::Get(), TEXT("dmproctest")))
+	{
+		GetWorld()->SpawnActor<ADMProcSelfTest>();
+	}
+	FParse::Value(FCommandLine::Get(), TEXT("dmnavtimeout="), NavReadyTimeoutSeconds);
+#endif
+
+	// The generator built (or failed to build) its layout during Super::StartPlay (BeginPlay).
+	TActorIterator<APLGGenerator> Generator(GetWorld());
+	if (!Generator)
+	{
+		// A hand-built map is ready as it is.
+		MapValue = 0;
+		for (TActorIterator<ADMValuable> It(GetWorld()); It; ++It)
+		{
+			MapValue += It->GetCurrentValue();
+		}
+		BeginRound();
+		return;
+	}
+	GeneratedLevel = *Generator;
+	if (!Generator->IsGenerated())
+	{
+		AbortRound(FString::Printf(TEXT("level generation failed (seed %d)"), Generator->GetSeed()));
+		return;
 	}
 
+	// Antiques settle and the target is known while the navmesh builds; the timer and the monsters wait for it.
+	PopulateGeneratedLevel(**Generator);
 	MapValue = 0;
 	for (TActorIterator<ADMValuable> It(GetWorld()); It; ++It)
 	{
 		MapValue += It->GetCurrentValue();
 	}
+	UpdateTarget();
+	PrepareStartTime = GetWorld()->GetTimeSeconds();
+	NavReadyPolls = 0;
+	GetWorldTimerManager().SetTimer(ReadyTimer, this, &ADMGameMode::CheckMapReady, 0.25f, true);
+}
+
+void ADMGameMode::CheckMapReady()
+{
+	APLGGenerator* Generator = GeneratedLevel.Get();
+	if (!Generator)
+	{
+		GetWorldTimerManager().ClearTimer(ReadyTimer);
+		AbortRound(TEXT("the level generator disappeared"));
+		return;
+	}
+	FString Why;
+	NavReadyPolls = Generator->IsNavigationReady(Why) ? NavReadyPolls + 1 : 0;
+	const double Waited = GetWorld()->GetTimeSeconds() - PrepareStartTime;
+	if (NavReadyPolls >= 2)
+	{
+		GetWorldTimerManager().ClearTimer(ReadyTimer);
+		UE_LOG(LogDreamMovers, Log, TEXT("Generated level ready after %.2f s: starting the round"), Waited);
+		SpawnGeneratedMonsters(*Generator);
+		BeginRound();
+	}
+	else if (Waited > NavReadyTimeoutSeconds)
+	{
+		GetWorldTimerManager().ClearTimer(ReadyTimer);
+		AbortRound(FString::Printf(TEXT("navigation not ready after %.1f s (%s)"), Waited, *Why));
+	}
+}
+
+void ADMGameMode::BeginRound()
+{
 	if (ADMGameState* GS = GetGameState<ADMGameState>())
 	{
 		GS->StartRound(0, RoundSeconds);
 	}
 	UpdateTarget();
 	GetWorldTimerManager().SetTimer(CheckTimer, this, &ADMGameMode::CheckRound, 0.5f, true);
+}
 
-#if !UE_BUILD_SHIPPING
-	if (FParse::Param(FCommandLine::Get(), TEXT("dmselftest")))
+void ADMGameMode::AbortRound(const FString& Reason)
+{
+	AbortReason = Reason;
+	UE_LOG(LogDreamMovers, Error, TEXT("Round aborted: %s"), *Reason);
+	if (ADMGameState* GS = GetGameState<ADMGameState>())
 	{
-		GetWorld()->SpawnActor<ADMSelfTest>();
+		GS->AbortRound();
 	}
-#endif
 }
 
 void ADMGameMode::PopulateGeneratedLevel(APLGGenerator& Generator)
 {
 	UWorld* World = GetWorld();
 	FRandomStream Rng = Generator.MakeContentStream();
-
-	// Antiques: the chapter's set, each once, on shuffled floor spots.
-	TArray<FPLGSpawnSlot> ItemSlots = Generator.GetSpawnSlots(TEXT("Item"));
-	TArray<FDMValuableSpec> Specs = DMValuableCatalog::MakeChapterOne();
-	Shuffle(ItemSlots, Rng);
-	Shuffle(Specs, Rng);
-	const int32 NumItems = FMath::Min(ItemSlots.Num(), Specs.Num());
-	for (int32 i = 0; i < NumItems; ++i)
-	{
-		const FDMValuableSpec& Spec = Specs[i];
-		FTransform Transform = ItemSlots[i].Transform;
-		Transform.SetRotation(FQuat(FRotator(0.f, Rng.FRandRange(0.f, 360.f), 0.f)) * Transform.GetRotation());
-		Transform.AddToTranslation(FVector(0.f, 0.f, Spec.Size.Z * 0.5f + 1.f));
-		Transform.SetScale3D(Spec.Size / 100.f);
-		if (ADMValuable* Item = World->SpawnActorDeferred<ADMValuable>(ADMValuable::StaticClass(), Transform, nullptr, nullptr,
-			ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn))
-		{
-			Item->InitFromSpec(Spec);
-			Item->FinishSpawning(Transform);
-		}
-	}
 
 	// Wardrobes on every hiding spot: narrow ones for one doll, wide ones for two.
 	int32 NumWardrobes = 0;
@@ -119,6 +165,47 @@ void ADMGameMode::PopulateGeneratedLevel(APLGGenerator& Generator)
 			}
 		}
 	}
+
+	// Antiques: the chapter's set, each once, on shuffled floor spots.
+	TArray<FPLGSpawnSlot> ItemSlots = Generator.GetSpawnSlots(TEXT("Item"));
+	TArray<FDMValuableSpec> Specs = DMValuableCatalog::MakeChapterOne();
+	Shuffle(ItemSlots, Rng);
+	Shuffle(Specs, Rng);
+	// Every antique of the set should get a spot; fewer spots than antiques is a kit problem the self test reports.
+	ExpectedAntiques = Specs.Num();
+	BlockedAntiqueSpawns = 0;
+	const int32 NumItems = FMath::Min(ItemSlots.Num(), Specs.Num());
+	for (int32 i = 0; i < NumItems; ++i)
+	{
+		const FDMValuableSpec& Spec = Specs[i];
+		FTransform Transform = ItemSlots[i].Transform;
+		Transform.SetRotation(FQuat(FRotator(0.f, Rng.FRandRange(0.f, 360.f), 0.f)) * Transform.GetRotation());
+		Transform.AddToTranslation(FVector(0.f, 0.f, Spec.Size.Z * 0.5f + 1.f));
+		Transform.SetScale3D(Spec.Size / 100.f);
+		// Something already there (a wall, a wardrobe, another antique) would push the item off its spot.
+		FCollisionQueryParams Query(SCENE_QUERY_STAT(DMAntiqueSpot), false);
+		if (World->OverlapBlockingTestByChannel(Transform.GetLocation(), Transform.GetRotation(), ECC_PhysicsBody,
+			FCollisionShape::MakeBox(Spec.Size * 0.5f - FVector(1.f)), Query))
+		{
+			++BlockedAntiqueSpawns;
+			UE_LOG(LogDreamMovers, Warning, TEXT("Antique spot %d (%s) is already blocked"), i, *Transform.GetLocation().ToCompactString());
+		}
+		if (ADMValuable* Item = World->SpawnActorDeferred<ADMValuable>(ADMValuable::StaticClass(), Transform, nullptr, nullptr,
+			ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn))
+		{
+			Item->InitFromSpec(Spec);
+			Item->FinishSpawning(Transform);
+		}
+	}
+
+	UE_LOG(LogDreamMovers, Log, TEXT("Generated level (seed %d): %d of %d antiques on %d spots (%d spots blocked), %d wardrobes"),
+		Generator.GetSeed(), NumItems, ExpectedAntiques, ItemSlots.Num(), BlockedAntiqueSpawns, NumWardrobes);
+
+}
+
+void ADMGameMode::SpawnGeneratedMonsters(APLGGenerator& Generator)
+{
+	UWorld* World = GetWorld();
 
 	// Bell horse waits on the hub's post.
 	const TArray<FPLGSpawnSlot> Posts = Generator.GetSpawnSlots(TEXT("Guard"));
@@ -185,46 +272,8 @@ void ADMGameMode::PopulateGeneratedLevel(APLGGenerator& Generator)
 		}
 	}
 
-	UE_LOG(LogDreamMovers, Log, TEXT("Generated level (seed %d): %d antiques on %d spots, %d wardrobes, horse %s, butler patrols %d rooms"),
-		Generator.GetSeed(), NumItems, ItemSlots.Num(), NumWardrobes, Posts.Num() > 0 ? TEXT("yes") : TEXT("no"), ButlerRoom != INDEX_NONE ? Route.Num() : 0);
-
-#if !UE_BUILD_SHIPPING
-	// -plgselftest: once physics settled, every antique should rest on a floor inside the house.
-	if (FParse::Param(FCommandLine::Get(), TEXT("plgselftest")))
-	{
-		FTimerHandle Handle;
-		GetWorldTimerManager().SetTimer(Handle, FTimerDelegate::CreateWeakLambda(this, [this]()
-		{
-			int32 Items = 0;
-			int32 Resting = 0;
-			for (TActorIterator<ADMValuable> It(GetWorld()); It; ++It)
-			{
-				++Items;
-				const float Z = It->GetActorLocation().Z;
-				Resting += (Z > 0.f && Z < 300.f && It->GetVelocity().Size() < 20.f) ? 1 : 0;
-			}
-			int32 Spots = 0;
-			for (TActorIterator<ADMHidingSpot> It(GetWorld()); It; ++It)
-			{
-				++Spots;
-			}
-			int32 Butlers = 0;
-			int32 Horses = 0;
-			for (TActorIterator<ADMButler> It(GetWorld()); It; ++It)
-			{
-				Butlers += It->GetController() ? 1 : 0;
-			}
-			for (TActorIterator<ADMBellHorse> It(GetWorld()); It; ++It)
-			{
-				Horses += It->GetController() ? 1 : 0;
-			}
-			const ADMGameState* GS = GetGameState<ADMGameState>();
-			const bool bPassed = Items > 0 && Resting == Items && Spots > 0 && Butlers == 1 && Horses == 1 && GS && GS->GetTargetValue() > 0;
-			UE_LOG(LogDreamMovers, Display, TEXT("[DMProcTest] %s %d/%d antiques resting on the floor, %d wardrobes, butler %d, horse %d (AI possessed), target %d of %d"),
-				bPassed ? TEXT("PASS") : TEXT("FAIL"), Resting, Items, Spots, Butlers, Horses, GS ? GS->GetTargetValue() : 0, MapValue);
-		}), 7.5f, false);
-	}
-#endif
+	UE_LOG(LogDreamMovers, Log, TEXT("Generated level monsters: horse %s, butler patrols %d rooms"),
+		Posts.Num() > 0 ? TEXT("yes") : TEXT("no"), ButlerRoom != INDEX_NONE ? Route.Num() : 0);
 }
 
 void ADMGameMode::PostLogin(APlayerController* NewPlayer)

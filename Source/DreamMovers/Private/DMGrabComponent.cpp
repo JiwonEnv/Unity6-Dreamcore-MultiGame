@@ -1,7 +1,9 @@
 #include "DMGrabComponent.h"
 
 #include "Components/StaticMeshComponent.h"
+#include "DMCharacter.h"
 #include "DMValuable.h"
+#include "DreamMovers.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
@@ -155,10 +157,34 @@ void UDMGrabComponent::ServerGrab_Implementation(ADMValuable* Target, FVector_Ne
 	{
 		return;
 	}
+	if (const ADMCharacter* Doll = Cast<ADMCharacter>(GetOwner()); Doll && (Doll->IsHiding() || Doll->IsDowned()))
+	{
+		UE_LOG(LogDreamMovers, Verbose, TEXT("%s: grab rejected, the doll is hiding or down"), *GetOwner()->GetName());
+		return;
+	}
 	// The client traced against a slightly older world; allow some slack but no grabbing across the map.
-	const float Distance = FVector::Dist(GetViewLocation(), WorldGrabPoint);
+	const FVector View = GetViewLocation();
+	const float Distance = FVector::Dist(View, WorldGrabPoint);
 	if (Distance > GrabRange * 1.5f)
 	{
+		UE_LOG(LogDreamMovers, Verbose, TEXT("%s: grab rejected, point %.0f cm away"), *GetOwner()->GetName(), Distance);
+		return;
+	}
+	// The point has to be on the item, so the item itself is within reach too.
+	FVector OnTarget;
+	const float PointToTarget = Target->GetMesh()->GetClosestPointOnCollision(WorldGrabPoint, OnTarget);
+	if (PointToTarget < 0.f || PointToTarget > GrabPointTolerance)
+	{
+		UE_LOG(LogDreamMovers, Verbose, TEXT("%s: grab rejected, point %.1f cm from %s"), *GetOwner()->GetName(), PointToTarget, *Target->GetName());
+		return;
+	}
+	// And nothing solid (a wall, another item) between the eyes and that point.
+	FHitResult Hit;
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(DMGrabCheck), false, GetOwner());
+	const FVector Past = WorldGrabPoint + (WorldGrabPoint - View).GetSafeNormal() * 5.f;
+	if (GetWorld()->LineTraceSingleByChannel(Hit, View, Past, ECC_Visibility, Params) && Hit.GetActor() != Target)
+	{
+		UE_LOG(LogDreamMovers, Verbose, TEXT("%s: grab rejected, %s is in the way"), *GetOwner()->GetName(), *GetNameSafe(Hit.GetComponent()));
 		return;
 	}
 

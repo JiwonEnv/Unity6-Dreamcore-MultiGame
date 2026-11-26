@@ -7,7 +7,12 @@
 #include "DMNoiseSubsystem.h"
 #include "DreamMovers.h"
 #include "EngineUtils.h"
+#include "NavigationSystem.h"
+#include "HAL/IConsoleManager.h"
 #include "Net/UnrealNetwork.h"
+
+static TAutoConsoleVariable<int32> CVarButlerTrace(TEXT("dm.ButlerTrace"), 0,
+	TEXT("1: log the butler's state, sight, timers and move every 0.25 s (server)."));
 
 #define LOCTEXT_NAMESPACE "DreamMoversButler"
 
@@ -85,45 +90,70 @@ void ADMButler::OnMonsterStateChanged()
 	Candlelight->SetIntensity(bAlarmed ? 300.f : 150.f);
 }
 
-bool ADMButler::CanSee(const ADMCharacter* Doll, float* OutDistance) const
+bool ADMButler::CanSee(const ADMCharacter* Doll, float* OutDistance, FString* OutWhy) const
 {
 	if (!Doll || Doll->IsDowned() || Doll->IsHiding())
 	{
+		if (OutWhy) { *OutWhy = TEXT("no doll, down or in a wardrobe"); }
 		return false; // a closed wardrobe blocks the candlelight
 	}
 	const FVector Eye = Candlelight->GetComponentLocation();
-	const FVector TargetPoint = Doll->GetPawnViewLocation();
-	const FVector ToTarget = TargetPoint - Eye;
-	const float Distance = ToTarget.Size();
-	if (Distance > SightRange)
+	const float MaxCos = FMath::Cos(FMath::DegreesToRadians(SightHalfAngle));
+	// The eyes, and any part of the body that is not under something (a doll half under a desk shows the other half).
+	TArray<FVector> Points;
+	Doll->GetExposedPoints(Points);
+	FString Last;
+	for (const FVector& TargetPoint : Points)
 	{
-		return false;
+		const FVector ToTarget = TargetPoint - Eye;
+		const float Distance = ToTarget.Size();
+		if (Distance > SightRange)
+		{
+			Last = FString::Printf(TEXT("out of range %.0f"), Distance);
+			continue;
+		}
+		const float Cos = FVector::DotProduct(ToTarget / FMath::Max(Distance, 1.f), Candlelight->GetForwardVector());
+		if (Cos < MaxCos)
+		{
+			Last = FString::Printf(TEXT("outside the cone (%.0f deg off the light axis)"), FMath::RadiansToDegrees(FMath::Acos(Cos)));
+			continue;
+		}
+		FHitResult Hit;
+		FCollisionQueryParams Params(SCENE_QUERY_STAT(DMButlerSight), false, this);
+		if (GetWorld()->LineTraceSingleByChannel(Hit, Eye, TargetPoint, ECC_Visibility, Params) && Hit.GetActor() != Doll)
+		{
+			Last = FString::Printf(TEXT("blocked by %s.%s at %s"), *GetNameSafe(Hit.GetActor()), *GetNameSafe(Hit.GetComponent()), *Hit.ImpactPoint.ToCompactString());
+			continue; // behind a wall, furniture or a carried antique
+		}
+		if (OutDistance)
+		{
+			*OutDistance = Distance;
+		}
+		if (OutWhy)
+		{
+			*OutWhy = FString::Printf(TEXT("visible: candle %s -> %s (%d of %d points exposed)"), *Eye.ToCompactString(), *TargetPoint.ToCompactString(), Points.Num() - 1, 8);
+		}
+		return true;
 	}
-	const float Cos = FVector::DotProduct(ToTarget / FMath::Max(Distance, 1.f), Candlelight->GetForwardVector());
-	if (Cos < FMath::Cos(FMath::DegreesToRadians(SightHalfAngle)))
+	if (OutWhy)
 	{
-		return false;
+		*OutWhy = FString::Printf(TEXT("%s (%d of 8 body points exposed)"), *Last, Points.Num() - 1);
 	}
-
-	FHitResult Hit;
-	FCollisionQueryParams Params(SCENE_QUERY_STAT(DMButlerSight), false, this);
-	if (GetWorld()->LineTraceSingleByChannel(Hit, Eye, TargetPoint, ECC_Visibility, Params) && Hit.GetActor() != Doll)
-	{
-		return false; // behind a wall, furniture or a carried antique
-	}
-	if (OutDistance)
-	{
-		*OutDistance = Distance;
-	}
-	return true;
+	return false;
 }
 
 ADMCharacter* ADMButler::FindVisibleDoll(float& OutDistance) const
 {
 	ADMCharacter* Best = nullptr;
 	OutDistance = TNumericLimits<float>::Max();
+	const bool bIgnoring = GetWorld()->GetTimeSeconds() < IgnoreUnreachableUntil;
 	for (TActorIterator<ADMCharacter> It(GetWorld()); It; ++It)
 	{
+		// Still at the spot it just gave up on: it already knows it cannot get there.
+		if (bIgnoring && FVector::Dist2D(It->GetActorLocation(), UnreachableSpot) < 100.f)
+		{
+			continue;
+		}
 		float Distance;
 		if (CanSee(*It, &Distance) && Distance < OutDistance)
 		{
@@ -138,6 +168,29 @@ void ADMButler::RingBell()
 {
 	LastBellTime = GetWorld()->GetTimeSeconds();
 	UDMNoiseSubsystem::Report(this, GetActorLocation(), BellRadius, this);
+}
+
+FVector ADMButler::ReachablePoint(const FVector& Location) const
+{
+	FNavLocation OnNav;
+	const UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	return Nav && Nav->ProjectPointToNavigation(Location, OnNav, FVector(200.f, 200.f, 250.f)) ? OnNav.Location : Location;
+}
+
+void ADMButler::BeginSearch(double Now, bool bUnreachable)
+{
+	if (bUnreachable)
+	{
+		UnreachableSpot = LastKnownLocation;
+		IgnoreUnreachableUntil = Now + UnreachableIgnoreSeconds;
+	}
+	UE_LOG(LogDreamMovers, Log, TEXT("%s: %s, searching around %s"), *GetName(),
+		bUnreachable ? TEXT("cannot reach the doll") : TEXT("lost sight of the doll"), *LastKnownLocation.ToCompactString());
+	ChaseStallSince = 0.0;
+	SetMonsterState(EDMMonsterState::Search);
+	SpotProgress = 0.f;
+	// The last place it saw the doll, not where the doll is now.
+	MoveToLocation(ReachablePoint(LastKnownLocation), ChaseSpeed);
 }
 
 void ADMButler::ResumePatrol()
@@ -189,8 +242,9 @@ void ADMButler::ServerThink(float DeltaSeconds)
 				LastKnownLocation = Seen->GetActorLocation();
 				LastSeenTime = Now;
 				SetMonsterState(EDMMonsterState::Chase);
+				ChaseStallSince = 0.0;
 				RingBell();
-				MoveToActor(Seen, ChaseSpeed);
+				MoveToLocation(ReachablePoint(Seen->GetActorLocation()), ChaseSpeed, true);
 				break;
 			}
 		}
@@ -201,7 +255,8 @@ void ADMButler::ServerThink(float DeltaSeconds)
 
 		if (GetMonsterState() == EDMMonsterState::Search)
 		{
-			if (IsMoveDone() && StateAge() > SearchSeconds)
+			// Done looking around, or the goal turned out to be out of reach: never wait on it forever.
+			if ((IsMoveDone() && StateAge() > SearchSeconds) || StateAge() > MaxSearchSeconds)
 			{
 				ResumePatrol();
 			}
@@ -231,7 +286,8 @@ void ADMButler::ServerThink(float DeltaSeconds)
 			ResumePatrol();
 			break;
 		}
-		if (CanSee(Chased))
+		const bool bSees = CanSee(Chased);
+		if (bSees)
 		{
 			LastSeenTime = Now;
 			LastKnownLocation = Chased->GetActorLocation();
@@ -239,15 +295,29 @@ void ADMButler::ServerThink(float DeltaSeconds)
 		if (Now - LastSeenTime > LoseSightSeconds)
 		{
 			// Lost them: check where they were last seen, then give up.
-			SetMonsterState(EDMMonsterState::Search);
-			SpotProgress = 0.f;
-			MoveToLocation(LastKnownLocation, ChaseSpeed);
+			BeginSearch(Now, false);
+			break;
+		}
+		// Standing still without being able to catch them: there is no way to them (under a desk, behind
+		// something it cannot walk through). Waiting would last forever, so search instead.
+		const bool bStalled = GetVelocity().Size2D() < 20.f && !CanCatch(Chased);
+		if (GetVelocity().Size2D() < 20.f)
+		{
+			// Standing still in a chase it faces the doll (or where it last saw it), candle first.
+			const FVector Toward = (bSees ? Chased->GetActorLocation() : LastKnownLocation) - GetActorLocation();
+			SetActorRotation(FMath::RInterpConstantTo(GetActorRotation(), FRotator(0.f, Toward.Rotation().Yaw, 0.f), DeltaSeconds, 270.f));
+		}
+		ChaseStallSince = bStalled ? (ChaseStallSince == 0.0 ? Now : ChaseStallSince) : 0.0;
+		if (bStalled && Now - ChaseStallSince > LoseSightSeconds)
+		{
+			BeginSearch(Now, true);
 			break;
 		}
 		if (Now - LastRepathTime > 0.4)
 		{
 			LastRepathTime = Now;
-			MoveToActor(Chased, ChaseSpeed);
+			// Toward where it can actually stand: next to them if they are in view, else the last place it saw them.
+			MoveToLocation(ReachablePoint(bSees ? Chased->GetActorLocation() : LastKnownLocation), ChaseSpeed, true);
 		}
 		if (Now - LastBellTime > BellInterval)
 		{
@@ -262,6 +332,30 @@ void ADMButler::ServerThink(float DeltaSeconds)
 	}
 
 	Suspicion = GetMonsterState() == EDMMonsterState::Chase ? 255 : uint8(FMath::Clamp(SpotProgress / SpotSeconds, 0.f, 1.f) * 255.f);
+	Trace(Now);
+}
+
+void ADMButler::Trace(double Now)
+{
+	if (CVarButlerTrace.GetValueOnGameThread() == 0 || Now - LastTraceTime < 0.25)
+	{
+		return;
+	}
+	LastTraceTime = Now;
+	static const TCHAR* States[] = { TEXT("Idle"), TEXT("Patrol"), TEXT("Chase"), TEXT("Charge"), TEXT("Search"), TEXT("Return") };
+	const int32 StateIndex = int32(GetMonsterState());
+	// The chased doll, or else the nearest one, so the sight result is about the doll that matters.
+	const ADMCharacter* Doll = Target.Get();
+	for (TActorIterator<ADMCharacter> It(GetWorld()); It && !Doll; ++It)
+	{
+		Doll = *It;
+	}
+	FString Why;
+	const bool bSees = CanSee(Doll, nullptr, &Why);
+	UE_LOG(LogDreamMovers, Display, TEXT("[ButlerTrace] t=%.2f state=%s age=%.2f suspicion=%d spot=%.2f sees=%d (%s) since-seen=%.2f last-known=%s doll=%s %s pos=%s speed=%.0f"),
+		Now, StateIndex >= 0 && StateIndex < 6 ? States[StateIndex] : TEXT("?"), StateAge(), int32(Suspicion), SpotProgress, bSees ? 1 : 0, *Why,
+		LastSeenTime > 0.0 ? Now - LastSeenTime : -1.0, *LastKnownLocation.ToCompactString(), Doll ? *Doll->GetActorLocation().ToCompactString() : TEXT("none"),
+		*DescribeMove(), *GetActorLocation().ToCompactString(), GetVelocity().Size2D());
 }
 
 #undef LOCTEXT_NAMESPACE

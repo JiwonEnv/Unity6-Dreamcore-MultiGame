@@ -73,14 +73,36 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Butler")
 	float SearchSeconds = 3.f;
 
+	/** A search whose goal cannot be reached in this long ends anyway, back to patrol. */
+	UPROPERTY(EditAnywhere, Category = "Butler")
+	float MaxSearchSeconds = 12.f;
+
+	/**
+	 * After giving up on a doll it could see but not reach (under furniture, behind a barrier), the butler leaves
+	 * a doll that stays at that spot alone for this long. Moving away from the spot ends it at once.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Butler")
+	float UnreachableIgnoreSeconds = 10.f;
+
+public:
+	/** In the candlelight cone, within SightRange, and not blocked (walls, furniture, carried antiques). */
+	bool CanSee(const ADMCharacter* Doll, float* OutDistance = nullptr, FString* OutWhy = nullptr) const;
+
 private:
 	ADMCharacter* FindVisibleDoll(float& OutDistance) const;
-	bool CanSee(const ADMCharacter* Doll, float* OutDistance = nullptr) const;
 	void RingBell();
 	void ResumePatrol();
+	/** Walk to the last known spot (or the nearest walkable point to it) and look around. */
+	void BeginSearch(double Now, bool bUnreachable);
+	/** Nearest walkable point to Location, or Location itself if none is close. */
+	FVector ReachablePoint(const FVector& Location) const;
 
 	UPROPERTY(Replicated)
 	uint8 Suspicion = 0;
+
+	/** dm.ButlerTrace: one line every 0.25 s with state, sight, timers and the move. */
+	void Trace(double Now);
+	double LastTraceTime = -1.0;
 
 	TArray<FVector> WorldPatrol;
 	int32 PatrolIndex = 0;
@@ -92,4 +114,8 @@ private:
 	double LastSeenTime = 0.0;
 	double LastBellTime = -100.0;
 	double LastRepathTime = 0.0;
+	/** When the butler started standing still in a chase without being able to catch (0 = moving or catching). */
+	double ChaseStallSince = 0.0;
+	FVector UnreachableSpot = FVector::ZeroVector;
+	double IgnoreUnreachableUntil = 0.0;
 };

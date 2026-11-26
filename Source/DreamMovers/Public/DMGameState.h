@@ -7,9 +7,13 @@
 UENUM()
 enum class EDMRoundState : uint8
 {
+	/** Waiting for the map (and on a generated map its navmesh); no timer, no monsters. */
+	Preparing,
 	Playing,
 	Success,
-	Failed
+	Failed,
+	/** The map could not be made ready (generation failed or navigation timed out); the round never starts. */
+	Aborted
 };
 
 /**
@@ -31,6 +35,10 @@ public:
 	void AddCollected(int32 Value);
 	void AddBroken(int32 Value);
 	void EndRound(EDMRoundState Result);
+	/** Server: only from Preparing. */
+	void AbortRound();
+	/** Self tests only (they are never spawned in Shipping): take stability away without banking anything. */
+	void DebugDrainStability(float Seconds) { RoundEndTime -= Seconds; }
 
 	int32 GetCollectedValue() const { return CollectedValue; }
 	int32 GetBrokenValue() const { return BrokenValue; }
@@ -66,5 +74,5 @@ private:
 	float RoundDuration = 0.f;
 
 	UPROPERTY(Replicated)
-	EDMRoundState RoundState = EDMRoundState::Playing;
+	EDMRoundState RoundState = EDMRoundState::Preparing;
 };

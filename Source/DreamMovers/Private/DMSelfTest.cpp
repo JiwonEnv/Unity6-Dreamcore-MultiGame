@@ -208,7 +208,8 @@ void ADMSelfTest::Step(int32 Index)
 		break;
 	case 15:
 		UE_LOG(LogDreamMovers, Display, TEXT("[SelfTest] DONE: %d passed, %d failed"), Passed, Failed);
-		FPlatformMisc::RequestExit(false, TEXT("DreamMovers self test finished"));
+		// Non-zero exit code on failure. Forced: a normal exit request ignores the code in the editor executable.
+		FPlatformMisc::RequestExitWithStatus(true, Failed == 0 ? 0 : 1, TEXT("DreamMovers self test finished"));
 		break;
 	default:
 		break;

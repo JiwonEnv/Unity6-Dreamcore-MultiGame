@@ -17,6 +17,9 @@ public:
 	virtual void BeginPlay() override;
 	virtual void DrawHUD() override;
 
+	/** Current value driven into the oil pastel material's Collapse parameter. */
+	float GetCollapse() const { return Collapse; }
+
 protected:
 	/** Price tags are drawn on items closer than this. */
 	UPROPERTY(EditDefaultsOnly, Category = "HUD")

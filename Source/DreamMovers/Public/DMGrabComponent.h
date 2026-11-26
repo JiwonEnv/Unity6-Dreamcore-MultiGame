@@ -53,6 +53,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Grab")
 	float HoldDistanceStep = 25.f;
 
+	/** How far (cm) a client's grab point may be from the item's surface; the item may have moved a little. */
+	UPROPERTY(EditDefaultsOnly, Category = "Grab")
+	float GrabPointTolerance = 30.f;
+
 	/** Strength: the heaviest item one player can hold up against gravity. */
 	UPROPERTY(EditAnywhere, Category = "Grab")
 	float MaxLiftKg = 20.f;
@@ -72,6 +76,10 @@ protected:
 	FLinearColor ThreadColor = FLinearColor(1.f, 0.35f, 0.55f);
 
 private:
+	/** Lets -dmproctest send crafted grab requests to check the server validation. */
+	friend class ADMProcSelfTest;
+
+	/** Rejected unless the point is on the target, within reach, in plain view, and the holder is up and not hiding. */
 	UFUNCTION(Server, Reliable)
 	void ServerGrab(ADMValuable* Target, FVector_NetQuantize WorldGrabPoint);
 

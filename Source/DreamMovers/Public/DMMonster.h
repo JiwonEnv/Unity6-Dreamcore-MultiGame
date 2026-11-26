@@ -55,14 +55,29 @@ protected:
 	void SetMonsterState(EDMMonsterState NewState);
 	double StateAge() const;
 
-	void MoveToLocation(const FVector& Goal, float Speed);
+	void MoveToLocation(const FVector& Goal, float Speed, bool bRightUpTo = false);
 	void MoveToActor(AActor* Goal, float Speed);
 	void StopMoving();
 	/** True once the current move finished or failed. */
 	bool IsMoveDone() const;
 
-	/** Downs the first doll within CatchRadius. */
+public:
+	/** For traces: path following status, request result, goal and distance to it. */
+	FString DescribeMove() const;
+
+protected:
+
+	/** Downs the first doll CanCatch allows. */
 	ADMCharacter* TryCatch();
+
+public:
+	/**
+	 * Close enough (CatchRadius beyond both capsules, similar height) and nothing static in between: a line from
+	 * the top of the monster to the doll must not cross a wall, a tabletop or a wardrobe.
+	 */
+	bool CanCatch(const ADMCharacter* Doll) const;
+
+protected:
 
 	/** Placeholder body part, colored at BeginPlay. Call from the constructor. */
 	UStaticMeshComponent* AddPart(FName Name, UStaticMesh* Shape, const FVector& Location, const FVector& Scale,
@@ -95,6 +110,11 @@ private:
 	EDMMonsterState MonsterState = EDMMonsterState::Idle;
 
 	double StateStartTime = 0.0;
+
+	/** Last move request, for traces. */
+	FVector LastMoveGoal = FVector::ZeroVector;
+	FString LastMoveGoalName;
+	int32 LastMoveResult = -1;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UMaterialInterface> PartMaterial;

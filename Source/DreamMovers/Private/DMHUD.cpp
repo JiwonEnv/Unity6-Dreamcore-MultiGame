@@ -85,6 +85,8 @@ void ADMHUD::UpdateDreamCollapse(float DeltaSeconds)
 		Target = 1.f; // the dream woke up: only the sketch is left
 		break;
 	case EDMRoundState::Success:
+	case EDMRoundState::Preparing:
+	case EDMRoundState::Aborted:
 		Target = 0.f;
 		break;
 	}
@@ -142,7 +144,16 @@ void ADMHUD::DrawRoundInfo()
 		DrawCenteredText(FText::Format(LOCTEXT("Broken", "깨뜨린 금액 {0}"), FText::AsNumber(GS->GetBrokenValue())), FVector2D(CenterX, 100.f), Warning, 14);
 	}
 
-	if (GS->GetRoundState() != EDMRoundState::Playing)
+	if (GS->GetRoundState() == EDMRoundState::Preparing)
+	{
+		DrawCenteredText(LOCTEXT("Preparing", "꿈을 준비하는 중..."), FVector2D(CenterX, Canvas->ClipY * 0.4f), Paper, 28);
+	}
+	else if (GS->GetRoundState() == EDMRoundState::Aborted)
+	{
+		DrawCenteredText(LOCTEXT("Aborted", "꿈을 만들지 못했습니다"), FVector2D(CenterX, Canvas->ClipY * 0.4f), Warning, 36);
+		DrawCenteredText(LOCTEXT("AbortedHint", "라운드를 시작하지 않습니다. 로그를 확인하세요"), FVector2D(CenterX, Canvas->ClipY * 0.4f + 44.f), Paper, 16);
+	}
+	else if (GS->GetRoundState() != EDMRoundState::Playing)
 	{
 		const bool bWon = GS->GetRoundState() == EDMRoundState::Success;
 		DrawCenteredText(bWon ? LOCTEXT("Success", "수거 성공!") : LOCTEXT("Failed", "꿈이 깨버렸다..."),

@@ -25,8 +25,16 @@ public:
 
 	/** Server: puts Doll inside if there is room. */
 	bool TryEnter(ADMCharacter* Doll);
-	/** Server: lets Doll out in front of the doors. */
-	void Leave(ADMCharacter* Doll);
+	/**
+	 * Server: lets Doll out in front of the doors. Tries each exit spot and moves the doll only to one that is free
+	 * and has floor under it; if every one is blocked the doll stays inside and this returns false.
+	 */
+	bool Leave(ADMCharacter* Doll);
+
+	/** Server: the doll is gone (caught, left the game); frees its place without moving it. */
+	void Release(ADMCharacter* Doll);
+
+	const FVector& GetSize() const { return Size; }
 
 	/** Server, between SpawnActorDeferred and FinishSpawning. */
 	void Configure(const FVector& InSize, int32 InCapacity);
@@ -35,7 +43,7 @@ public:
 	int32 GetNumOccupants() const { return NumOccupants; }
 	int32 GetCapacity() const { return Capacity; }
 
-	/** Closest wardrobe Doll can reach from where it stands, or null. */
+	/** Closest wardrobe Doll can reach: in front of the doors, on the same floor, nothing in between. Null if none. */
 	static ADMHidingSpot* FindReachable(const ADMCharacter* Doll);
 
 protected:
@@ -65,6 +73,8 @@ private:
 
 	FVector GetSlotLocation(int32 Slot) const;
 	FVector GetExitLocation(int32 Slot) const;
+	/** Room for a standing doll and floor under it. */
+	bool IsExitClear(const ADMCharacter* Doll, const FVector& Location) const;
 	void PurgeOccupants();
 
 	TArray<TWeakObjectPtr<ADMCharacter>> Occupants;

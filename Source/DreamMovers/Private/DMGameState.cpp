@@ -25,7 +25,7 @@ void ADMGameState::StartRound(int32 InTargetValue, float DurationSeconds)
 
 void ADMGameState::SetTargetValue(int32 InTargetValue)
 {
-	if (RoundState == EDMRoundState::Playing)
+	if (RoundState == EDMRoundState::Playing || RoundState == EDMRoundState::Preparing)
 	{
 		TargetValue = InTargetValue;
 	}
@@ -45,6 +45,14 @@ void ADMGameState::AddBroken(int32 Value)
 	if (RoundState == EDMRoundState::Playing)
 	{
 		BrokenValue += Value;
+	}
+}
+
+void ADMGameState::AbortRound()
+{
+	if (RoundState == EDMRoundState::Preparing)
+	{
+		RoundState = EDMRoundState::Aborted;
 	}
 }
 
