@@ -74,6 +74,7 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
 - Unity Hub에서 이 폴더를 추가해 엽니다. 시작 씬은 `Assets/_Project/Scenes/Sandbox.unity`입니다.
 - 프로젝트 설정 검사 (배치모드):
   `Unity.exe -batchmode -projectPath . -executeMethod DreamMovers.Editor.ProjectCheck.Run -quit`
+- UE5 버전 실행: `git worktree add ../DreamMovers-UE5 ue5-final`로 별도 폴더에 꺼낸 뒤, Unreal Engine 5.8에서 `DreamMovers.uproject`를 열고 모듈 빌드를 승인합니다.
 
 ## 폴더 구성
 
@@ -83,5 +84,5 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
 | `Assets/_Project/Settings` | URP 렌더 파이프라인 에셋, 렌더러, 볼륨 프로필 |
 | `Assets/_Project/Input` | Input System 액션 |
 | `Assets/_Project/Scripts/Editor` | 에디터 도구와 검사 스크립트 |
-| `Docs` | 기획서, Tripo 에셋 목록, UE5 테스트 가이드 |
+| `Docs` | 기획서, Tripo 에셋 목록, UE5 테스트 가이드, UE5 스크린샷(`ue5_screenshots`) |
 | `TestEvidence` | UE5 버전 테스트 로그와 스크린샷 |

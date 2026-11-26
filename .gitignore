@@ -34,11 +34,3 @@ crashlytics-build.properties
 *.apk
 *.aab
 *.unitypackage
-
-# Unreal Engine leftovers from before the port (the UE5 version is at tag ue5-final)
-/Binaries/
-/Intermediate/
-/Saved/
-/DerivedDataCache/
-/Content/
-/Plugins/
