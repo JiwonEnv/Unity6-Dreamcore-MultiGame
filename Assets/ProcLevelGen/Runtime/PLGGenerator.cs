@@ -801,6 +801,10 @@ namespace ProcLevelGen
         {
             foreach (string arg in Environment.GetCommandLineArgs())
             {
+                if (!arg.StartsWith("-"))
+                {
+                    continue;
+                }
                 string trimmed = arg.TrimStart('-');
                 if (trimmed.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                 {
@@ -812,9 +816,10 @@ namespace ProcLevelGen
             return false;
         }
 
+        /// <summary>Only flags count (leading '-'), so a value like "-testFilter PLGSelfTest" never turns a hook on.</summary>
         static bool HasArg(string name)
         {
-            return Environment.GetCommandLineArgs().Any(a => string.Equals(a.TrimStart('-'), name, StringComparison.OrdinalIgnoreCase));
+            return Environment.GetCommandLineArgs().Any(a => a.StartsWith("-") && string.Equals(a.TrimStart('-'), name, StringComparison.OrdinalIgnoreCase));
         }
 
 #if UNITY_EDITOR
