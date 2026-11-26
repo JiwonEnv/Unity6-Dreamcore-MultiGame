@@ -2,7 +2,8 @@
     "name": "DreamMovers.Editor",
     "rootNamespace": "DreamMovers.Editor",
     "references": [
-        "Unity.RenderPipelines.Universal.Runtime"
+        "Unity.RenderPipelines.Universal.Runtime",
+        "ProcLevelGen"
     ],
     "includePlatforms": [
         "Editor"
