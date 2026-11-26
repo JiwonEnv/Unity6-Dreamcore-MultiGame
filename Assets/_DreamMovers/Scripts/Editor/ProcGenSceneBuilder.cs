@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 namespace DreamMovers.Editor
 {
     /// <summary>
-    /// Builds the procedural test scene Assets/_Project/Scenes/ProcGen.unity, ported from Tools/ue/build_proc_level.py
+    /// Builds the procedural test scene Assets/_DreamMovers/Scenes/ProcGen.unity, ported from Tools/ue/build_proc_level.py
     /// (tag ue5-final). Only the generator is placed: it assembles the 3 + 2 + 3 module kit from a new seed every run.
     /// The start module always sits at the origin (10 x 10 m, door toward +Z), so the player starts are placed there.
     /// No valuables, monsters, extraction zone or oil pastel look yet: this scene checks layout, walls, doors and navigation.
@@ -16,8 +16,9 @@ namespace DreamMovers.Editor
     /// </summary>
     public static class ProcGenSceneBuilder
     {
-        public const string ScenePath = "Assets/_Project/Scenes/ProcGen.unity";
-        const string MaterialPath = "Assets/_Project/Materials/PLG_Graybox.mat";
+        public const string ScenePath = ProjectFolders.Root + "/Scenes/ProcGen.unity";
+        const string MaterialFolder = ProjectFolders.Root + "/Art/MaterialLibrary/Graybox";
+        const string MaterialPath = MaterialFolder + "/M_Graybox.mat";
 
         // Dream Movers names for the sample kit (the generator stays game-agnostic).
         static readonly (PLGRole Role, string Name)[] ModuleNames =
@@ -92,11 +93,11 @@ namespace DreamMovers.Editor
             {
                 return material;
             }
-            if (!AssetDatabase.IsValidFolder("Assets/_Project/Materials"))
+            if (!AssetDatabase.IsValidFolder(MaterialFolder))
             {
-                AssetDatabase.CreateFolder("Assets/_Project", "Materials");
+                ProjectFolders.Create();
             }
-            material = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "PLG_Graybox" };
+            material = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "M_Graybox" };
             material.SetFloat("_Smoothness", 0.1f);
             material.enableInstancing = true;
             AssetDatabase.CreateAsset(material, MaterialPath);

@@ -71,8 +71,9 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
 ## 실행
 
 - Unity 6.3 LTS (6000.3.9f1), URP
-- Unity Hub에서 이 폴더를 추가해 엽니다. 시작 씬은 `Assets/_Project/Scenes/ProcGen.unity`(플레이할 때마다 새 시드로 맵 생성)입니다.
+- Unity Hub에서 이 폴더를 추가해 엽니다. 시작 씬은 `Assets/_DreamMovers/Scenes/ProcGen.unity`(플레이할 때마다 새 시드로 맵 생성)입니다.
 - 생성 맵 씬 다시 만들기: 메뉴 **Dream Movers > Build ProcGen Scene**
+- 폴더 구조 만들기·정리: 메뉴 **Dream Movers > Create Folder Structure** (몇 번 실행해도 안전)
 - 프로젝트 설정 검사 (배치모드):
   `Unity.exe -batchmode -projectPath . -executeMethod DreamMovers.Editor.ProjectCheck.Run -quit`
 - UE5 버전 실행: `git worktree add ../DreamMovers-UE5 ue5-final`로 별도 폴더에 꺼낸 뒤, Unreal Engine 5.8에서 `DreamMovers.uproject`를 열고 모듈 빌드를 승인합니다.
@@ -82,10 +83,15 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
 | 폴더 | 내용 |
 |---|---|
 | `Assets/ProcLevelGen` | 레벨 생성기 (게임과 분리된 모듈, 테스트와 규격 문서 포함). [README](Assets/ProcLevelGen/README.md) |
-| `Assets/_Project/Scenes` | 씬 (`ProcGen` 생성 맵, `Sandbox`) |
-| `Assets/_Project/Materials` | 그레이박스 재질 |
-| `Assets/_Project/Settings` | URP 렌더 파이프라인 에셋, 렌더러, 볼륨 프로필 |
-| `Assets/_Project/Input` | Input System 액션 |
-| `Assets/_Project/Scripts/Editor` | 에디터 도구(생성 맵 씬 빌더)와 검사 스크립트 |
+| `Assets/_DreamMovers` | 게임 콘텐츠 전부. 에셋 하나의 메시·텍스처·재질·프리팹은 한 폴더에 둡니다 (아래) |
+| `Assets/_DreamMovers/Art` | `Characters` · `Monsters` · `Props/Valuables` · `Props/Decor` · `Environment/Modules` · `Environment/Landmarks` · `MaterialLibrary`(공용 재질·셰이더, 그레이박스) · `VFX` · `UI` |
+| `Assets/_DreamMovers/Audio` | `Music` · `SFX` |
+| `Assets/_DreamMovers/Gameplay` | 플레이어·매니저 같은 게임 로직 프리팹과 데이터 |
+| `Assets/_DreamMovers/Scenes` | 씬 (`ProcGen` 생성 맵) |
+| `Assets/_DreamMovers/Lighting` | 볼륨 프로필, LUT |
+| `Assets/_DreamMovers/Scripts` | `Runtime`(게임 코드) · `Editor`(씬 빌더, 폴더 생성, 검사 스크립트) |
+| `Assets/_DreamMovers/Settings` | URP 렌더 파이프라인 에셋·렌더러, `Input`(Input System 액션) |
+| `Assets/ThirdParty` | 에셋 스토어 등 외부 에셋 (직접 고치지 않음) |
+| `Assets/_Sandbox` | 개인 테스트용 (`Sandbox` 씬) |
 | `Docs` | 기획서, Tripo 에셋 목록, UE5 테스트 가이드, UE5 스크린샷(`ue5_screenshots`) |
 | `TestEvidence` | UE5 버전 테스트 로그와 스크린샷 |
