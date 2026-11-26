@@ -3,7 +3,7 @@
 Unity 6 멀티플레이 드림코어 게임 · Tripo로 만든 에셋에 오일 파스텔·색연필 풀스크린 셰이더를 입히고, 꿈이 깨질수록 연필 스케치만 남는 연출 | 드림코어 저택 환경 아트 포트폴리오
 
 > **Unity로 이전 중**
-> Unreal Engine 5로 0단계(기술 검증)까지 진행한 뒤 Unity 6.3 LTS + URP로 옮기고 있습니다. 지금 Unity 쪽은 빈 프로젝트 뼈대만 있습니다.
+> Unreal Engine 5로 0단계(기술 검증)까지 진행한 뒤 Unity 6.3 LTS + URP로 옮기고 있습니다. Unity 쪽은 레벨 생성기(ProcLevelGen)까지 옮겼습니다. 같은 시드에서 UE5와 같은 맵이 나옵니다.
 > UE5 버전은 태그 [`ue5-final`](../../tree/ue5-final)에 그대로 남아 있습니다. 아래 스크린샷과 셰이더 설명은 UE5 버전 기준입니다.
 
 ![테스트 맵 전체](Docs/proposal_images/1_test_map_overview.png)
@@ -71,7 +71,8 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
 ## 실행
 
 - Unity 6.3 LTS (6000.3.9f1), URP
-- Unity Hub에서 이 폴더를 추가해 엽니다. 시작 씬은 `Assets/_Project/Scenes/Sandbox.unity`입니다.
+- Unity Hub에서 이 폴더를 추가해 엽니다. 시작 씬은 `Assets/_Project/Scenes/ProcGen.unity`(플레이할 때마다 새 시드로 맵 생성)입니다.
+- 생성 맵 씬 다시 만들기: 메뉴 **Dream Movers > Build ProcGen Scene**
 - 프로젝트 설정 검사 (배치모드):
   `Unity.exe -batchmode -projectPath . -executeMethod DreamMovers.Editor.ProjectCheck.Run -quit`
 - UE5 버전 실행: `git worktree add ../DreamMovers-UE5 ue5-final`로 별도 폴더에 꺼낸 뒤, Unreal Engine 5.8에서 `DreamMovers.uproject`를 열고 모듈 빌드를 승인합니다.
@@ -80,9 +81,11 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
 
 | 폴더 | 내용 |
 |---|---|
-| `Assets/_Project/Scenes` | 씬 |
+| `Assets/ProcLevelGen` | 레벨 생성기 (게임과 분리된 모듈, 테스트와 규격 문서 포함). [README](Assets/ProcLevelGen/README.md) |
+| `Assets/_Project/Scenes` | 씬 (`ProcGen` 생성 맵, `Sandbox`) |
+| `Assets/_Project/Materials` | 그레이박스 재질 |
 | `Assets/_Project/Settings` | URP 렌더 파이프라인 에셋, 렌더러, 볼륨 프로필 |
 | `Assets/_Project/Input` | Input System 액션 |
-| `Assets/_Project/Scripts/Editor` | 에디터 도구와 검사 스크립트 |
+| `Assets/_Project/Scripts/Editor` | 에디터 도구(생성 맵 씬 빌더)와 검사 스크립트 |
 | `Docs` | 기획서, Tripo 에셋 목록, UE5 테스트 가이드, UE5 스크린샷(`ue5_screenshots`) |
 | `TestEvidence` | UE5 버전 테스트 로그와 스크린샷 |
