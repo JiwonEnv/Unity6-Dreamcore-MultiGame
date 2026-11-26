@@ -42,8 +42,10 @@ def open_empty_map():
         les.load_level(MAP)
         require_map_open()
         for a in eas.get_all_level_actors():
-            if not isinstance(a, (unreal.WorldSettings, unreal.Brush)):
-                eas.destroy_actor(a)
+            # Volumes are brushes too; only the level's own builder brush is kept, or nav bounds pile up on every run.
+            if isinstance(a, unreal.WorldSettings) or (isinstance(a, unreal.Brush) and not isinstance(a, unreal.Volume)):
+                continue
+            eas.destroy_actor(a)
     else:
         if not les.new_level(MAP):
             raise RuntimeError(f"could not create {MAP}")
@@ -93,8 +95,8 @@ def generator():
         t.set_editor_property("name", name)
     gen.set_editor_property("themes", themes)
 
-    # A preview in the editor viewport; play builds a fresh one from a new seed.
-    gen.preview()
+    # No preview is built here: the editor would bake its geometry into the saved navmesh, and play builds its own
+    # layout. Use "Preview New Seed" on the actor to look at layouts in the editor.
     return gen
 
 

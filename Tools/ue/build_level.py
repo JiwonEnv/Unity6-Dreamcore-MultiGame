@@ -236,8 +236,10 @@ def open_empty_map():
         les.load_level(MAP)
         require_map_open()
         for a in eas.get_all_level_actors():
-            if not isinstance(a, (unreal.WorldSettings, unreal.Brush)):
-                eas.destroy_actor(a)
+            # Volumes are brushes too; only the level's own builder brush is kept, or nav bounds pile up on every run.
+            if isinstance(a, unreal.WorldSettings) or (isinstance(a, unreal.Brush) and not isinstance(a, unreal.Volume)):
+                continue
+            eas.destroy_actor(a)
     else:
         if not les.new_level(MAP):
             raise RuntimeError(f"could not create {MAP}")
