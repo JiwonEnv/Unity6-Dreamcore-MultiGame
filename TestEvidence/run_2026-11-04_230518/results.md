@@ -1,0 +1,74 @@
+﻿# Self test run 2026-11-04_230518
+
+- Commit: `4b0fa9ecc9c07b0ef89766ccbfe1384fa2f415ae`
+- Engine: 5.8.4 CL 58902052
+- Uncommitted changes: 35 path(s), listed at the end
+
+| Scenario | Result | Exit | Seconds | Seeds | Log |
+|---|---|---|---|---|---|
+| desk_hide | FAIL | 1 | 85 | seed 535117761: 9 modules | `desk_hide.log` |
+
+## desk_hide
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -dmprocexpect=deskhide -plgseed=535117761 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_230518\desk_hide.log"`
+
+Layout hash: e94bc661
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r1.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_setup: RoomLarge module 3, trace 1
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_butler_gives_up_and_patrols:  | 0.4 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.9 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_inner_edge_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_inner_edge_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.9 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_inner_edge_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_center_crawled_under: 8 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_center_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (8 cm off the hide spot) | 5.7 back on patrol, walked away 200 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_center_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_inner_edge_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_inner_edge_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.6 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_inner_edge_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_far_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_far_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.2 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] FAIL r1.desk_front_center_far_seen_again_after_leaving: not spotted in 6 s at V(X=2433.12, Y=-193.32, Z=57.00) (outside the cone (123 deg off the light axis))
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_exposed_crawled_under: 8 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] FAIL r1.desk_front_exposed_exposed_doll_is_caught: still not caught after 20 s  | 0.4 spotted | 1.7 under the desk 1 (8 cm off the hide spot)
+
+## Uncommitted changes
+
+- ` M Content/Maps/Lvl_ProcGen.umap`
+- ` M Docs/GDD.md`
+- ` M Docs/Phase0_Test_Guide.md`
+- ` M Plugins/ProcLevelGen/Docs/ModuleSpec.md`
+- ` M Plugins/ProcLevelGen/README.md`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Private/PLGGenerator.cpp`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Private/PLGLayout.cpp`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGGenerator.h`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGLayout.h`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGTypes.h`
+- ` M Source/DreamMovers/Private/DMBellHorse.cpp`
+- ` M Source/DreamMovers/Private/DMButler.cpp`
+- ` M Source/DreamMovers/Private/DMCharacter.cpp`
+- ` M Source/DreamMovers/Private/DMGameMode.cpp`
+- ` M Source/DreamMovers/Private/DMGameState.cpp`
+- ` M Source/DreamMovers/Private/DMGrabComponent.cpp`
+- ` M Source/DreamMovers/Private/DMHUD.cpp`
+- ` M Source/DreamMovers/Private/DMHidingSpot.cpp`
+- ` M Source/DreamMovers/Private/DMMonster.cpp`
+- ` M Source/DreamMovers/Private/DMSelfTest.cpp`
+- ` M Source/DreamMovers/Public/DMButler.h`
+- ` M Source/DreamMovers/Public/DMCharacter.h`
+- ` M Source/DreamMovers/Public/DMGameMode.h`
+- ` M Source/DreamMovers/Public/DMGameState.h`
+- ` M Source/DreamMovers/Public/DMGrabComponent.h`
+- ` M Source/DreamMovers/Public/DMHUD.h`
+- ` M Source/DreamMovers/Public/DMHidingSpot.h`
+- ` M Source/DreamMovers/Public/DMMonster.h`
+- ` M Tools/ue/build_level.py`
+- ` M Tools/ue/build_proc_level.py`
+- ` M Tools/ue/test_proc_level.py`
+- `?? Source/DreamMovers/Private/DMProcSelfTest.cpp`
+- `?? Source/DreamMovers/Public/DMProcSelfTest.h`
+- `?? TestEvidence/`
+- `?? Tools/run_selftests.ps1`

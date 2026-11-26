@@ -1,0 +1,44 @@
+﻿Using bundled DotNet SDK version: 10.0 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" DreamMoversEditor Win64 Development -Project=E:\Project\Unreal_Oil-Shader\DreamMovers.uproject -WaitMutex
+Log file: C:\Users\ljw13\AppData\Local\UnrealBuildTool\Log.txt
+Determining max actions to execute in parallel (12 physical cores, 24 logical cores)
+  Executing up to 12 processes, one per physical core
+Using 'git status' to determine working set for adaptive non-unity build (E:\Project\Unreal_Oil-Shader).
+Creating makefile for DreamMoversEditor (.uproject file is newer)
+UbaServer - Listening on 0.0.0.0:1345
+UHT compiled-in object format Default
+Building DreamMoversEditor...
+===== Toolchain Information =====
+Using ISPC compiler (C:\Program Files\Epic Games\UE_5.8\Engine\Source\ThirdParty\Intel\ISPC\bin\Windows\ispc.exe)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20250404, LLVM 18.1.2) 
+Using Visual Studio 14.44.35222 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from DreamMovers unity file: DMButler.cpp, DMGameMode.cpp, DMHidingSpot.cpp, DMValuable.cpp, DMValuableCatalog.cpp
+[Adaptive Build] Excluded from ProcLevelGen unity file: PLGGenerator.cpp, PLGLayout.cpp
+===== End Toolchain Information =====
+Using Unreal Build Accelerator local executor to run 14 action(s)
+  CPU 12 physical cores, 24 logical cores
+  Memory 31.1 GB physical, 88.39 GB/99.24 GB committed
+  UBA Storage capacity 40 GB
+[1/14] Compile [x64] Module.ProcLevelGen.cpp
+[2/14] Compile [x64] PLGGenerator.cpp
+[3/14] Compile [x64] PLGLayout.cpp
+[4/14] Link [x64] UnrealEditor-ProcLevelGen.lib
+   E:/Project/Unreal_Oil-Shader/Plugins/ProcLevelGen/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProcLevelGen/UnrealEditor-ProcLevelGen.lib 라이브러리 및 E:/Project/Unreal_Oil-Shader/Plugins/ProcLevelGen/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProcLevelGen/UnrealEditor-ProcLevelGen.exp 개체를 생성하고 있습니다.
+[5/14] Link [x64] UnrealEditor-ProcLevelGen.dll
+[6/14] Compile [x64] DMButler.cpp
+[7/14] Compile [x64] DMGameMode.cpp
+E:\Project\Unreal_Oil-Shader\Source\DreamMovers\Private\DMGameMode.cpp(146,18): error C4458: 'Role' 선언은 클래스 멤버를 숨깁니다.
+		const EPLGRole Role = Defs[Placed.Def].Role;
+		               ^
+C:\Program Files\Epic Games\UE_5.8\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h(864,29): note: 'AActor::Role' 선언을 참조하십시오.
+	TEnumAsByte<enum ENetRole> Role;
+	                           ^
+[8/14] Compile [x64] DMHidingSpot.cpp
+[9/14] Compile [x64] DMValuable.cpp
+[10/14] Compile [x64] DMValuableCatalog.cpp
+[11/14] Compile [x64] Module.DreamMovers.cpp
+Total time in Unreal Build Accelerator local executor: 2153.37 seconds
+
+Result: Failed (OtherCompilationError)
+Total execution time: 2164.13 seconds
+Trace written to file C:\Users\ljw13\AppData\Local\UnrealBuildTool\Trace.uba with size 205.1kb

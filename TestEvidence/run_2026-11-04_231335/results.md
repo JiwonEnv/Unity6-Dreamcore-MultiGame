@@ -1,0 +1,270 @@
+﻿# Self test run 2026-11-04_231335
+
+- Commit: `4b0fa9ecc9c07b0ef89766ccbfe1384fa2f415ae`
+- Engine: 5.8.4 CL 58902052
+- Uncommitted changes: 35 path(s), listed at the end
+
+| Scenario | Result | Exit | Seconds | Seeds | Log |
+|---|---|---|---|---|---|
+| seeds200 | PASS | 0 | 18 | seed 1: 9 modules, seed 2: 7 modules, seed 3: 9 modules, seed 4: 8 modules, seed 5: 10 modules, seed 6: 8 modules, seed 7: 8 modules, seed 8: 12 modules, seed 9: 10 modules, seed 10: 11 modules, seed 11: 7 modules, seed 12: 10 modules, seed 13: 7 modules, seed 14: 7 modules, seed 15: 13 modules, seed 16: 11 modules, seed 17: 7 modules, seed 18: 9 modules, seed 19: 14 modules, seed 20: 9 modules, seed 21: 7 modules, seed 22: 8 modules, seed 23: 7 modules, seed 24: 9 modules, seed 25: 7 modules, seed 26: 9 modules, seed 27: 7 modules, seed 28: 7 modules, seed 29: 8 modules, seed 30: 8 modules, seed 31: 8 modules, seed 32: 8 modules, seed 33: 11 modules, seed 34: 8 modules, seed 35: 9 modules, seed 36: 10 modules, seed 37: 9 modules, seed 38: 8 modules, seed 39: 7 modules, seed 40: 7 modules, seed 41: 8 modules, seed 42: 8 modules, seed 43: 9 modules, seed 44: 7 modules, seed 45: 8 modules, seed 46: 9 modules, seed 47: 7 modules, seed 48: 11 modules, seed 49: 7 modules, seed 50: 7 modules, seed 51: 7 modules, seed 52: 10 modules, seed 53: 8 modules, seed 54: 7 modules, seed 55: 10 modules, seed 56: 9 modules, seed 57: 8 modules, seed 58: 8 modules, seed 59: 7 modules, seed 60: 7 modules, seed 61: 7 modules, seed 62: 7 modules, seed 63: 7 modules, seed 64: 7 modules, seed 65: 7 modules, seed 66: 9 modules, seed 67: 7 modules, seed 68: 7 modules, seed 69: 8 modules, seed 70: 8 modules, seed 71: 8 modules, seed 72: 9 modules, seed 73: 8 modules, seed 74: 7 modules, seed 75: 7 modules, seed 76: 9 modules, seed 77: 10 modules, seed 78: 10 modules, seed 79: 12 modules, seed 80: 8 modules, seed 81: 8 modules, seed 82: 10 modules, seed 83: 8 modules, seed 84: 8 modules, seed 85: 10 modules, seed 86: 9 modules, seed 87: 11 modules, seed 88: 7 modules, seed 89: 10 modules, seed 90: 10 modules, seed 91: 9 modules, seed 92: 7 modules, seed 93: 9 modules, seed 94: 7 modules, seed 95: 9 modules, seed 96: 12 modules, seed 97: 9 modules, seed 98: 10 modules, seed 99: 8 modules, seed 100: 9 modules, seed 101: 13 modules, seed 102: 7 modules, seed 103: 7 modules, seed 104: 7 modules, seed 105: 9 modules, seed 106: 10 modules, seed 107: 7 modules, seed 108: 7 modules, seed 109: 8 modules, seed 110: 9 modules, seed 111: 8 modules, seed 112: 9 modules, seed 113: 8 modules, seed 114: 7 modules, seed 115: 8 modules, seed 116: 7 modules, seed 117: 7 modules, seed 118: 12 modules, seed 119: 8 modules, seed 120: 9 modules, seed 121: 7 modules, seed 122: 11 modules, seed 123: 7 modules, seed 124: 9 modules, seed 125: 7 modules, seed 126: 7 modules, seed 127: 8 modules, seed 128: 8 modules, seed 129: 8 modules, seed 130: 7 modules, seed 131: 10 modules, seed 132: 9 modules, seed 133: 11 modules, seed 134: 8 modules, seed 135: 10 modules, seed 136: 7 modules, seed 137: 11 modules, seed 138: 8 modules, seed 139: 8 modules, seed 140: 8 modules, seed 141: 8 modules, seed 142: 8 modules, seed 143: 7 modules, seed 144: 10 modules, seed 145: 8 modules, seed 146: 7 modules, seed 147: 11 modules, seed 148: 8 modules, seed 149: 9 modules, seed 150: 8 modules, seed 151: 7 modules, seed 152: 8 modules, seed 153: 11 modules, seed 154: 8 modules, seed 155: 9 modules, seed 156: 12 modules, seed 157: 16 modules, seed 158: 10 modules, seed 159: 11 modules, seed 160: 7 modules, seed 161: 8 modules, seed 162: 8 modules, seed 163: 10 modules, seed 164: 11 modules, seed 165: 9 modules, seed 166: 10 modules, seed 167: 7 modules, seed 168: 9 modules, seed 169: 11 modules, seed 170: 10 modules, seed 171: 9 modules, seed 172: 7 modules, seed 173: 8 modules, seed 174: 9 modules, seed 175: 10 modules, seed 176: 8 modules, seed 177: 7 modules, seed 178: 7 modules, seed 179: 7 modules, seed 180: 11 modules, seed 181: 8 modules, seed 182: 7 modules, seed 183: 8 modules, seed 184: 7 modules, seed 185: 12 modules, seed 186: 9 modules, seed 187: 7 modules, seed 188: 7 modules, seed 189: 8 modules, seed 190: 7 modules, seed 191: 10 modules, seed 192: 8 modules, seed 193: 7 modules, seed 194: 8 modules, seed 195: 7 modules, seed 196: 7 modules, seed 197: 13 modules, seed 198: 8 modules, seed 199: 10 modules, seed 200: 7 modules | `seeds200.log` |
+| proc_a | PASS | 0 | 83 | seed 535117761: 9 modules | `proc_a.log` |
+| proc_b | PASS | 0 | 71 | seed 2037773057: 9 modules | `proc_b.log` |
+| abort_empty | PASS | 0 | 15 |  | `abort_empty.log` |
+| abort_impossible | PASS | 0 | 15 |  | `abort_impossible.log` |
+| abort_navtimeout | PASS | 0 | 15 | seed 535117761: 9 modules | `abort_navtimeout.log` |
+| desk_hide | PASS | 0 | 61 | seed 535117761: 9 modules | `desk_hide.log` |
+| plg_selftest | PASS | 0 | 23 | seed 535117761: 9 modules | `plg_selftest.log` |
+| proto_selftest | PASS | 0 | 40 |  | `proto_selftest.log` |
+
+## seeds200
+
+`UnrealEditor-Cmd.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" -ExecutePythonScript=E:\Project\Unreal_Oil-Shader/Tools/ue/test_proc_level.py -unattended -nop4 -nosplash -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\seeds200.log"`
+
+Layout hash: 738bcd7f, 41276df8, 9c1e7747, 6b83766d, 5b413dc6, 1c6a34b8, a619b8f3, b5b9836a, fc8c8149, fdf0bd91, 8a5d13bb, c3d61555, 3b561b38, a6031eb9, 7d1a53cd, 85773038, 892286f3, 2c1a9bb2, 3544917f, e5f12a89, 05dcce25, 465a9d44, ea5a8adf, d22d915d, 4dbee731, bb4af7a4, 50a4fcd6, 80cfa8d1, 65621c2f, 12a1c2d5, 5fb1a83c, e5e113a7, dc197664, d4dc429d, cf82934b, 1937785d, 4b25079e, 02153b9d, f91fbb26, fa04092c, c466986d, 12eb885a, 59a1dc7b, 5ebd88de, 0f2f8926, 55912fd7, 89b9a96f, f7483e00, 545044f4, f30999ad, 8684f9c2, b3afa802, 85a32ee4, aa845ae7, c6a094c7, ddbec3ad, b925af91, a3ce5bc8, 2eb5d5f5, ed0329ff, 45059a80, 9090db83, afa66353, b5458f80, 1e98d371, 617fe1af, 843bd46e, c722d0b8, 60f8995e, 5f8276dc, 83a3d15f, 8ec51715, 0914ccf4, abb57e72, a9e72068, 8db97118, 3748161b, 93146a00, 2b40305b, e33a3f05, 50264f74, 624f1402, 91fdb782, a5742f60, 1077b7ed, c32a3b84, da4e92fe, 8ad2a6e6, ea807744, b426b1a4, 5815eace, 854d3697, 242fa043, c383216b, 9c0eaa9a, 6d80bbb2, 3f5773f1, 42ea1f2b, d119ee7f, 9cb689a2, 9ebe34db, 643d80a6, 2f8e7149, 3fb03ea5, d8b44857, 27d48b7e, 623bbc27, 01545d25, 22c9ae73, 5e3fccc2, 8d90fd9f, 7338b92f, 54ac1f8b, 3b6fdba9, bf2f7b92, c530984e, 08e4ec8c, e0c63541, 4a9dd844, 42973b02, 8d90f86f, 6d41a954, 42adae72, 4b6e730b, 51d2fb77, 9ed2470d, 62804177, 40df2538, e268d774, 46f69767, 6ab0f957, 4d8dc9ac, 99093cca, decbafd8, 4cf2d4c8, bba6435c, d04a5f67, be5b94d6, 476c9aa5, 596c944d, 898cdb86, 587e3fbf, 12cf8afb, 4cc8a787, b4a1ea15, 10d7f2a4, 58a0d1c2, 14384771, c46788ca, 680ea4cc, ea07e023, 62752e98, 391174f8, 14e6f197, eaf5ea20, 51c06deb, aa687889, b147f5fc, 7f43eb13, 18dfc76f, a8284d3f, a9c0abe0, eef57c62, b8b79ce2, 458c8048, 2463ef5c, 320bebff, 724f6d19, 3cce0159, 272a052f, c53718c5, c7a6c275, faffd30d, 3ef56749, f5ae0e84, 769cf6e2, 31e759cc, fffdd3f2, dc76cbf4, 4e9a08c6, 718182c6, 0c3f1d7e, 7b485778, d14f02c0, 612e45bb, ba9c80ab, 6d7c0f7b, a7a3a61b, 02d20630, 50bb0271, 12303ded, da3dd0de, b0d48a4f, e5e73b94, db94db03, 319b349c, cdd17291, 42a69124, 095d3e02, 00ecdb92
+
+- LogPython: Warning: [PLGTest] PASS 200/200 seeds
+
+## proc_a
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -plgseed=535117761 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\proc_a.log"`
+
+Layout hash: e94bc661
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r1.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: generation succeeded: seed 535117761, 9 modules, layout hash e94bc661
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: layout passes ValidateLayout
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: 113 graybox boxes built
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: player stands on the generated floor (z 57, vz 0)
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: navigation reaches 8/8 modules from the start
+- LogDreamMovers: Display: [DMTest] PASS r1.antique_count: 15 in the map, 15 expected
+- LogDreamMovers: Display: [DMTest] PASS r1.antiques_on_generated_floor_inside_house: 15/15 on the floor, 15/15 inside
+- LogDreamMovers: Display: [DMTest] PASS r1.antique_spots_free_at_spawn: 0 spots already blocked
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobes: 6 wardrobes for 6 hiding spots
+- LogDreamMovers: Display: [DMTest] PASS r1.monsters_with_ai
+- LogDreamMovers: Display: [DMTest] PASS r1.solo_target_30_percent: target 8040, map value 26800, 30% = 8040
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_enter: hiding 1, occupants 1, door noise 1
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_enter_makes_noise
+- LogDreamMovers: Display: [DMTest] PASS r1.hidden_doll_unseen_and_uncatchable
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_grab_while_hidden
+- LogDreamMovers: Display: [DMTest] PASS r1.butler_patrols: reached 2 patrol rooms, walked 2647 cm in 20.1 s
+- LogDreamMovers: Display: [DMTest] PASS r1.horse_runs_to_noise: charged at once 1, within 198 cm after 2.0 s
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_blocked_exit_stays_hidden: hiding 1, occupants 1, moved 0.0 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_exit: hiding 0, occupants 0, collision 1, 50 cm in front, door noise 1
+- LogDreamMovers: Display: [DMTest] PASS r1.no_catch_through_wall_doll_inside: 90 cm apart across the wall
+- LogDreamMovers: Display: [DMTest] PASS r1.no_catch_through_wall_doll_outside: 90 cm apart across the wall
+- LogDreamMovers: Display: [DMTest] PASS r1.catch_in_the_open: 90 cm apart, nothing between
+- LogDreamMovers: Display: [DMTest] PASS r1.no_catch_under_desk: butler 75 cm away at the desk edge
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_blocks_candlelight_at_2m: crouched under the desk, butler 2 m away facing it
+- LogDreamMovers: Display: [DMTest] PASS r1.crouched_doll_in_open_is_seen_at_2m: control for the desk check
+- LogDreamMovers: Display: [DMTest] PASS r1.crouch_slow_and_silent: crouched 1, height 60 cm, speed 150, footstep noises 0
+- LogDreamMovers: Display: [DMTest] PASS r1.sprint_is_loud_control: footstep noises 4 at 520 cm/s
+- LogDreamMovers: Display: [DMTest] PASS r1.grab_light: 토끼 머리 열쇠, the aim trace finds 토끼 머리 열쇠
+- LogDreamMovers: Display: [DMTest] PASS r1.lift_light: rose 81 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.carry_light_to_zone: arrived holding it after 7.1 s
+- LogDreamMovers: Display: [DMTest] PASS r1.deliver_adds_value: collected +800 for an item worth 800
+- LogDreamMovers: Display: [DMTest] PASS r1.deliver_drains_20s_per_1000: stability -16.00 s beyond time, expected 16.00 s
+- LogDreamMovers: Display: [DMTest] PASS r1.solo_cannot_lift_heavy: 회전목마 말 32 kg, held 1, rose 4 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_grab_through_wall: item 230 cm away behind the wall
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_point_off_the_item: point 133 cm from the view, 150 cm above the item
+- LogDreamMovers: Display: [DMTest] PASS r1.server_accepts_valid_grab: item 104 cm away in plain view
+- LogDreamMovers: Display: [DMTest] PASS r1.full_color_above_half_stability: stability 0.92, collapse 0.000
+- LogDreamMovers: Display: [DMTest] PASS r1.collapse_follows_stability: stability 0.29, collapse 0.309, expected 0.310
+- LogDreamMovers: Display: [DMTest] PASS r1.target_reached_succeeds: collected 8040 of 8040
+- LogDreamMovers: Display: [DMTest] PASS r2.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r2.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r2.restart_after_success: a new round started after the success summary
+- LogDreamMovers: Display: [DMTest] PASS r2.same_seed_same_layout: seed 535117761/535117761, hash e94bc661/e94bc661
+- LogDreamMovers: Display: [DMTest] PASS r2.timeout_fails: failed 0.5 s after stability ran out, doll still up
+- LogDreamMovers: Display: [DMTest] PASS r3.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r3.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r3.restart_after_failure: a new round started after the failure summary
+- LogDreamMovers: Display: [DMTest] PASS r3.butler_catches_unshielded_doll: caught after 0.0 s
+- LogDreamMovers: Display: [DMTest] PASS r3.solo_down_fails_at_once: round failed 0.5 s after the catch, no revive in normal play
+
+## proc_b
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -plgseed=2037773057 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\proc_b.log"`
+
+Layout hash: f2531f08
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r1.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: generation succeeded: seed 2037773057, 9 modules, layout hash f2531f08
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: layout passes ValidateLayout
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: 113 graybox boxes built
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: player stands on the generated floor (z 57, vz 0)
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: navigation reaches 8/8 modules from the start
+- LogDreamMovers: Display: [DMTest] PASS r1.antique_count: 15 in the map, 15 expected
+- LogDreamMovers: Display: [DMTest] PASS r1.antiques_on_generated_floor_inside_house: 15/15 on the floor, 15/15 inside
+- LogDreamMovers: Display: [DMTest] PASS r1.antique_spots_free_at_spawn: 0 spots already blocked
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobes: 6 wardrobes for 6 hiding spots
+- LogDreamMovers: Display: [DMTest] PASS r1.monsters_with_ai
+- LogDreamMovers: Display: [DMTest] PASS r1.solo_target_30_percent: target 8040, map value 26800, 30% = 8040
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_enter: hiding 1, occupants 1, door noise 1
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_enter_makes_noise
+- LogDreamMovers: Display: [DMTest] PASS r1.hidden_doll_unseen_and_uncatchable
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_grab_while_hidden
+- LogDreamMovers: Display: [DMTest] PASS r1.butler_patrols: reached 2 patrol rooms, walked 1024 cm in 8.5 s
+- LogDreamMovers: Display: [DMTest] PASS r1.horse_runs_to_noise: charged at once 1, within 199 cm after 2.0 s
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_blocked_exit_stays_hidden: hiding 1, occupants 1, moved 0.0 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_exit: hiding 0, occupants 0, collision 1, 50 cm in front, door noise 1
+- LogDreamMovers: Display: [DMTest] PASS r1.no_catch_through_wall_doll_inside: 90 cm apart across the wall
+- LogDreamMovers: Display: [DMTest] PASS r1.no_catch_through_wall_doll_outside: 90 cm apart across the wall
+- LogDreamMovers: Display: [DMTest] PASS r1.catch_in_the_open: 90 cm apart, nothing between
+- LogDreamMovers: Display: [DMTest] PASS r1.no_catch_under_desk: butler 75 cm away at the desk edge
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_blocks_candlelight_at_2m: crouched under the desk, butler 2 m away facing it
+- LogDreamMovers: Display: [DMTest] PASS r1.crouched_doll_in_open_is_seen_at_2m: control for the desk check
+- LogDreamMovers: Display: [DMTest] PASS r1.crouch_slow_and_silent: crouched 1, height 60 cm, speed 150, footstep noises 0
+- LogDreamMovers: Display: [DMTest] PASS r1.sprint_is_loud_control: footstep noises 4 at 520 cm/s
+- LogDreamMovers: Display: [DMTest] PASS r1.grab_light: 크리스탈 쿠페 잔, the aim trace finds 크리스탈 쿠페 잔
+- LogDreamMovers: Display: [DMTest] PASS r1.lift_light: rose 67 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.carry_light_to_zone: arrived holding it after 7.9 s
+- LogDreamMovers: Display: [DMTest] PASS r1.deliver_adds_value: collected +1200 for an item worth 1200
+- LogDreamMovers: Display: [DMTest] PASS r1.deliver_drains_20s_per_1000: stability -24.00 s beyond time, expected 24.00 s
+- LogDreamMovers: Display: [DMTest] PASS r1.solo_cannot_lift_heavy: 회전목마 말 32 kg, held 1, rose 16 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_grab_through_wall: item 227 cm away behind the wall
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_point_off_the_item: point 133 cm from the view, 150 cm above the item
+- LogDreamMovers: Display: [DMTest] PASS r1.server_accepts_valid_grab: item 104 cm away in plain view
+- LogDreamMovers: Display: [DMTest] PASS r1.full_color_above_half_stability: stability 0.93, collapse 0.000
+- LogDreamMovers: Display: [DMTest] PASS r1.collapse_follows_stability: stability 0.29, collapse 0.309, expected 0.310
+- LogDreamMovers: Display: [DMTest] PASS r1.target_reached_succeeds: collected 8040 of 8040
+- LogDreamMovers: Display: [DMTest] PASS r2.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r2.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r2.restart_after_success: a new round started after the success summary
+- LogDreamMovers: Display: [DMTest] PASS r2.same_seed_same_layout: seed 2037773057/2037773057, hash f2531f08/f2531f08
+- LogDreamMovers: Display: [DMTest] PASS r2.timeout_fails: failed 0.5 s after stability ran out, doll still up
+- LogDreamMovers: Display: [DMTest] PASS r3.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r3.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r3.restart_after_failure: a new round started after the failure summary
+- LogDreamMovers: Display: [DMTest] PASS r3.butler_catches_unshielded_doll: caught after 0.0 s
+- LogDreamMovers: Display: [DMTest] PASS r3.solo_down_fails_at_once: round failed 0.5 s after the catch, no revive in normal play
+
+## abort_empty
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -dmprocexpect=abort -plgtestkit=empty -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\abort_empty.log"`
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_aborted: level generation failed (seed 2095118849)
+- LogDreamMovers: Display: [DMTest] PASS r1.round_never_started: never Playing, timer never ran
+- LogDreamMovers: Display: [DMTest] PASS r1.no_monsters
+- LogDreamMovers: Display: [DMTest] PASS r1.no_content_without_layout: generation failed 1, antiques 0
+- LogDreamMovers: Display: [DMTest] PASS r1.abort_stays_aborted: still Aborted 4 s later, no restart
+
+## abort_impossible
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -dmprocexpect=abort -plgtestkit=impossible -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\abort_impossible.log"`
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_aborted: level generation failed (seed 490945153)
+- LogDreamMovers: Display: [DMTest] PASS r1.round_never_started: never Playing, timer never ran
+- LogDreamMovers: Display: [DMTest] PASS r1.no_monsters
+- LogDreamMovers: Display: [DMTest] PASS r1.no_content_without_layout: generation failed 1, antiques 0
+- LogDreamMovers: Display: [DMTest] PASS r1.abort_stays_aborted: still Aborted 4 s later, no restart
+
+## abort_navtimeout
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -dmprocexpect=abort -dmnavtimeout=0.01 -plgseed=535117761 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\abort_navtimeout.log"`
+
+Layout hash: e94bc661
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_aborted: navigation not ready after 0.3 s ()
+- LogDreamMovers: Display: [DMTest] PASS r1.round_never_started: never Playing, timer never ran
+- LogDreamMovers: Display: [DMTest] PASS r1.no_monsters
+- LogDreamMovers: Display: [DMTest] PASS r1.no_content_without_layout: generation failed 0, antiques 15
+- LogDreamMovers: Display: [DMTest] PASS r1.abort_stays_aborted: still Aborted 4 s later, no restart
+
+## desk_hide
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -dmprocexpect=deskhide -plgseed=535117761 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\desk_hide.log"`
+
+Layout hash: e94bc661
+
+- LogDreamMovers: Display: [DMTest] PASS r1.round_starts_when_ready: saw Preparing 1, navmesh ready at start 1
+- LogDreamMovers: Display: [DMTest] PASS r1.no_timer_or_monsters_while_preparing: monsters 0, timer 0
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_setup: RoomLarge module 3, trace 1
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_butler_gives_up_and_patrols:  | 0.4 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.9 back on patrol, walked away 200 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_inner_edge_crawled_under: 8 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_inner_edge_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (8 cm off the hide spot) | 5.9 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_inner_edge_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_center_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_center_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.7 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_center_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_inner_edge_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_inner_edge_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (7 cm off the hide spot) | 5.6 back on patrol, walked away 201 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_side_inner_edge_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_far_crawled_under: 8 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_far_butler_gives_up_and_patrols:  | 0.0 spotted | 1.7 under the desk 1 (8 cm off the hide spot) | 5.2 back on patrol, walked away 200 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_center_far_seen_again_after_leaving: after 0.4 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_exposed_crawled_under: 7 cm off after 1.7 s
+- LogDreamMovers: Display: [DMTest] PASS r1.desk_front_exposed_exposed_doll_is_caught: caught 0.2 s after hiding  | 0.0 spotted | 1.7 under the desk 1 (7 cm off the hide spot)
+
+## plg_selftest
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -plgselftest -plgseed=535117761 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\plg_selftest.log"`
+
+Layout hash: e94bc661
+
+- LogProcLevelGen: Display: [PLGSelfTest] PASS generation succeeded: seed 535117761, 9 modules, layout hash e94bc661
+- LogProcLevelGen: Display: [PLGSelfTest] PASS layout passes ValidateLayout
+- LogProcLevelGen: Display: [PLGSelfTest] PASS 113 graybox boxes built
+- LogProcLevelGen: Display: [PLGSelfTest] PASS player stands on the generated floor (z 57, vz 0)
+- LogProcLevelGen: Display: [PLGSelfTest] PASS navigation reaches 8/8 modules from the start
+
+Screenshots: plg_selftest_PLGSelfTest_Player.png, plg_selftest_PLGSelfTest_Top.png
+
+## proto_selftest
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_Proto?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmselftest -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_231335\proto_selftest.log"`
+
+- LogDreamMovers: Display: [SelfTest] PASS: listen server has a doll
+- LogDreamMovers: Display: [SelfTest] PASS: both monsters are in the map
+- LogDreamMovers: Display: [SelfTest] PASS: thread grabbed the 5 kg item
+- LogDreamMovers: Display: [SelfTest] PASS: 5 kg item lifted (z 25 -> 74)
+- LogDreamMovers: Display: [SelfTest] PASS: thread grabbed the 32 kg item
+- LogDreamMovers: Display: [SelfTest] PASS: 32 kg item NOT lifted by one doll (z 45 -> 52)
+- LogDreamMovers: Display: [SelfTest] PASS: horse reacted to the noise (state EDMMonsterState::Return)
+- LogDreamMovers: Display: [SelfTest] PASS: butler noticed the doll (state EDMMonsterState::Patrol, suspicion 0.00)
+- LogDreamMovers: Display: [SelfTest] PASS: downed player views their cotton ball (view target DMCottonBall_0)
+- LogDreamMovers: Display: [SelfTest] PASS: butler caught the doll and a cotton ball spawned
+- LogDreamMovers: Display: [SelfTest] PASS: cotton ball in the extraction zone revived the doll
+
+Screenshots: proto_selftest_SelfTest_1_Holding.png, proto_selftest_SelfTest_2_Butler.png, proto_selftest_SelfTest_3_Downed.png, proto_selftest_SelfTest_4_Revived.png
+
+## Uncommitted changes
+
+- ` M Content/Maps/Lvl_ProcGen.umap`
+- ` M Docs/GDD.md`
+- ` M Docs/Phase0_Test_Guide.md`
+- ` M Plugins/ProcLevelGen/Docs/ModuleSpec.md`
+- ` M Plugins/ProcLevelGen/README.md`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Private/PLGGenerator.cpp`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Private/PLGLayout.cpp`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGGenerator.h`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGLayout.h`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGTypes.h`
+- ` M Source/DreamMovers/Private/DMBellHorse.cpp`
+- ` M Source/DreamMovers/Private/DMButler.cpp`
+- ` M Source/DreamMovers/Private/DMCharacter.cpp`
+- ` M Source/DreamMovers/Private/DMGameMode.cpp`
+- ` M Source/DreamMovers/Private/DMGameState.cpp`
+- ` M Source/DreamMovers/Private/DMGrabComponent.cpp`
+- ` M Source/DreamMovers/Private/DMHUD.cpp`
+- ` M Source/DreamMovers/Private/DMHidingSpot.cpp`
+- ` M Source/DreamMovers/Private/DMMonster.cpp`
+- ` M Source/DreamMovers/Private/DMSelfTest.cpp`
+- ` M Source/DreamMovers/Public/DMButler.h`
+- ` M Source/DreamMovers/Public/DMCharacter.h`
+- ` M Source/DreamMovers/Public/DMGameMode.h`
+- ` M Source/DreamMovers/Public/DMGameState.h`
+- ` M Source/DreamMovers/Public/DMGrabComponent.h`
+- ` M Source/DreamMovers/Public/DMHUD.h`
+- ` M Source/DreamMovers/Public/DMHidingSpot.h`
+- ` M Source/DreamMovers/Public/DMMonster.h`
+- ` M Tools/ue/build_level.py`
+- ` M Tools/ue/build_proc_level.py`
+- ` M Tools/ue/test_proc_level.py`
+- `?? Source/DreamMovers/Private/DMProcSelfTest.cpp`
+- `?? Source/DreamMovers/Public/DMProcSelfTest.h`
+- `?? TestEvidence/`
+- `?? Tools/run_selftests.ps1`

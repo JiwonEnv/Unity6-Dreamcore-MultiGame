@@ -1,0 +1,81 @@
+﻿# Self test run 2026-11-04_212901
+
+- Commit: `4b0fa9ecc9c07b0ef89766ccbfe1384fa2f415ae`
+- Engine: 5.8.4 CL 58902052
+- Uncommitted changes: 26 path(s), listed at the end
+
+| Scenario | Result | Exit | Seconds | Seeds | Log |
+|---|---|---|---|---|---|
+| proc_a | FAIL | 0 | 105 | seed 535117761: 9 modules | `proc_a.log` |
+
+## proc_a
+
+`UnrealEditor.exe "E:\Project\Unreal_Oil-Shader\DreamMovers.uproject" /Game/Maps/Lvl_ProcGen?listen -game -windowed -ResX=1280 -ResY=720 -nosplash -unattended -dmproctest -plgseed=535117761 -ABSLOG="E:\Project\Unreal_Oil-Shader\TestEvidence\run_2026-11-04_212901\proc_a.log"`
+
+Layout hash: e94bc661
+
+- LogDreamMovers: Display: [DMTest] FAIL r1.round_starts_when_ready: round state 4 instead of Playing (navigation not ready after 30.0 s (module 0 is not on the navmesh yet))
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: generation succeeded: seed 535117761, 9 modules, layout hash e94bc661
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: layout passes ValidateLayout
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: 97 graybox boxes built
+- LogDreamMovers: Display: [DMTest] PASS r1.generation: player stands on the generated floor (z 57, vz 0)
+- LogDreamMovers: Display: [DMTest] FAIL r1.generation: start module pivot is on the navmesh
+- LogDreamMovers: Display: [DMTest] PASS r1.antique_count: 15 in the map, 15 expected
+- LogDreamMovers: Display: [DMTest] FAIL r1.antiques_on_generated_floor_inside_house: 14/15 on the floor, 15/15 inside 붉은 하트 성물함(z 22.5 bottom -5.0 floor-hit 1 inside 1)
+- LogDreamMovers: Display: [DMTest] PASS r1.antique_spots_free_at_spawn: 0 spots already blocked
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobes: 6 wardrobes for 6 hiding spots
+- LogDreamMovers: Display: [DMTest] FAIL r1.monsters_with_ai
+- LogDreamMovers: Display: [DMTest] PASS r1.solo_target_30_percent: target 8040, map value 26800, 30% = 8040
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_enter: hiding 1, occupants 1, door noise 1
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_enter_makes_noise
+- LogDreamMovers: Display: [DMTest] FAIL r1.hidden_doll_unseen_and_uncatchable
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_grab_while_hidden
+- LogDreamMovers: Display: [DMTest] FAIL r1.butler_patrols: no butler
+- LogDreamMovers: Display: [DMTest] FAIL r1.horse_runs_to_noise: no horse
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_blocked_exit_stays_hidden: hiding 1, occupants 1, moved 0.0 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.wardrobe_exit: hiding 0, occupants 0, collision 1, 50 cm in front, door noise 1
+- LogDreamMovers: Display: [DMTest] FAIL r1.catch_geometry: missing doll, butler or generator
+- LogDreamMovers: Display: [DMTest] FAIL r1.desk_shields: no room with a desk
+- LogDreamMovers: Display: [DMTest] PASS r1.crouch_slow_and_silent: crouched 1, height 60 cm, speed 150, footstep noises 0
+- LogDreamMovers: Display: [DMTest] PASS r1.sprint_is_loud_control: footstep noises 4 at 520 cm/s
+- LogDreamMovers: Display: [DMTest] FAIL r1.grab_light: 토끼 머리 열쇠
+- LogDreamMovers: Display: [DMTest] FAIL r1.lift_light: not holding it
+- LogDreamMovers: Display: [DMTest] FAIL r1.carry_light_to_zone: the thread broke at V(X=1230.00, Y=950.00, Z=57.00)
+- LogDreamMovers: Display: [DMTest] FAIL r1.deliver_light: not holding the item at the zone
+- LogDreamMovers: Display: [DMTest] FAIL r1.solo_cannot_lift_heavy: 회전목마 말 32 kg, held 0, rose 0 cm
+- LogDreamMovers: Display: [DMTest] PASS r1.server_rejects_grab_through_wall: item 230 cm away behind the wall
+- LogDreamMovers: Display: [DMTest] FAIL r1.server_rejects_point_off_the_item
+- LogDreamMovers: Display: [DMTest] PASS r1.server_accepts_valid_grab: item 104 cm away in plain view
+- LogDreamMovers: Display: [DMTest] FAIL r1.full_color_above_half_stability: stability 0.00, collapse 0.000
+- LogDreamMovers: Display: [DMTest] FAIL r1.collapse_follows_stability: stability 0.00, collapse 0.000, expected 0.750
+- LogDreamMovers: Display: [DMTest] FAIL r1.target_reached_succeeds: timed out after 4.0 s
+- LogDreamMovers: Display: [DMTest] FAIL r1.restarts: timed out after 25.0 s
+
+## Uncommitted changes
+
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Private/PLGGenerator.cpp`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Private/PLGLayout.cpp`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGGenerator.h`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGLayout.h`
+- ` M Plugins/ProcLevelGen/Source/ProcLevelGen/Public/PLGTypes.h`
+- ` M Source/DreamMovers/Private/DMCharacter.cpp`
+- ` M Source/DreamMovers/Private/DMGameMode.cpp`
+- ` M Source/DreamMovers/Private/DMGameState.cpp`
+- ` M Source/DreamMovers/Private/DMGrabComponent.cpp`
+- ` M Source/DreamMovers/Private/DMHUD.cpp`
+- ` M Source/DreamMovers/Private/DMHidingSpot.cpp`
+- ` M Source/DreamMovers/Private/DMMonster.cpp`
+- ` M Source/DreamMovers/Private/DMSelfTest.cpp`
+- ` M Source/DreamMovers/Public/DMButler.h`
+- ` M Source/DreamMovers/Public/DMCharacter.h`
+- ` M Source/DreamMovers/Public/DMGameMode.h`
+- ` M Source/DreamMovers/Public/DMGameState.h`
+- ` M Source/DreamMovers/Public/DMGrabComponent.h`
+- ` M Source/DreamMovers/Public/DMHUD.h`
+- ` M Source/DreamMovers/Public/DMHidingSpot.h`
+- ` M Source/DreamMovers/Public/DMMonster.h`
+- ` M Tools/ue/test_proc_level.py`
+- `?? Source/DreamMovers/Private/DMProcSelfTest.cpp`
+- `?? Source/DreamMovers/Public/DMProcSelfTest.h`
+- `?? TestEvidence/`
+- `?? Tools/run_selftests.ps1`
