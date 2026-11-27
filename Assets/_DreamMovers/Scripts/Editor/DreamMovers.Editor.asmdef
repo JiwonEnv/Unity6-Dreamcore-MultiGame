@@ -3,7 +3,11 @@
     "rootNamespace": "DreamMovers.Editor",
     "references": [
         "Unity.RenderPipelines.Universal.Runtime",
-        "ProcLevelGen"
+        "ProcLevelGen",
+        "DreamMovers.Runtime",
+        "Unity.Netcode.Runtime",
+        "Unity.Netcode.Editor",
+        "Unity.Networking.Transport"
     ],
     "includePlatforms": [
         "Editor"
