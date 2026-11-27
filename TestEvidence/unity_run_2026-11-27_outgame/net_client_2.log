@@ -1,0 +1,242 @@
+Mono path[0] = 'E:/Project/Unity6-Dreamcore-Multigame/Builds/Windows/DreamMovers_Data/Managed'
+Mono config path = 'E:/Project/Unity6-Dreamcore-Multigame/Builds/Windows/MonoBleedingEdge/etc'
+Found 1 interfaces on host : 0) 172.30.1.8
+Player connection [48100]  Target information:
+
+Player connection [48100]  * "[IP] 172.30.1.8 [Port] 55001 [Flags] 2 [Guid] 565762347 [EditorId] 4140993249 [Version] 1048832 [Id] WindowsPlayer(2,DESKTOP-GFK7DOO) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] DreamMovers" 
+
+Player connection [48100] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.9f1 (7a9955a4f2fa)
+[Subsystems] Discovering subsystems at path E:/Project/Unity6-Dreamcore-Multigame/Builds/Windows/DreamMovers_Data/UnitySubsystems
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.106 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Microsoft Media Foundation video decoding to texture disabled: graphics device is Null, only Direct3D 11 and Direct3D 12 (only on desktop) are supported for hardware-accelerated video decoding.
+UnloadTime: 0.343600 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.898000 ms
+Unloading 3 unused Assets / (0 B). Loaded Objects now: 1962.
+Memory consumption went from 51.6 MB to 51.6 MB.
+Total: 2.215400 ms (FindLiveObjects: 0.084900 ms CreateObjectMapping: 0.018400 ms MarkObjects: 2.099900 ms  DeleteObjects: 0.009100 ms)
+
+Couldn't create a Convex Mesh from source mesh, within the maximum polygons limit (256). The partial hull will be used. Consider simplifying your mesh. Source mesh name: Sphere
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.MeshCollider:set_convex (bool)
+DreamMovers.DMValuable:BuildShape () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:162)
+DreamMovers.DMValuable:ApplySpec () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:131)
+DreamMovers.DMValuable:OnNetworkSpawn () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:97)
+Unity.Netcode.NetworkBehaviour:NetworkSpawn () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkBehaviour.cs:814)
+Unity.Netcode.NetworkObject:InvokeBehaviourNetworkSpawn () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkObject.cs:2553)
+Unity.Netcode.NetworkSpawnManager:SpawnNetworkObjectLocallyCommon (Unity.Netcode.NetworkObject,ulong,bool,bool,ulong,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Spawning/NetworkSpawnManager.cs:1207)
+Unity.Netcode.NetworkSpawnManager:NonAuthorityLocalSpawn (Unity.Netcode.NetworkObject,Unity.Netcode.NetworkObject/SerializedObject&,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Spawning/NetworkSpawnManager.cs:1128)
+Unity.Netcode.NetworkObject:Deserialize (Unity.Netcode.NetworkObject/SerializedObject&,Unity.Netcode.FastBufferReader,Unity.Netcode.NetworkManager,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkObject.cs:3335)
+Unity.Netcode.SceneEventData:SynchronizeSceneNetworkObjects (Unity.Netcode.NetworkManager) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/SceneManagement/SceneEventData.cs:1132)
+Unity.Netcode.NetworkSceneManager:HandleClientSceneEvent (uint) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/SceneManagement/NetworkSceneManager.cs:2328)
+Unity.Netcode.NetworkSceneManager:ClientLoadedSynchronization (uint) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/SceneManagement/NetworkSceneManager.cs:2223)
+Unity.Netcode.NetworkSceneManager:OnClientBeginSync (uint) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/SceneManagement/NetworkSceneManager.cs:2154)
+Unity.Netcode.NetworkSceneManager:HandleClientSceneEvent (uint) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/SceneManagement/NetworkSceneManager.cs:2310)
+Unity.Netcode.NetworkSceneManager:HandleSceneEvent (ulong,Unity.Netcode.FastBufferReader) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/SceneManagement/NetworkSceneManager.cs:2655)
+Unity.Netcode.SceneEventMessage:Handle (Unity.Netcode.NetworkContext&) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Messaging/Messages/SceneEventMessage.cs:29)
+Unity.Netcode.NetworkMessageManager:ReceiveMessage<Unity.Netcode.SceneEventMessage> (Unity.Netcode.FastBufferReader,Unity.Netcode.NetworkContext&,Unity.Netcode.NetworkMessageManager) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Messaging/NetworkMessageManager.cs:568)
+Unity.Netcode.NetworkMessageManager:HandleMessage (Unity.Netcode.NetworkMessageHeader&,Unity.Netcode.FastBufferReader,ulong,single,int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Messaging/NetworkMessageManager.cs:422)
+Unity.Netcode.NetworkMessageManager:ProcessIncomingMessageQueue () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Messaging/NetworkMessageManager.cs:448)
+Unity.Netcode.NetworkManager:NetworkUpdate (Unity.Netcode.NetworkUpdateStage) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkManager.cs:349)
+Unity.Netcode.NetworkUpdateLoop:RunNetworkUpdateStage (Unity.Netcode.NetworkUpdateStage) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkUpdateLoop.cs:191)
+Unity.Netcode.NetworkUpdateLoop/NetworkEarlyUpdate/<>c:<CreateLoopSystem>b__0_0 () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkUpdateLoop.cs:214)
+
+[E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs line 162]
+
+LevelGenerator: seed 535117761: 9 modules (attempt 1), layout hash e94bc661
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:305)
+ProcLevelGen.PLGGenerator:ApplyServerSeed (int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:165)
+DreamMovers.DMLevelSync:Update () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMLevelSync.cs:58)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DreamMovers] client built seed 535117761 (build 1), layout hash e94bc661
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMLevelSync:Update () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMLevelSync.cs:59)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_connected
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:147)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_has_own_doll
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:148)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] client layout seed 535117761 hash e94bc661
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:150)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_built_server_seed: seed 535117761
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:151)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_sees_antiques: 15
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:153)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_sees_wardrobes_and_monsters: 6 wardrobes, 2 monsters
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:154)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_sees_heavy_brought_over
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:164)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_grab_accepted_by_server
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:178)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_sees_two_holders
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:181)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_sees_item_lifted: item at y 1.24
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunClient>d__10:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:184)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+[DMNetTest] ALL PASSED, 0 failure(s)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest/<Start>d__5:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:72)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+UnloadTime: 3.404200 ms
+Unloading 1 unused Assets / (0 B). Loaded Objects now: 1933.
+Memory consumption went from 55.9 MB to 55.9 MB.
+Total: 2.502800 ms (FindLiveObjects: 0.087700 ms CreateObjectMapping: 0.019100 ms MarkObjects: 2.386300 ms  DeleteObjects: 0.009100 ms)
+
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+PlayerConnection::Cleanup##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1795790065547,"processId":50656,"allocatedMemory":1330775,"memoryLabels":[{"Default":136},{"NewDelete":104},{"Manager":549111},{"Shader":1344},{"GfxDevice":72},{"Audio":752},{"Serialization":144},{"JobScheduler":32768},{"String":468},{"HashMap":5120},{"PoolAlloc":384},{"CloudService":144},{"VR":1872},{"NativeArray":737964},{"Subsystems":96},{"Accessibility":80},{"UIElements":200},{"CoreBusinessMetrics":120}]}

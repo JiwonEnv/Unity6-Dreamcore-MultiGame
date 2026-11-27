@@ -1,0 +1,41 @@
+[DMTest] PASS round_starts_when_ready: state Playing after 0.5 s 
+[DMTest] PASS no_monsters_while_preparing
+[DMTest] PASS same_layout_as_ue5: seed 535117761 hash e94bc661
+[DMTest] PASS generation: generation succeeded: seed 535117761, 9 modules, layout hash e94bc661
+[DMTest] PASS generation: layout passes ValidateLayout
+[DMTest] PASS generation: 113 graybox boxes built
+[DMTest] PASS generation: player stands on the generated floor (y 0.02, vy 0.00)
+[DMTest] PASS generation: navigation reaches 8/8 modules from the start
+[DMTest] PASS antique_count: 15 in the map, 15 expected
+[DMTest] PASS antique_spots_free_at_spawn: 0 blocked
+[DMTest] PASS antiques_on_floor: 15 of 15
+[DMTest] PASS wardrobes: 6 wardrobes for 6 hiding spots
+[DMTest] PASS monsters_spawned
+[DMTest] PASS solo_target_30_percent: target 8040, map 26800
+[DMTest] PASS host_has_a_doll
+[DMTest] PASS wardrobe_enter: hiding True, occupants 1
+[DMTest] PASS wardrobe_enter_makes_noise
+[DMTest] PASS hidden_doll_unseen_and_uncatchable
+[DMTest] PASS server_rejects_grab_while_hidden
+[DMTest] PASS wardrobe_leave: hiding False, at (-4.68, 0.02, 19.70)
+[DMTest] PASS no_catch_through_wall: doll inside, butler just outside the wall
+[DMTest] PASS catch_in_the_open: 0.8 m apart, nothing between
+[DMTest] PASS crouch_is_slow_and_silent: crouched True, speed 1.50 m/s, noises 0, from (-3.00, 0.02, -4.00) to (-3.00, 0.02, -1.75), controller True grounded True height 0.6
+[DMTest] PASS sprint_is_loud: footstep noises 3 at 5.20 m/s
+[DMTest] PASS grab_light: 금박 달걀, aiming at 금박 달걀
+[DMTest] PASS lift_light: rose 0.70 m
+[DMTest] PASS carry_light_to_zone: held True, item (0.00, 0.38, -2.45), zone (0.00, 1.00, -2.50)
+[DMTest] PASS deliver_adds_value: +1500, item worth 1500
+[DMTest] PASS deliver_drains_20s_per_1000: stability -30.00 s beyond time, expected 30.00 s
+[DMTest] PASS solo_cannot_lift_heavy: 금박 액자 그림 25 kg, held True, rose 0.00 m
+[DMTest] PASS server_rejects_grab_through_wall: item 1.64 m away behind the wall
+[DMTest] PASS server_rejects_point_off_the_item
+[DMTest] PASS server_accepts_valid_grab: item 1.28 m away in plain view
+[DMTest] PASS full_color_above_half_stability: stability 0.94, collapse 0.00
+[DMTest] PASS collapse_follows_stability: stability 0.25, collapse 0.38, want 0.38
+[DMTest] PASS butler_catches_unshielded_doll: after 0.0 s
+[DMTest] PASS solo_down_fails_at_once: state Failed 0.2 s after the catch
+[DMTest] PASS restart_after_failure: state Playing, doll True, balls 0
+[DMTest] PASS restart_resets_content: collected 0, antiques 15
+[DMTest] PASS no_errors_logged
+[DMTest] PASS out-game flow; failed join said: 127.0.0.1에 접속하지 못했습니다. 주소와 방장 상태를 확인해 주세요

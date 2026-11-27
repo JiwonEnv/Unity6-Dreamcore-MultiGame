@@ -24,6 +24,7 @@ Assets/
         Shaders/
       VFX/
       UI/
+        OutGame/               아웃게임 화면 (UXML 배치 · USS 스타일 · 패널 설정)
     Audio/Music/  Audio/SFX/
     Gameplay/                  플레이어·매니저 같은 게임 로직 프리팹, 데이터(ScriptableObject)
     Scenes/                    씬
@@ -76,6 +77,7 @@ Tripo 에셋 목록과 같은 ID를 씁니다. 에셋 폴더 이름도 이 ID입
 | `SH_` | 셰이더·셰이더 그래프 | `SH_OilPastel.shadergraph` |
 | `VFX_` | 이펙트 | `VFX_DreamCrack` |
 | `SFX_` / `MUS_` | 효과음 / 음악 | `SFX_GlassBreak.wav` |
+| `UI_` | UI 화면 배치(UXML)·스타일(USS·TSS)·패널 설정 | `UI_MainMenu.uxml` |
 | (없음) | 프리팹 | `VAL_Teacup.prefab` |
 
 텍스처 끝에는 채널 접미어를 붙입니다: `_BC` 색(베이스 컬러) · `_N` 노멀 · `_MS` 금속도·매끄러움(URP 마스크) · `_AO` 앰비언트 오클루전 · `_E` 발광
