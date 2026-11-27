@@ -6,6 +6,8 @@
         "ProcLevelGen",
         "Unity.Netcode.Runtime",
         "Unity.Networking.Transport",
+        "Unity.InputSystem",
+        "Unity.Collections",
         "UnityEngine.TestRunner"
     ],
     "includePlatforms": [],
