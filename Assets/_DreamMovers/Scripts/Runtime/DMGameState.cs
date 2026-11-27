@@ -29,6 +29,8 @@ namespace DreamMovers
         /// <summary>Bumped on every restart, so a client rebuilds even when the seed stays the same (-plgseed).</summary>
         readonly NetworkVariable<int> levelBuild = new NetworkVariable<int>();
         readonly NetworkVariable<FixedString128Bytes> abortReason = new NetworkVariable<FixedString128Bytes>();
+        /// <summary>Who is in the room, with the nickname each sent when joining (pause menu list).</summary>
+        readonly NetworkList<DMPlayerEntry> players = new NetworkList<DMPlayerEntry>();
 
         public int CollectedValue => collectedValue.Value;
         public int BrokenValue => brokenValue.Value;
@@ -46,16 +48,62 @@ namespace DreamMovers
         /// <summary>1 at the start of the round, 0 when the dream wakes.</summary>
         public float Stability => roundDuration.Value > 0f ? RemainingSeconds / roundDuration.Value : 0f;
 
+        public NetworkList<DMPlayerEntry> Players => players;
+
         public override void OnNetworkSpawn()
         {
             Instance = this;
+            if (IsServer)
+            {
+                NetworkManager.OnClientConnectedCallback += AddPlayer;
+                NetworkManager.OnClientDisconnectCallback += RemovePlayer;
+                foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
+                {
+                    AddPlayer(clientId);
+                }
+            }
         }
 
         public override void OnNetworkDespawn()
         {
+            if (NetworkManager != null)
+            {
+                NetworkManager.OnClientConnectedCallback -= AddPlayer;
+                NetworkManager.OnClientDisconnectCallback -= RemovePlayer;
+            }
             if (Instance == this)
             {
                 Instance = null;
+            }
+        }
+
+        void AddPlayer(ulong clientId)
+        {
+            foreach (DMPlayerEntry entry in players)
+            {
+                if (entry.ClientId == clientId)
+                {
+                    return;
+                }
+            }
+            string name = DMSession.NameFor(clientId);
+            var fixedName = new FixedString64Bytes();
+            // Nicknames are at most 12 characters, so this fits; a failed append just leaves the default.
+            if (fixedName.Append(name) != FormatError.None)
+            {
+                fixedName = new FixedString64Bytes($"플레이어 {clientId + 1}");
+            }
+            players.Add(new DMPlayerEntry { ClientId = clientId, Name = fixedName });
+        }
+
+        void RemovePlayer(ulong clientId)
+        {
+            for (int i = players.Count - 1; i >= 0; --i)
+            {
+                if (players[i].ClientId == clientId)
+                {
+                    players.RemoveAt(i);
+                }
             }
         }
 

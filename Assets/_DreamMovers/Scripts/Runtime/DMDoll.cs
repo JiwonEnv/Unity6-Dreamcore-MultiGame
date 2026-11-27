@@ -10,7 +10,7 @@ namespace DreamMovers
     /// <summary>
     /// First-person doll, one per player. Small capsule (the dolls are about 2.5 heads tall), a placeholder body that
     /// only other players see, and the thread grab (<see cref="DMGrab"/>). Hold Ctrl to crouch (60 cm, slow, silent),
-    /// Shift to sprint (loud), E to climb into a wardrobe. Input actions are built in code, like the UE5 version.
+    /// Shift to sprint (loud), E to climb into a wardrobe. Input comes from the shared, rebindable DMControls.
     /// Movement is owner-driven (the owner's NetworkTransform pushes position and yaw); the server reads the synced
     /// state for noise, sight and catching. Ported from the UE5 ADMCharacter. Pivot at the feet.
     /// </summary>
@@ -69,15 +69,8 @@ namespace DreamMovers
         bool downed;
 
         // Owner input.
-        InputActionMap actions;
-        InputAction moveAction;
-        InputAction lookAction;
-        InputAction jumpAction;
-        InputAction sprintAction;
-        InputAction grabAction;
-        InputAction holdAction;
-        InputAction crouchAction;
-        InputAction interactAction;
+        /// <summary>This doll reads the shared controls (<see cref="DMControls"/>), so key changes apply at once.</summary>
+        bool readsControls;
 
         // Server bookkeeping.
         Vector3 lastServerPosition;
@@ -168,9 +161,11 @@ namespace DreamMovers
             {
                 Local = null;
             }
-            actions?.Disable();
-            actions?.Dispose();
-            actions = null;
+            if (readsControls)
+            {
+                DMControls.Map.Disable();
+                readsControls = false;
+            }
             if (IsServer && HidingSpot != null)
             {
                 HidingSpot.Release(this);
@@ -179,17 +174,8 @@ namespace DreamMovers
 
         void BuildInput()
         {
-            actions = new InputActionMap("DreamMovers");
-            moveAction = actions.AddAction("Move", InputActionType.Value);
-            moveAction.AddCompositeBinding("2DVector").With("Up", "<Keyboard>/w").With("Down", "<Keyboard>/s").With("Left", "<Keyboard>/a").With("Right", "<Keyboard>/d");
-            lookAction = actions.AddAction("Look", InputActionType.Value, "<Mouse>/delta");
-            jumpAction = actions.AddAction("Jump", InputActionType.Button, "<Keyboard>/space");
-            sprintAction = actions.AddAction("Sprint", InputActionType.Button, "<Keyboard>/leftShift");
-            grabAction = actions.AddAction("Grab", InputActionType.Button, "<Mouse>/leftButton");
-            holdAction = actions.AddAction("HoldDistance", InputActionType.Value, "<Mouse>/scroll/y");
-            crouchAction = actions.AddAction("Crouch", InputActionType.Button, "<Keyboard>/leftCtrl");
-            interactAction = actions.AddAction("Interact", InputActionType.Button, "<Keyboard>/e");
-            actions.Enable();
+            DMControls.Map.Enable();
+            readsControls = true;
         }
 
         void FitController(bool isCrouched)
@@ -262,34 +248,47 @@ namespace DreamMovers
             {
                 return ScriptedInput.Value;
             }
-            if (actions == null || !Application.isFocused || Cursor.lockState != CursorLockMode.Locked)
+            if (!readsControls || !DMControls.Map.enabled || !Application.isFocused || Cursor.lockState != CursorLockMode.Locked)
             {
                 return default;
             }
             return new DMDollInput
             {
-                Move = moveAction.ReadValue<Vector2>(),
-                Look = lookAction.ReadValue<Vector2>() * lookSensitivity,
-                Jump = jumpAction.WasPressedThisFrame(),
-                Sprint = sprintAction.IsPressed(),
-                Crouch = crouchAction.IsPressed(),
-                GrabPressed = grabAction.WasPressedThisFrame(),
-                GrabReleased = grabAction.WasReleasedThisFrame(),
-                HoldDistance = holdAction.ReadValue<float>(),
-                Interact = interactAction.WasPressedThisFrame()
+                Move = DMControls.Move.ReadValue<Vector2>(),
+                Look = LookDelta(),
+                Jump = DMControls.Jump.WasPressedThisFrame(),
+                Sprint = DMControls.Sprint.IsPressed(),
+                Crouch = DMControls.Crouch.IsPressed(),
+                GrabPressed = DMControls.Grab.WasPressedThisFrame(),
+                GrabReleased = DMControls.Grab.WasReleasedThisFrame(),
+                HoldDistance = DMControls.HoldDistance.ReadValue<float>(),
+                Interact = DMControls.Interact.WasPressedThisFrame()
             };
+        }
+
+        /// <summary>Mouse look scaled by the player's sensitivity, Y flipped if they asked.</summary>
+        Vector2 LookDelta()
+        {
+            DMSettings settings = DMSettings.Current;
+            Vector2 look = DMControls.Look.ReadValue<Vector2>() * (lookSensitivity * settings.mouseSensitivity);
+            if (settings.invertY)
+            {
+                look.y = -look.y;
+            }
+            return look;
         }
 
         void OwnerUpdate()
         {
             if (Cursor.lockState != CursorLockMode.Locked && Application.isFocused && Mouse.current != null
-                && Mouse.current.leftButton.wasPressedThisFrame && !DMConnectMenu.IsOpen)
+                && Mouse.current.leftButton.wasPressedThisFrame && !DMOutGameUI.BlocksGameInput)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 return;
             }
-            if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            // Esc opens the pause menu (which frees the mouse); without one (tests, old scenes) it just frees the mouse.
+            if (DMOutGameUI.Instance == null && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;

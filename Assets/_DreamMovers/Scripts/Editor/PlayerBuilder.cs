@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DreamMovers.Editor
 {
     /// <summary>
-    /// Windows development build of the generated map scene, for trying the multiplayer with two copies on one PC
+    /// Windows development build (main menu, then the generated map scene), for trying the multiplayer with two copies on one PC
     /// (one hosts, one joins 127.0.0.1). Output: Builds/Windows/DreamMovers.exe (not in git).
     /// Menu: Dream Movers/Build Windows Player. Batch: -executeMethod DreamMovers.Editor.PlayerBuilder.BuildWindows
     /// </summary>
@@ -18,7 +18,7 @@ namespace DreamMovers.Editor
         {
             var options = new BuildPlayerOptions
             {
-                scenes = new[] { ProcGenSceneBuilder.ScenePath },
+                scenes = new[] { MainMenuSceneBuilder.ScenePath, ProcGenSceneBuilder.ScenePath },
                 locationPathName = OutputPath,
                 target = BuildTarget.StandaloneWindows64,
                 options = BuildOptions.Development

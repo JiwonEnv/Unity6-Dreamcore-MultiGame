@@ -14,7 +14,7 @@ namespace DreamMovers.Editor
     /// (tag ue5-final). Only the generator is placed: it assembles the 3 + 2 + 3 module kit from a new seed every run.
     /// The start module always sits at the origin (10 x 10 m, door toward +Z), so the player starts and the extraction
     /// zone are placed there. The scene also holds the network manager, the server's game mode (it fills the map with
-    /// antiques, wardrobes and monsters), the HUD and the host/join menu. No oil pastel look yet.
+    /// antiques, wardrobes and monsters), the HUD and the out-game UI (pause menu, loading screen; the menus too when played directly). No oil pastel look yet.
     /// Builds the gameplay prefabs first (Dream Movers > Build Gameplay Prefabs).
     /// Menu: Dream Movers/Build ProcGen Scene. Batch: -executeMethod DreamMovers.Editor.ProcGenSceneBuilder.Build
     /// </summary>
@@ -120,7 +120,8 @@ namespace DreamMovers.Editor
 
             var ui = new GameObject("UI");
             ui.AddComponent<DMHud>();
-            ui.AddComponent<DMConnectMenu>();
+            // Pause menu, loading screen and pop-ups in play (and the menus when this scene is played directly).
+            OutGameUIBuilder.AddTo();
 
             var cameraObject = new GameObject("Main Camera", typeof(Camera), typeof(AudioListener));
             cameraObject.tag = "MainCamera";
@@ -128,7 +129,7 @@ namespace DreamMovers.Editor
             cameraObject.AddComponent<DMViewCamera>();
 
             EditorSceneManager.SaveScene(scene, ScenePath);
-            AddToBuildSettingsFirst(ScenePath);
+            OutGameUIBuilder.OrderBuildScenes();
             Debug.Log($"[DreamMovers] built {ScenePath}");
         }
 
@@ -148,15 +149,6 @@ namespace DreamMovers.Editor
             material.enableInstancing = true;
             AssetDatabase.CreateAsset(material, MaterialPath);
             return material;
-        }
-
-        /// <summary>The generated scene is the startup scene, like Lvl_ProcGen in the UE5 version.</summary>
-        static void AddToBuildSettingsFirst(string path)
-        {
-            var scenes = new System.Collections.Generic.List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
-            scenes.RemoveAll(s => s.path == path);
-            scenes.Insert(0, new EditorBuildSettingsScene(path, true));
-            EditorBuildSettings.scenes = scenes.ToArray();
         }
     }
 }

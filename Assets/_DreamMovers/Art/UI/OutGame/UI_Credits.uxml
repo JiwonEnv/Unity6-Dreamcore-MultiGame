@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="credits-screen" class="screen screen--solid">
+        <ui:VisualElement class="panel">
+            <ui:Label text="크레딧" class="heading" />
+            <ui:ScrollView style="max-height: 420px;">
+                <ui:Label text="꿈 수거반 (Dream Movers)" class="body" />
+                <ui:Label text="기획 · 아트 · 개발: (이름)" class="body" />
+                <ui:Label text="3D 모델 일부는 Tripo AI로 만들었습니다." class="body" />
+                <ui:Label text="엔진: Unity 6 · Universal Render Pipeline · Netcode for GameObjects" class="body" />
+                <ui:Label text="글꼴: 시스템 글꼴 (맑은 고딕). 출시 전에 라이선스가 있는 글꼴로 바꿉니다." class="hint" />
+                <ui:Label text="사운드: (들어오면 출처와 라이선스를 적습니다)" class="hint" />
+            </ui:ScrollView>
+            <ui:VisualElement class="row">
+                <ui:Button name="back" text="뒤로" class="button--small" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="loading-screen" class="screen screen--solid">
+        <ui:Label name="loading-text" text="꿈으로 들어가는 중…" class="title" style="font-size: 40px;" />
+        <ui:Label name="loading-detail" class="blink" />
+        <ui:Button name="cancel" text="취소" class="button--small" style="margin-top: 24px;" />
+    </ui:VisualElement>
+</ui:UXML>

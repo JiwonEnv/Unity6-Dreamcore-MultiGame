@@ -95,7 +95,8 @@ namespace DreamMovers
             }
             // Same easing as UE FInterpTo at speed 1.5.
             collapse = Mathf.Lerp(collapse, target, Mathf.Clamp01(deltaTime * 1.5f));
-            Shader.SetGlobalFloat(CollapseId, collapse);
+            // The player may tone the fade down (accessibility); Collapse itself keeps the designed value.
+            Shader.SetGlobalFloat(CollapseId, collapse * DMSettings.Current.collapseIntensity);
         }
 
         /// <summary>Tests: jump straight to the current target instead of easing.</summary>
@@ -107,7 +108,7 @@ namespace DreamMovers
         void OnGUI()
         {
             NetworkManager manager = NetworkManager.Singleton;
-            if (manager == null || !manager.IsListening || Event.current.type != EventType.Repaint)
+            if (manager == null || !manager.IsListening || Event.current.type != EventType.Repaint || DMOutGameUI.CoversScreen)
             {
                 return;
             }
@@ -115,6 +116,12 @@ namespace DreamMovers
             Camera view = DMViewCamera.Instance != null ? DMViewCamera.Instance.Camera : Camera.main;
             if (view == null)
             {
+                return;
+            }
+            if (DMOutGameUI.BlocksGameInput)
+            {
+                // A menu is open on top: keep only the score and timer (IMGUI would draw over the menu).
+                DrawRoundInfo();
                 return;
             }
             DrawPriceTags(view);

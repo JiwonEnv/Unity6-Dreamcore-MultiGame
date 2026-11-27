@@ -1,0 +1,66 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="settings-screen" class="screen screen--dim">
+        <ui:VisualElement class="panel">
+            <ui:Label text="설정" class="heading" />
+            <ui:VisualElement class="tabs">
+                <ui:Button name="tab-graphics" text="그래픽" class="button--small" />
+                <ui:Button name="tab-audio" text="오디오" class="button--small" />
+                <ui:Button name="tab-controls" text="조작" class="button--small" />
+                <ui:Button name="tab-voice" text="보이스챗" class="button--small" />
+                <ui:Button name="tab-accessibility" text="접근성" class="button--small" />
+                <ui:Button name="tab-language" text="언어" class="button--small" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="page-graphics" class="tab-page">
+                <ui:DropdownField name="resolution" label="해상도" class="field" />
+                <ui:DropdownField name="window-mode" label="화면 모드" class="field" />
+                <ui:DropdownField name="quality" label="품질" class="field" />
+                <ui:Toggle name="vsync" label="수직 동기화" class="field" />
+                <ui:DropdownField name="frame-limit" label="프레임 제한" class="field" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="page-audio" class="tab-page">
+                <ui:SliderInt name="master-volume" label="전체" low-value="0" high-value="100" show-input-field="true" class="field" />
+                <ui:SliderInt name="music-volume" label="음악" low-value="0" high-value="100" show-input-field="true" class="field" />
+                <ui:SliderInt name="effects-volume" label="효과음" low-value="0" high-value="100" show-input-field="true" class="field" />
+                <ui:SliderInt name="voice-volume" label="보이스챗" low-value="0" high-value="100" show-input-field="true" class="field" />
+                <ui:Label text="음악 · 효과음 · 보이스챗 볼륨은 사운드가 들어오면 적용됩니다 (지금은 저장만)." class="hint" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="page-controls" class="tab-page">
+                <ui:Slider name="sensitivity" label="마우스 감도" low-value="0.1" high-value="3" show-input-field="true" class="field" />
+                <ui:Toggle name="invert-y" label="마우스 Y축 반전" class="field" />
+                <ui:Label name="rebind-status" text="바꿀 키를 누르세요. Esc는 취소" class="hint" />
+                <ui:ScrollView name="bindings" style="max-height: 260px;" />
+                <ui:VisualElement class="row">
+                    <ui:Button name="reset-bindings" text="키 기본값" class="button--small" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="page-voice" class="tab-page">
+                <ui:DropdownField name="microphone" label="마이크" class="field" />
+                <ui:Toggle name="push-to-talk" label="눌러서 말하기 (끄면 항상 켜짐)" class="field" />
+                <ui:Label text="보이스챗이 들어오면 적용됩니다 (지금은 저장만)." class="hint" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="page-accessibility" class="tab-page">
+                <ui:Toggle name="reduce-shake" label="화면 흔들림 끄기" class="field" />
+                <ui:Slider name="collapse-intensity" label="화풍 전환 강도" low-value="0" high-value="1" show-input-field="true" class="field" />
+                <ui:Label text="꿈이 무너질 때 그림이 스케치로 바래는 정도. 낮추면 끝까지 색이 남습니다 (괘종시계는 그대로)." class="hint" />
+                <ui:Toggle name="subtitles" label="자막" class="field" />
+                <ui:Label text="흔들림과 자막은 해당 연출이 들어오면 적용됩니다 (지금은 저장만)." class="hint" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="page-language" class="tab-page">
+                <ui:DropdownField name="language" label="언어" class="field" />
+                <ui:Label text="번역이 들어오면 적용됩니다 (지금은 저장만)." class="hint" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="row">
+                <ui:Button name="defaults" text="기본값으로" class="button--small" />
+                <ui:Button name="close" text="닫기" class="button--small" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

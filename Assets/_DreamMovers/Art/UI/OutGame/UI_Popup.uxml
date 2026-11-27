@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="popup-screen" class="screen screen--dim">
+        <ui:VisualElement class="panel">
+            <ui:Label name="popup-title" class="heading" />
+            <ui:Label name="popup-message" class="body" />
+            <ui:VisualElement class="row">
+                <ui:Button name="popup-cancel" text="취소" class="button--small" />
+                <ui:Button name="popup-ok" text="확인" class="button--small" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

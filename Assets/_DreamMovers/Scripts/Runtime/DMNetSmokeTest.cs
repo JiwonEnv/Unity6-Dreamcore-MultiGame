@@ -21,11 +21,14 @@ namespace DreamMovers
         {
             if (DMArgs.Has("dmnettest"))
             {
-                new GameObject("DM Net Smoke Test").AddComponent<DMNetSmokeTest>();
+                // The run starts in the menu scene and moves to the game scene: keep the checker alive across it.
+                DontDestroyOnLoad(new GameObject("DM Net Smoke Test").AddComponent<DMNetSmokeTest>().gameObject);
             }
             if (DMArgs.TryGet("dmshot=", out string path))
             {
-                new GameObject("DM Shot").AddComponent<DMNetSmokeTest>().StartCoroutine(TakeShot(path));
+                var shot = new GameObject("DM Shot").AddComponent<DMNetSmokeTest>();
+                DontDestroyOnLoad(shot.gameObject);
+                shot.StartCoroutine(TakeShot(path));
             }
         }
 
