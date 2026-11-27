@@ -30,6 +30,7 @@ Assets/
     Lighting/Volumes/          볼륨 프로필, LUT
     Scripts/Runtime/           게임 코드 (네임스페이스 DreamMovers)
     Scripts/Editor/            에디터 도구 (네임스페이스 DreamMovers.Editor)
+    Scripts/Tests/             플레이 모드 테스트 (네임스페이스 DreamMovers.Tests)
     Settings/                  URP 에셋·렌더러, Input/
   ProcLevelGen/                맵 생성기. 게임과 분리된 재사용 모듈 (네임스페이스 ProcLevelGen)
   ThirdParty/                  에셋 스토어 등 외부 에셋. 직접 고치지 않음
@@ -92,7 +93,8 @@ Art/Props/Valuables/VAL_Teacup/
 
 ### 코드
 
-- 네임스페이스: 게임 `DreamMovers`, 에디터 도구 `DreamMovers.Editor`, 맵 생성기 `ProcLevelGen`
+- 네임스페이스: 게임 `DreamMovers`, 에디터 도구 `DreamMovers.Editor`, 테스트 `DreamMovers.Tests`, 맵 생성기 `ProcLevelGen`
+- 게임 클래스는 `DM` 접두어 (`DMDoll`, `DMGrab`). UE5 버전의 `ADM…`/`UDM…` 이름과 짝이 맞게
 - 파일 하나에 public 타입 하나, 파일 이름 = 클래스 이름 (PascalCase)
 
 ## 3. 커밋과 브랜치

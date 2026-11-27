@@ -1,0 +1,10 @@
+LevelGenerator: seed 535117761: 9 modules (attempt 1), layout hash e94bc661
+[DMNetTest] PASS host_round_playing
+[DMNetTest] PASS host_sees_client_doll: 2 clients connected
+[DMNetTest] host layout seed 535117761 hash e94bc661
+[DMNetTest] PASS target_40_percent_for_two: target 10720, map 26800
+[DMNetTest] PASS client_movement_syncs_to_host: client doll at (0.80, 0.02, 0.00)
+[DMNetTest] PASS host_grabs_heavy
+[DMNetTest] PASS two_holders: 2 holding 금박 액자 그림 (25 kg)
+[DMNetTest] PASS two_dolls_lift_heavy: rose 0.67 m
+[DMNetTest] ALL PASSED, 0 failure(s)
