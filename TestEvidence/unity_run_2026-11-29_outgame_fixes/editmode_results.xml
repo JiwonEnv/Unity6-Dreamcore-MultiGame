@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Passed" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.1252972">
+  <test-suite type="TestSuite" id="1000" name="DreamMovers" fullname="DreamMovers" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.125297" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1008" name="ProcLevelGen.Tests.Editor.dll" fullname="E:/Project/Unity6-Dreamcore-Multigame/Library/ScriptAssemblies/ProcLevelGen.Tests.Editor.dll" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.121039" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="41544" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1009" name="ProcLevelGen" fullname="ProcLevelGen" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.120786" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1010" name="Tests" fullname="ProcLevelGen.Tests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.120627" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="PLGLayoutTests" fullname="ProcLevelGen.Tests.PLGLayoutTests" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.119867" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1006" name="GeneratorBuildsGrayboxInEditMode" fullname="ProcLevelGen.Tests.PLGLayoutTests.GeneratorBuildsGrayboxInEditMode" methodname="GeneratorBuildsGrayboxInEditMode" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" seed="1717793369" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.041464" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[PLG Test Generator: seed 1: 9 modules (attempt 1), layout hash 738bcd7f
+]]></output>
+            </test-case>
+            <test-case id="1002" name="RandomStreamMatchesUE5" fullname="ProcLevelGen.Tests.PLGLayoutTests.RandomStreamMatchesUE5" methodname="RandomStreamMatchesUE5" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" seed="1156521994" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.000524" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="SameLayoutsAsUE5ForSeeds1To200" fullname="ProcLevelGen.Tests.PLGLayoutTests.SameLayoutsAsUE5ForSeeds1To200" methodname="SameLayoutsAsUE5ForSeeds1To200" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" seed="2058487646" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.031694" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="SampleKitFollowsTheSpec" fullname="ProcLevelGen.Tests.PLGLayoutTests.SampleKitFollowsTheSpec" methodname="SampleKitFollowsTheSpec" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" seed="1404754631" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.000262" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="Seeds1To200PassEveryCheck" fullname="ProcLevelGen.Tests.PLGLayoutTests.Seeds1To200PassEveryCheck" methodname="Seeds1To200PassEveryCheck" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" seed="614736502" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.028349" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[PLGTest] modules per map: min 7, avg 8.6, max 16
+]]></output>
+            </test-case>
+            <test-case id="1007" name="TestKitsFailWithoutBuilding" fullname="ProcLevelGen.Tests.PLGLayoutTests.TestKitsFailWithoutBuilding" methodname="TestKitsFailWithoutBuilding" classname="ProcLevelGen.Tests.PLGLayoutTests" runstate="Runnable" seed="384085172" result="Passed" start-time="2026-11-28 15:18:23Z" end-time="2026-11-28 15:18:23Z" duration="0.008223" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[
+IgnoreFailingMessages:true
+PLG Test Generator empty: test kit 'empty'
+PLG Test Generator empty: kit: no module with role Start
+PLG Test Generator empty: kit: no module with role Hub
+PLG Test Generator empty: kit: no module with role End
+PLG Test Generator empty: kit: no module with role Room
+PLG Test Generator empty: kit: no module with role Corridor
+PLG Test Generator empty: seed 535117761: failed after 16 attempts, last: no Start module
+PLG Test Generator empty: seed 7337081: failed after 16 attempts, last: no Start module
+PLG Test Generator empty: seed 7337080: failed after 16 attempts, last: no Start module
+PLG Test Generator empty: seed 7337083: failed after 16 attempts, last: no Start module
+PLG Test Generator empty: generation failed after 4 seed(s), starting from seed 535117761; nothing was built
+PLG Test Generator impossible: test kit 'impossible'
+PLG Test Generator impossible: seed 535117761: failed after 16 attempts, last: the hub does not fit on any start door
+PLG Test Generator impossible: seed 7337081: failed after 16 attempts, last: the hub does not fit on any start door
+PLG Test Generator impossible: seed 7337080: failed after 16 attempts, last: the hub does not fit on any start door
+PLG Test Generator impossible: seed 7337083: failed after 16 attempts, last: the hub does not fit on any start door
+PLG Test Generator impossible: generation failed after 4 seed(s), starting from seed 535117761; nothing was built
+Saving results to: C:/Users/ljw13/AppData/LocalLow/JiwonEnv/DreamMovers\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

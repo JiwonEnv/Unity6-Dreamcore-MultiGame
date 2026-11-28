@@ -76,12 +76,12 @@ UE5 버전은 전체 화면 포스트 프로세스 머티리얼 하나에 다섯
   - 아웃게임 화면: 타이틀, 메인 메뉴(닉네임), 방 만들기·참가, 설정(그래픽·오디오·조작 키 바꾸기·보이스챗·접근성·언어, `settings.json`에 저장), 크레딧, Esc 일시정지(시간은 안 멈춤, 참가자 목록, 방 나가기), 로딩 화면, 접속 실패·연결 끊김 알림. 방장은 버전이 다르거나 방이 가득 찬 참가를 거절합니다.
   - 화면 배치는 `Assets/_DreamMovers/Art/UI/OutGame`의 `UI_*.uxml`·`UI_OutGame.uss`에 있어 UI Builder에서 바꿀 수 있습니다. 코드는 요소 이름으로만 찾으니 이름(`name`)만 유지하면 됩니다.
   - 조작: WASD 이동, 마우스 시점, 왼쪽 클릭(누르고 있기) 실로 잡기, 휠 거리 조절, Shift 달리기(시끄러움), Ctrl 웅크리기(조용함), Space 점프, E 서랍장 숨기·나오기, Esc 일시정지 (키는 설정에서 바꿀 수 있음)
-  - 한 PC에서 둘이 해 보기: 메뉴 **Dream Movers > Build Windows Player**로 `Builds/Windows/DreamMovers.exe`를 만들고 두 번 실행해 하나는 호스트, 하나는 `127.0.0.1`로 참가
+  - 한 PC에서 둘이 해 보기: 메뉴 **Dream Movers > Build Windows Player**로 `Builds/Windows/DreamMovers.exe`를 만들고 두 번 실행해 하나는 호스트, 하나는 `127.0.0.1`로 참가 (두 번째는 `-dmprofile=2`를 붙이면 닉네임이 겹치지 않음)
 - 씬 다시 만들기: 메뉴 **Dream Movers > Build All Scenes** (메인 메뉴 + 생성 맵, 게임 프리팹도 같이 다시 만듦. 따로: **Build Main Menu Scene**, **Build ProcGen Scene**, **Build Gameplay Prefabs**)
 - 폴더 구조 만들기·정리: 메뉴 **Dream Movers > Create Folder Structure** (몇 번 실행해도 안전)
 - 테스트: Test Runner의 PlayMode에서 `DMGameplayTests`(호스트로 한 라운드: 준비·내용물·서랍장·잡힘 판정·웅크리기·잡기·운반·안정도·붕괴값·재시작), `DMOutGameTests`(설정 저장·불러오기, 키 바꾸기 저장, 참가 허용 규칙, 메뉴 → 방 만들기 → 일시정지 → 나가기 → 메뉴, 없는 주소 참가 시 알림과 함께 메뉴로)와 `PLGSelfTest`
-- 두 프로세스 네트워크 점검: 빌드 후 `DreamMovers.exe -batchmode -nographics -dmhost -dmnettest -plgseed=535117761`와 `DreamMovers.exe -batchmode -nographics -dmclient=127.0.0.1 -dmnettest`를 함께 실행. 둘이 같은 맵을 만들고, 혼자 못 드는 25kg 골동품을 둘이 같이 드는지 `[DMNetTest]` 줄로 확인
-- 개발용 플래그: `-dmhost`, `-dmclient=IP` (메뉴를 건너뛰고 바로 방 만들기·참가), `-plgseed=N`, `-dmshownoise`(소음 표시), `-dmbutlertrace`, `-dmgrabtrace`, `-dmuishot=폴더`(아웃게임 화면을 모두 찍고 종료)
+- 두 프로세스 네트워크 점검: 빌드 후 `DreamMovers.exe -batchmode -nographics -dmhost -dmnettest -plgseed=535117761 -dmprofile=host`와 `DreamMovers.exe -batchmode -nographics -dmclient=127.0.0.1 -dmnettest -dmprofile=client`를 함께 실행. 둘이 같은 맵을 만들고, 혼자 못 드는 25kg 골동품을 둘이 같이 드는지, 끝에 방장이 방을 닫으면 참가자가 "방장이 방을 닫았습니다"를 받는지 `[DMNetTest]` 줄로 확인
+- 개발용 플래그: `-dmhost`, `-dmclient=IP` (메뉴를 건너뛰고 바로 방 만들기·참가), `-plgseed=N`, `-dmshownoise`(소음 표시), `-dmbutlertrace`, `-dmgrabtrace`, `-dmuishot=폴더`(아웃게임 화면을 모두 찍고 종료), `-dmprofile=이름`(설정 파일을 `settings_이름.json`으로 따로 써서 한 PC의 두 실행본이 닉네임·키를 나눠 가짐)
 - 프로젝트 설정 검사 (배치모드):
   `Unity.exe -batchmode -projectPath . -executeMethod DreamMovers.Editor.ProjectCheck.Run -quit`
 - UE5 버전 실행: `git worktree add ../DreamMovers-UE5 ue5-final`로 별도 폴더에 꺼낸 뒤, Unreal Engine 5.8에서 `DreamMovers.uproject`를 열고 모듈 빌드를 승인합니다.

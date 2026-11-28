@@ -1,0 +1,750 @@
+Mono path[0] = 'E:/Project/Unity6-Dreamcore-Multigame/Builds/Windows/DreamMovers_Data/Managed'
+Mono config path = 'E:/Project/Unity6-Dreamcore-Multigame/Builds/Windows/MonoBleedingEdge/etc'
+Found 1 interfaces on host : 0) 172.30.1.8
+Player connection [39140]  Target information:
+
+Player connection [39140]  * "[IP] 172.30.1.8 [Port] 55000 [Flags] 2 [Guid] 3166436090 [EditorId] 533635870 [Version] 1048832 [Id] WindowsPlayer(2,DESKTOP-GFK7DOO) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] DreamMovers" 
+
+Player connection [39140] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.9f1 (7a9955a4f2fa)
+[Subsystems] Discovering subsystems at path E:/Project/Unity6-Dreamcore-Multigame/Builds/Windows/DreamMovers_Data/UnitySubsystems
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.092 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Microsoft Media Foundation video decoding to texture disabled: graphics device is Null, only Direct3D 11 and Direct3D 12 (only on desktop) are supported for hardware-accelerated video decoding.
+UnloadTime: 0.357500 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.031500 ms
+LevelGenerator: seed 535117761: 9 modules (attempt 1), layout hash e94bc661
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:305)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<UnityEngine.Vector3>:set_Value (UnityEngine.Vector3) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:54)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:55)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<UnityEngine.Vector3>:set_Value (UnityEngine.Vector3) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:54)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:55)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<UnityEngine.Vector3>:set_Value (UnityEngine.Vector3) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:54)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:55)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<UnityEngine.Vector3>:set_Value (UnityEngine.Vector3) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:54)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:55)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<UnityEngine.Vector3>:set_Value (UnityEngine.Vector3) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:54)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:55)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<UnityEngine.Vector3>:set_Value (UnityEngine.Vector3) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:54)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMHidingSpot:Configure (UnityEngine.Vector3,int) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMHidingSpot.cs:55)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:238)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+Couldn't create a Convex Mesh from source mesh, within the maximum polygons limit (256). The partial hull will be used. Consider simplifying your mesh. Source mesh name: Sphere
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.MeshCollider:set_convex (bool)
+DreamMovers.DMValuable:BuildShape () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:162)
+DreamMovers.DMValuable:ApplySpec () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:131)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:89)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+[E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs line 162]
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.Netcode.NetworkVariableBase:MarkNetworkBehaviourDirty () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:308)
+Unity.Netcode.NetworkVariableBase:SetDirty (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariableBase.cs:271)
+Unity.Netcode.NetworkVariable`1<DreamMovers.DMValuableSpec>:set_Value (DreamMovers.DMValuableSpec) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/NetworkVariable/NetworkVariable.cs:163)
+DreamMovers.DMValuable:InitFromSpec (DreamMovers.DMValuableSpec) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMValuable.cs:88)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:266)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+[DreamMovers] generated level (seed 535117761): 15 of 15 antiques on 22 spots (0 spots blocked), 6 wardrobes
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMGameMode:PopulateGeneratedLevel () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:270)
+DreamMovers.DMGameMode:OnGenerated (ProcLevelGen.PLGGenerator,bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:153)
+ProcLevelGen.PLGGenerator:Generate (bool) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:334)
+ProcLevelGen.PLGGenerator:Start () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/ProcLevelGen/Runtime/PLGGenerator.cs:148)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+Unloading 3 unused Assets / (0 B). Loaded Objects now: 2820.
+Memory consumption went from 52.3 MB to 52.3 MB.
+Total: 2.360400 ms (FindLiveObjects: 0.129500 ms CreateObjectMapping: 0.022000 ms MarkObjects: 2.198200 ms  DeleteObjects: 0.007500 ms)
+
+[DreamMovers] generated level ready after 0.50 s: starting the round
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMGameMode/<WaitForNavigation>d__50:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:181)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DreamMovers] CandleButler(Clone): Idle -> Patrol
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMMonster:SetState (DreamMovers.DMMonsterState) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMMonster.cs:126)
+DreamMovers.DMButler:ResumePatrol () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMButler.cs:226)
+DreamMovers.DMButler:OnNetworkSpawn () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMButler.cs:121)
+Unity.Netcode.NetworkBehaviour:NetworkSpawn () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkBehaviour.cs:814)
+Unity.Netcode.NetworkObject:InvokeBehaviourNetworkSpawn () (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkObject.cs:2553)
+Unity.Netcode.NetworkSpawnManager:SpawnNetworkObjectLocallyCommon (Unity.Netcode.NetworkObject,ulong,bool,bool,ulong,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Spawning/NetworkSpawnManager.cs:1207)
+Unity.Netcode.NetworkSpawnManager:AuthorityLocalSpawn (Unity.Netcode.NetworkObject,ulong,bool,bool,ulong,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Spawning/NetworkSpawnManager.cs:1103)
+Unity.Netcode.NetworkObject:SpawnInternal (bool,ulong,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkObject.cs:1775)
+Unity.Netcode.NetworkObject:Spawn (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@e40dcfef2dee/Runtime/Core/NetworkObject.cs:1888)
+DreamMovers.DMGameMode:SpawnGeneratedMonsters () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:324)
+DreamMovers.DMGameMode/<WaitForNavigation>d__50:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:182)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DreamMovers] generated level monsters: horse yes, butler patrols 5 rooms
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMGameMode:SpawnGeneratedMonsters () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:326)
+DreamMovers.DMGameMode/<WaitForNavigation>d__50:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMGameMode.cs:182)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS host_round_playing
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:94)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS host_sees_client_doll: 2 clients connected
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:95)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] host layout seed 535117761 hash e94bc661
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:100)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS target_40_percent_for_two: target 10720, map 26800
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:101)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS client_movement_syncs_to_host: client doll at (0.80, 0.02, 0.00)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:122)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS host_grabs_heavy
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:127)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS two_holders: 2 holding 금박 액자 그림 (25 kg)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:131)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] PASS two_dolls_lift_heavy: rose 0.66 m
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:134)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+[DMNetTest] PASS host_closed_room: closing False
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest:Check (bool,string,string) (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:61)
+DreamMovers.DMNetSmokeTest/<RunHost>d__9:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:142)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[DMNetTest] ALL PASSED, 0 failure(s)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+DreamMovers.DMNetSmokeTest/<Start>d__5:MoveNext () (at E:/Project/Unity6-Dreamcore-Multigame/Assets/_DreamMovers/Scripts/Runtime/DMNetSmokeTest.cs:72)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+UnloadTime: 2.914900 ms
+Unloading 1 unused Assets / (0 B). Loaded Objects now: 1937.
+Memory consumption went from 54.6 MB to 54.6 MB.
+Total: 2.407500 ms (FindLiveObjects: 0.081500 ms CreateObjectMapping: 0.022000 ms MarkObjects: 2.297400 ms  DeleteObjects: 0.006400 ms)
+
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+PlayerConnection::Cleanup##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1795879086427,"processId":21936,"allocatedMemory":1100087,"memoryLabels":[{"Default":136},{"NewDelete":104},{"Manager":549111},{"Shader":1344},{"GfxDevice":72},{"Audio":752},{"Serialization":144},{"JobScheduler":32768},{"String":468},{"HashMap":5120},{"PoolAlloc":384},{"CloudService":144},{"VR":1872},{"NativeArray":507316},{"Subsystems":96},{"Accessibility":80},{"UIElements":160},{"CoreBusinessMetrics":120}]}

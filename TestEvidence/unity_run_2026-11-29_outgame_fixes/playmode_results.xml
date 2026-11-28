@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:45Z" duration="50.1656625">
+  <test-suite type="TestSuite" id="1021" name="DreamMovers" fullname="DreamMovers" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:45Z" duration="50.165663" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1010" name="DreamMovers.Tests.dll" fullname="E:/Project/Unity6-Dreamcore-Multigame/Library/ScriptAssemblies/DreamMovers.Tests.dll" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:35Z" duration="39.643865" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22220" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1011" name="DreamMovers" fullname="DreamMovers" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:35Z" duration="39.643409" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1012" name="Tests" fullname="DreamMovers.Tests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:35Z" duration="39.643158" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="DMGameplayTests" fullname="DreamMovers.Tests.DMGameplayTests" classname="DreamMovers.Tests.DMGameplayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:21Z" duration="26.006949" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="HostPlaysOneRoundOnTheTestSeed" fullname="DreamMovers.Tests.DMGameplayTests.HostPlaysOneRoundOnTheTestSeed" methodname="HostPlaysOneRoundOnTheTestSeed" classname="DreamMovers.Tests.DMGameplayTests" runstate="Runnable" seed="1384076196" result="Passed" start-time="2026-11-28 15:15:55Z" end-time="2026-11-28 15:16:21Z" duration="25.997656" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[
+IgnoreFailingMessages:true
+LevelGenerator: seed 535117761: 9 modules (attempt 1), layout hash e94bc661
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+Couldn't create a Convex Mesh from source mesh, within the maximum polygons limit (256). The partial hull will be used. Consider simplifying your mesh. Source mesh name: Sphere
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+[DreamMovers] generated level (seed 535117761): 15 of 15 antiques on 22 spots (0 spots blocked), 6 wardrobes
+[DreamMovers] generated level ready after 0.50 s: starting the round
+[DreamMovers] CandleButler(Clone): Idle -> Patrol
+[DreamMovers] generated level monsters: horse yes, butler patrols 5 rooms
+[DMTest] PASS round_starts_when_ready: state Playing after 0.5 s 
+[DMTest] PASS no_monsters_while_preparing
+[DMTest] PASS same_layout_as_ue5: seed 535117761 hash e94bc661
+[DMTest] PASS generation: generation succeeded: seed 535117761, 9 modules, layout hash e94bc661
+[DMTest] PASS generation: layout passes ValidateLayout
+[DMTest] PASS generation: 113 graybox boxes built
+[DMTest] PASS generation: player stands on the generated floor (y 0.02, vy 0.00)
+[DMTest] PASS generation: navigation reaches 8/8 modules from the start
+[DMTest] PASS antique_count: 15 in the map, 15 expected
+[DMTest] PASS antique_spots_free_at_spawn: 0 blocked
+[DMTest] PASS antiques_on_floor: 15 of 15
+[DMTest] PASS wardrobes: 6 wardrobes for 6 hiding spots
+[DMTest] PASS monsters_spawned
+[DMTest] PASS solo_target_30_percent: target 8040, map 26800
+[DMTest] PASS host_has_a_doll
+[DMTest] PASS wardrobe_enter: hiding True, occupants 1
+[DMTest] PASS wardrobe_enter_makes_noise
+[DMTest] PASS hidden_doll_unseen_and_uncatchable
+[DreamMovers] DollPlayer(Clone): grab rejected, the doll is hiding or down
+[DMTest] PASS server_rejects_grab_while_hidden
+[DMTest] PASS wardrobe_leave: hiding False, at (-4.68, 0.02, 19.70)
+[DMTest] PASS no_catch_through_wall: doll inside, butler just outside the wall
+[DMTest] PASS catch_in_the_open: 0.8 m apart, nothing between
+[DMTest] PASS crouch_is_slow_and_silent: crouched True, speed 1.50 m/s, noises 0, from (-3.00, 0.02, -4.00) to (-3.00, 0.02, -1.75), controller True grounded True height 0.6
+[DMTest] PASS sprint_is_loud: footstep noises 3 at 5.20 m/s
+[DMTest] PASS grab_light: 금박 달걀, aiming at 금박 달걀
+[DMTest] PASS lift_light: rose 0.70 m
+[DMTest] PASS carry_light_to_zone: held True, item (0.00, 0.38, -2.45), zone (0.00, 1.00, -2.50)
+[DMTest] PASS deliver_adds_value: +1500, item worth 1500
+[DMTest] PASS deliver_drains_20s_per_1000: stability -30.00 s beyond time, expected 30.00 s
+[DMTest] PASS solo_cannot_lift_heavy: 금박 액자 그림 25 kg, held True, rose 0.00 m
+[DreamMovers] DollPlayer(Clone): grab rejected, Wall NegX is in the way
+[DMTest] PASS server_rejects_grab_through_wall: item 1.64 m away behind the wall
+[DreamMovers] DollPlayer(Clone): grab rejected, point 1.50 m from 토끼 머리 열쇠
+[DMTest] PASS server_rejects_point_off_the_item
+[DMTest] PASS server_accepts_valid_grab: item 1.28 m away in plain view
+[DMTest] PASS full_color_above_half_stability: stability 0.94, collapse 0.00
+[DMTest] PASS collapse_follows_stability: stability 0.25, collapse 0.38, want 0.38
+[DreamMovers] DollPlayer(Clone) (client 0) was caught
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+[DMTest] PASS butler_catches_unshielded_doll: after 0.0 s
+[DMTest] PASS solo_down_fails_at_once: state Failed 0.2 s after the catch
+LevelGenerator: seed 1042110298: 7 modules (attempt 1), layout hash 09429ff6
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+[DreamMovers] generated level (seed 1042110298): 15 of 15 antiques on 23 spots (0 spots blocked), 6 wardrobes
+[DreamMovers] generated level ready after 0.50 s: starting the round
+[DreamMovers] CandleButler(Clone): Idle -> Patrol
+[DreamMovers] generated level monsters: horse yes, butler patrols 5 rooms
+[DMTest] PASS restart_after_failure: state Playing, doll True, balls 0
+[DMTest] PASS restart_resets_content: collected 0, antiques 15
+[DMTest] PASS no_errors_logged
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1003" name="DMOutGameTests" fullname="DreamMovers.Tests.DMOutGameTests" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-28 15:16:21Z" end-time="2026-11-28 15:16:35Z" duration="13.634930" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1006" name="ChangingToAKeyInUseSwapsThem" fullname="DreamMovers.Tests.DMOutGameTests.ChangingToAKeyInUseSwapsThem" methodname="ChangingToAKeyInUseSwapsThem" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" seed="961342330" result="Passed" start-time="2026-11-28 15:16:21Z" end-time="2026-11-28 15:16:21Z" duration="0.008498" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="DroppedPlayersReadKoreanReasons" fullname="DreamMovers.Tests.DMOutGameTests.DroppedPlayersReadKoreanReasons" methodname="DroppedPlayersReadKoreanReasons" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" seed="1654595902" result="Passed" start-time="2026-11-28 15:16:21Z" end-time="2026-11-28 15:16:21Z" duration="0.003456" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DreamMovers] disconnected: Disconnected due to host shutting down.
+[DreamMovers] disconnected: [Disconnect Event][Client-0][MaxConnectionAttempts] Connection closed
+]]></output>
+            </test-case>
+            <test-case id="1008" name="HostLetsInOnlyWhoFits" fullname="DreamMovers.Tests.DMOutGameTests.HostLetsInOnlyWhoFits" methodname="HostLetsInOnlyWhoFits" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" seed="2034878206" result="Passed" start-time="2026-11-28 15:16:21Z" end-time="2026-11-28 15:16:21Z" duration="0.002118" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="KeyChangesAreSavedAndRestored" fullname="DreamMovers.Tests.DMOutGameTests.KeyChangesAreSavedAndRestored" methodname="KeyChangesAreSavedAndRestored" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" seed="2104138145" result="Passed" start-time="2026-11-28 15:16:21Z" end-time="2026-11-28 15:16:21Z" duration="0.015670" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="MenuToRoomAndBack" fullname="DreamMovers.Tests.DMOutGameTests.MenuToRoomAndBack" methodname="MenuToRoomAndBack" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" seed="1835218538" result="Passed" start-time="2026-11-28 15:16:21Z" end-time="2026-11-28 15:16:35Z" duration="13.579311" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="180000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[
+IgnoreFailingMessages:true
+LevelGenerator: seed 650385472: 9 modules (attempt 1), layout hash 86bb4009
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+NetworkVariable is written to, but doesn't know its NetworkBehaviour yet. Are you modifying a NetworkVariable before the NetworkObject is spawned?
+[DreamMovers] generated level (seed 650385472): 15 of 15 antiques on 25 spots (0 spots blocked), 6 wardrobes
+[DreamMovers] generated level ready after 0.50 s: starting the round
+[DreamMovers] CandleButler(Clone): Idle -> Patrol
+[DreamMovers] generated level monsters: horse yes, butler patrols 5 rooms
+Failed to connect to server.
+[DreamMovers] disconnected: [Disconnect Event][Client-0][TransportClientId-4294967296][MaxConnectionAttempts] Connection closed due to maximum connection attempts reached.
+[DMTest] PASS out-game flow; failed join said: 127.0.0.1에 접속하지 못했습니다. 주소와 방장 상태를 확인해 주세요
+]]></output>
+            </test-case>
+            <test-case id="1004" name="SettingsSaveAndLoad" fullname="DreamMovers.Tests.DMOutGameTests.SettingsSaveAndLoad" methodname="SettingsSaveAndLoad" classname="DreamMovers.Tests.DMOutGameTests" runstate="Runnable" seed="202176780" result="Passed" start-time="2026-11-28 15:16:35Z" end-time="2026-11-28 15:16:35Z" duration="0.016398" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DreamMovers] settings could not be read, using defaults: JSON parse error: Missing a name for object member.
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1015" name="ProcLevelGen.Tests.Runtime.dll" fullname="E:/Project/Unity6-Dreamcore-Multigame/Library/ScriptAssemblies/ProcLevelGen.Tests.Runtime.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-28 15:16:35Z" end-time="2026-11-28 15:16:45Z" duration="10.516353" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22220" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1016" name="ProcLevelGen" fullname="ProcLevelGen" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-28 15:16:35Z" end-time="2026-11-28 15:16:45Z" duration="10.516015" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1017" name="Tests" fullname="ProcLevelGen.Tests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-28 15:16:35Z" end-time="2026-11-28 15:16:45Z" duration="10.515700" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1013" name="PLGSelfTest" fullname="ProcLevelGen.Tests.PLGSelfTest" classname="ProcLevelGen.Tests.PLGSelfTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-28 15:16:35Z" end-time="2026-11-28 15:16:45Z" duration="10.515422" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1014" name="Seed535117761PassesTheSelfTest" fullname="ProcLevelGen.Tests.PLGSelfTest.Seed535117761PassesTheSelfTest" methodname="Seed535117761PassesTheSelfTest" classname="ProcLevelGen.Tests.PLGSelfTest" runstate="Runnable" seed="1934595915" result="Passed" start-time="2026-11-28 15:16:35Z" end-time="2026-11-28 15:16:45Z" duration="10.514800" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[
+IgnoreFailingMessages:true
+LevelGenerator: seed 1784154230: 8 modules (attempt 1), layout hash e42f01eb
+LevelGenerator: seed 535117761: 9 modules (attempt 1), layout hash e94bc661
+[PLGSelfTest] PASS generation succeeded: seed 535117761, 9 modules, layout hash e94bc661
+[PLGSelfTest] PASS layout passes ValidateLayout
+[PLGSelfTest] PASS 113 graybox boxes built
+[PLGSelfTest] PASS player stands on the generated floor (y 1.00, vy 0.00)
+[PLGSelfTest] PASS navigation reaches 8/8 modules from the start
+Host type is not matching any asset type at Path Packages/com.unity.render-pipelines.core/Editor/Lighting/ProbeVolume/RenderingLayerMask/TraceRenderingLayerMask.urtshader.
+[PLGSelfTest] saved E:\Project\Unity6-Dreamcore-Multigame\Logs\PLGSelfTest\PLGSelfTest_Player.png
+[PLGSelfTest] saved E:\Project\Unity6-Dreamcore-Multigame\Logs\PLGSelfTest\PLGSelfTest_Top.png
+[PLGSelfTest] ALL PASSED, 0 failure(s)
+Saving results to: C:/Users/ljw13/AppData/LocalLow/JiwonEnv/DreamMovers\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
