@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="main-menu" class="screen screen--solid">
+        <ui:Label text="꿈 수거반" class="title" />
+        <ui:VisualElement class="panel">
+            <ui:TextField name="nickname" label="닉네임" max-length="12" class="field" />
+            <ui:Button name="create-room" text="방 만들기" class="button" />
+            <ui:Button name="join-room" text="방 참가" class="button" />
+            <ui:Button name="settings" text="설정" class="button" />
+            <ui:Button name="credits" text="크레딧" class="button" />
+            <ui:Button name="quit" text="종료" class="button" />
+        </ui:VisualElement>
+        <ui:Label name="version" text="v0" class="version" />
+    </ui:VisualElement>
+</ui:UXML>

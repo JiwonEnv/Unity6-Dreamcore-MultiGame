@@ -1,0 +1,13 @@
+LevelGenerator: seed 535117761: 9 modules (attempt 1), layout hash e94bc661
+[DreamMovers] client built seed 535117761 (build 1), layout hash e94bc661
+[DMNetTest] PASS client_connected
+[DMNetTest] PASS client_has_own_doll
+[DMNetTest] client layout seed 535117761 hash e94bc661
+[DMNetTest] PASS client_built_server_seed: seed 535117761
+[DMNetTest] PASS client_sees_antiques: 15
+[DMNetTest] PASS client_sees_wardrobes_and_monsters: 6 wardrobes, 2 monsters
+[DMNetTest] PASS client_sees_heavy_brought_over
+[DMNetTest] PASS client_grab_accepted_by_server
+[DMNetTest] PASS client_sees_two_holders
+[DMNetTest] PASS client_sees_item_lifted: item at y 1.24
+[DMNetTest] ALL PASSED, 0 failure(s)

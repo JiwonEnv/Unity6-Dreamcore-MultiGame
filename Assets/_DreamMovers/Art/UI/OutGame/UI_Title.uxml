@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="title-screen" class="screen screen--solid">
+        <ui:Label text="꿈 수거반" class="title" />
+        <ui:Label name="press-any-key" text="아무 키나 누르세요" class="blink" />
+        <ui:Label name="version" text="v0" class="version" />
+    </ui:VisualElement>
+</ui:UXML>

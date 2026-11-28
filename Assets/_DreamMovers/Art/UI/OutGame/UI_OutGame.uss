@@ -1,0 +1,137 @@
+/* Out-game screens: placeholder look. Layout and colors live here and in the UI_*.uxml files, so they can be
+   redesigned in UI Builder without touching code. Code only looks elements up by name. */
+
+:root {
+    --paper: rgb(255, 247, 230);
+    --ink: rgb(40, 32, 32);
+    --dim: rgba(20, 14, 18, 0.72);
+    --accent: rgb(214, 120, 150);
+    --muted: rgb(150, 135, 135);
+}
+
+.screen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen--dim {
+    background-color: var(--dim);
+}
+
+.screen--solid {
+    background-color: rgb(32, 26, 36);
+}
+
+.panel {
+    background-color: var(--paper);
+    border-radius: 12px;
+    padding: 28px 36px;
+    min-width: 520px;
+    max-width: 960px;
+    max-height: 90%;
+}
+
+.title {
+    font-size: 72px;
+    color: var(--paper);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin-bottom: 24px;
+}
+
+.heading {
+    font-size: 34px;
+    color: var(--ink);
+    -unity-font-style: bold;
+    margin-bottom: 18px;
+}
+
+.body {
+    font-size: 20px;
+    color: var(--ink);
+    white-space: normal;
+    margin-bottom: 8px;
+}
+
+.hint {
+    font-size: 16px;
+    color: var(--muted);
+    white-space: normal;
+    margin-bottom: 8px;
+}
+
+.blink {
+    font-size: 24px;
+    color: var(--paper);
+    -unity-text-align: middle-center;
+}
+
+.button {
+    font-size: 22px;
+    height: 48px;
+    min-width: 260px;
+    margin: 6px 0;
+}
+
+.button--small {
+    font-size: 18px;
+    height: 36px;
+    min-width: 120px;
+    margin: 0 4px;
+}
+
+.row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.field {
+    font-size: 20px;
+    margin: 6px 0;
+}
+
+.field > Label {
+    min-width: 220px;
+    color: var(--ink);
+}
+
+.tabs {
+    flex-direction: row;
+    margin-bottom: 12px;
+}
+
+.tab--selected {
+    background-color: var(--accent);
+    color: var(--paper);
+}
+
+.tab-page {
+    min-height: 360px;
+}
+
+.key-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+.key-row > Label {
+    font-size: 18px;
+    color: var(--ink);
+}
+
+.version {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    font-size: 14px;
+    color: var(--muted);
+}

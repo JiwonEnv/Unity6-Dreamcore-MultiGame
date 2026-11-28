@@ -24,12 +24,14 @@ Assets/
         Shaders/
       VFX/
       UI/
+        OutGame/               아웃게임 화면 (UXML 배치 · USS 스타일 · 패널 설정)
     Audio/Music/  Audio/SFX/
     Gameplay/                  플레이어·매니저 같은 게임 로직 프리팹, 데이터(ScriptableObject)
     Scenes/                    씬
     Lighting/Volumes/          볼륨 프로필, LUT
     Scripts/Runtime/           게임 코드 (네임스페이스 DreamMovers)
     Scripts/Editor/            에디터 도구 (네임스페이스 DreamMovers.Editor)
+    Scripts/Tests/             플레이 모드 테스트 (네임스페이스 DreamMovers.Tests)
     Settings/                  URP 에셋·렌더러, Input/
   ProcLevelGen/                맵 생성기. 게임과 분리된 재사용 모듈 (네임스페이스 ProcLevelGen)
   ThirdParty/                  에셋 스토어 등 외부 에셋. 직접 고치지 않음
@@ -75,6 +77,7 @@ Tripo 에셋 목록과 같은 ID를 씁니다. 에셋 폴더 이름도 이 ID입
 | `SH_` | 셰이더·셰이더 그래프 | `SH_OilPastel.shadergraph` |
 | `VFX_` | 이펙트 | `VFX_DreamCrack` |
 | `SFX_` / `MUS_` | 효과음 / 음악 | `SFX_GlassBreak.wav` |
+| `UI_` | UI 화면 배치(UXML)·스타일(USS·TSS)·패널 설정 | `UI_MainMenu.uxml` |
 | (없음) | 프리팹 | `VAL_Teacup.prefab` |
 
 텍스처 끝에는 채널 접미어를 붙입니다: `_BC` 색(베이스 컬러) · `_N` 노멀 · `_MS` 금속도·매끄러움(URP 마스크) · `_AO` 앰비언트 오클루전 · `_E` 발광
@@ -92,7 +95,8 @@ Art/Props/Valuables/VAL_Teacup/
 
 ### 코드
 
-- 네임스페이스: 게임 `DreamMovers`, 에디터 도구 `DreamMovers.Editor`, 맵 생성기 `ProcLevelGen`
+- 네임스페이스: 게임 `DreamMovers`, 에디터 도구 `DreamMovers.Editor`, 테스트 `DreamMovers.Tests`, 맵 생성기 `ProcLevelGen`
+- 게임 클래스는 `DM` 접두어 (`DMDoll`, `DMGrab`). UE5 버전의 `ADM…`/`UDM…` 이름과 짝이 맞게
 - 파일 하나에 public 타입 하나, 파일 이름 = 클래스 이름 (PascalCase)
 
 ## 3. 커밋과 브랜치

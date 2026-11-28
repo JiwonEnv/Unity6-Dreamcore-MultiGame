@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="UI_OutGame.uss" />
+    <ui:VisualElement name="join-room-screen" class="screen screen--solid">
+        <ui:VisualElement class="panel">
+            <ui:Label text="방 참가" class="heading" />
+            <ui:TextField name="address" label="방장 주소" class="field" />
+            <ui:Label text="방장의 방 만들기 화면에 나오는 주소를 넣으세요. 같은 PC에서 해 보려면 127.0.0.1" class="hint" />
+            <ui:VisualElement class="row">
+                <ui:Button name="back" text="뒤로" class="button--small" />
+                <ui:Button name="join" text="참가" class="button--small" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
