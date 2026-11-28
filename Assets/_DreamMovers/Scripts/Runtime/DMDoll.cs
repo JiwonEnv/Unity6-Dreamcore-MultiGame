@@ -71,6 +71,8 @@ namespace DreamMovers
         // Owner input.
         /// <summary>This doll reads the shared controls (<see cref="DMControls"/>), so key changes apply at once.</summary>
         bool readsControls;
+        /// <summary>Input reached the doll last frame; when a menu or alt-tab cuts it off, held buttons are let go once.</summary>
+        bool inputWasLive;
 
         // Server bookkeeping.
         Vector3 lastServerPosition;
@@ -250,8 +252,12 @@ namespace DreamMovers
             }
             if (!readsControls || !DMControls.Map.enabled || !Application.isFocused || Cursor.lockState != CursorLockMode.Locked)
             {
-                return default;
+                // The release of a held grab never arrives once input stops (pause menu, alt-tab): let go here.
+                bool cutOff = inputWasLive;
+                inputWasLive = false;
+                return cutOff ? new DMDollInput { GrabReleased = true } : default;
             }
+            inputWasLive = true;
             return new DMDollInput
             {
                 Move = DMControls.Move.ReadValue<Vector2>(),

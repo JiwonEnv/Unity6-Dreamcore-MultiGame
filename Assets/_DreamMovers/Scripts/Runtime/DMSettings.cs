@@ -60,7 +60,38 @@ namespace DreamMovers
         /// <summary>Tests point this at a temporary file so they never touch the player's settings.</summary>
         public static string PathOverride { get; set; }
 
-        public static string FilePath => PathOverride ?? Path.Combine(Application.persistentDataPath, "settings.json");
+        /// <summary>
+        /// settings.json in the user's data folder. -dmprofile=NAME (dev builds) uses settings_NAME.json instead, so two
+        /// copies on one PC keep their own nickname and keys.
+        /// </summary>
+        public static string FilePath
+        {
+            get
+            {
+                if (PathOverride != null)
+                {
+                    return PathOverride;
+                }
+                string file = DMArgs.TryGet("dmprofile=", out string profile) && IsSafeProfileName(profile) ? $"settings_{profile}.json" : "settings.json";
+                return Path.Combine(Application.persistentDataPath, file);
+            }
+        }
+
+        static bool IsSafeProfileName(string name)
+        {
+            if (string.IsNullOrEmpty(name) || name.Length > 16)
+            {
+                return false;
+            }
+            foreach (char c in name)
+            {
+                if (!char.IsLetterOrDigit(c) && c != '_' && c != '-')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public static DMSettings Current
         {
@@ -181,10 +212,15 @@ namespace DreamMovers
                 {
                     QualitySettings.SetQualityLevel(qualityLevel, true);
                 }
-                if (displaySaved && resolutionWidth > 0 && resolutionHeight > 0
-                    && (Screen.width != resolutionWidth || Screen.height != resolutionHeight || Screen.fullScreenMode != windowMode))
+                if (displaySaved)
                 {
-                    Screen.SetResolution(resolutionWidth, resolutionHeight, windowMode);
+                    // Only the window mode chosen so far: keep the current size.
+                    int width = resolutionWidth > 0 ? resolutionWidth : Screen.width;
+                    int height = resolutionHeight > 0 ? resolutionHeight : Screen.height;
+                    if (Screen.width != width || Screen.height != height || Screen.fullScreenMode != windowMode)
+                    {
+                        Screen.SetResolution(width, height, windowMode);
+                    }
                 }
             }
             Changed?.Invoke();

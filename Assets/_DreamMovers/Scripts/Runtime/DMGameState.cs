@@ -86,7 +86,7 @@ namespace DreamMovers
                     return;
                 }
             }
-            string name = DMSession.NameFor(clientId);
+            string name = UniqueName(DMSession.NameFor(clientId));
             var fixedName = new FixedString64Bytes();
             // Nicknames are at most 12 characters, so this fits; a failed append just leaves the default.
             if (fixedName.Append(name) != FormatError.None)
@@ -94,6 +94,29 @@ namespace DreamMovers
                 fixedName = new FixedString64Bytes($"플레이어 {clientId + 1}");
             }
             players.Add(new DMPlayerEntry { ClientId = clientId, Name = fixedName });
+        }
+
+        /// <summary>Two players with one nickname (two copies on one PC, or friends who picked the same) get "곰 (2)".</summary>
+        string UniqueName(string name)
+        {
+            string candidate = name;
+            for (int n = 2; NameTaken(candidate); ++n)
+            {
+                candidate = $"{name} ({n})";
+            }
+            return candidate;
+        }
+
+        bool NameTaken(string name)
+        {
+            foreach (DMPlayerEntry entry in players)
+            {
+                if (entry.Name.ToString() == name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         void RemovePlayer(ulong clientId)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -24,14 +25,23 @@ namespace DreamMovers
         public const string GameScene = "ProcGen";
         public const ushort Port = 7777;
         public const int MaxRoomSize = 4;
-        /// <summary>A client that has not connected after this long gives up (the transport would try for a minute).</summary>
-        public const float ConnectTimeoutSeconds = 12f;
+        /// <summary>A player who has not connected after this long gives up (the transport alone would try for a minute).</summary>
+        public const float MenuConnectTimeoutSeconds = 12f;
+        /// <summary>-dmclient runs start next to a host that may still be loading: wait as long as the transport would.</summary>
+        public const float CommandLineConnectTimeoutSeconds = 60f;
+        /// <summary>Longest a closing host waits for its players to receive "the room was closed".</summary>
+        const float CloseRoomTimeoutSeconds = 6f;
+        const string HostClosedRoom = "방장이 방을 닫았습니다";
 
         static readonly Dictionary<ulong, string> Names = new Dictionary<ulong, string>();
+        /// <summary>Server: let in but not connected yet (Netcode adds them a frame later), so they count toward the room size.</summary>
+        static readonly HashSet<ulong> Approved = new HashSet<ulong>();
         static NetworkManager hooked;
         static AsyncOperation sceneLoad;
         static float connectStartedAt;
         static bool leaving;
+        static bool closing;
+        static Runner runner;
 
         /// <summary>What the menu asked for and the game scene has not started yet.</summary>
         public static DMSessionRole Pending { get; private set; }
@@ -45,6 +55,12 @@ namespace DreamMovers
         public static bool WasConnected { get; private set; }
         /// <summary>A message for the menu to show once (why we left the room).</summary>
         public static string MenuMessage { get; set; }
+        /// <summary>Why this machine last left a room (kept after the menu has shown it; checks and logs).</summary>
+        public static string LastLeaveReason { get; private set; }
+        /// <summary>How long this join waits for the host.</summary>
+        public static float ConnectTimeoutSeconds { get; private set; } = MenuConnectTimeoutSeconds;
+        /// <summary>The host is telling its players the room is closing (then goes back to the menu).</summary>
+        public static bool IsClosing => closing;
 
         public static bool IsLoadingScene => sceneLoad != null && !sceneLoad.isDone;
 
@@ -53,7 +69,11 @@ namespace DreamMovers
         static void ResetStatics()
         {
             Names.Clear();
+            Approved.Clear();
             hooked = null;
+            closing = false;
+            runner = null;
+            ConnectTimeoutSeconds = MenuConnectTimeoutSeconds;
             sceneLoad = null;
             leaving = false;
             Pending = DMSessionRole.None;
@@ -75,7 +95,7 @@ namespace DreamMovers
         public static float ConnectingSeconds => IsConnecting ? Time.unscaledTime - connectStartedAt : 0f;
 
         /// <summary>Asked for a room or in one: the menus stay closed.</summary>
-        public static bool InRoom => Pending != DMSessionRole.None || IsListening || IsLoadingScene;
+        public static bool InRoom => Pending != DMSessionRole.None || IsListening || IsLoadingScene || closing;
 
         public static void Host(int maxPlayers, bool friendsOnly)
         {
@@ -88,6 +108,7 @@ namespace DreamMovers
         public static void Join(string address)
         {
             Address = string.IsNullOrWhiteSpace(address) ? "127.0.0.1" : address.Trim();
+            ConnectTimeoutSeconds = MenuConnectTimeoutSeconds;
             DMSettings settings = DMSettings.Current;
             settings.lastAddress = Address;
             settings.Save();
@@ -136,6 +157,7 @@ namespace DreamMovers
             string nickname = DMSettings.Current.EnsureNickname();
             net.NetworkConfig.ConnectionData = Payload(Application.version, nickname);
             Names.Clear();
+            Approved.Clear();
             WasConnected = false;
             var transport = net.GetComponent<UnityTransport>();
             bool started;
@@ -173,11 +195,13 @@ namespace DreamMovers
             if (DMArgs.TryGet("dmclient=", out string ip))
             {
                 Address = ip;
+                ConnectTimeoutSeconds = CommandLineConnectTimeoutSeconds;
                 Pending = DMSessionRole.Client;
                 return true;
             }
             if (DMArgs.Has("dmclient"))
             {
+                ConnectTimeoutSeconds = CommandLineConnectTimeoutSeconds;
                 Pending = DMSessionRole.Client;
                 return true;
             }
@@ -205,28 +229,68 @@ namespace DreamMovers
             if (!string.IsNullOrEmpty(message))
             {
                 MenuMessage = message;
+                LastLeaveReason = message;
             }
             NetworkManager net = Net;
-            if (net != null)
+            Role = DMSessionRole.None;
+            Names.Clear();
+            Approved.Clear();
+            if (net == null)
             {
-                Unhook(net);
+                GoToMenu();
+                return;
+            }
+            Unhook(net);
+            bool hostWithPlayers = net.IsListening && net.IsServer && net.ConnectedClientsIds.Any(id => id != NetworkManager.ServerClientId);
+            if (!hostWithPlayers)
+            {
                 if (net.IsListening)
                 {
-                    if (net.IsServer)
-                    {
-                        foreach (ulong clientId in net.ConnectedClientsIds.Where(id => id != NetworkManager.ServerClientId).ToList())
-                        {
-                            net.DisconnectClient(clientId, "방장이 방을 닫았습니다");
-                        }
-                    }
                     net.Shutdown();
                 }
                 // A fresh one comes with the game scene next time.
                 UnityEngine.Object.Destroy(net.gameObject);
+                GoToMenu();
+                return;
             }
-            Role = DMSessionRole.None;
-            Names.Clear();
+            // Tell everyone first, then let Netcode's own shutdown wait for them to go before the network is removed.
+            foreach (ulong clientId in net.ConnectedClientsIds.Where(id => id != NetworkManager.ServerClientId).ToList())
+            {
+                net.DisconnectClient(clientId, HostClosedRoom);
+            }
+            net.Shutdown();
+            closing = true;
+            if (runner == null)
+            {
+                runner = new GameObject("DM Session").AddComponent<Runner>();
+                UnityEngine.Object.DontDestroyOnLoad(runner.gameObject);
+            }
+            runner.StartCoroutine(FinishClosing(net));
+        }
+
+        static IEnumerator FinishClosing(NetworkManager net)
+        {
+            float until = Time.realtimeSinceStartup + CloseRoomTimeoutSeconds;
+            while (net != null && net.ShutdownInProgress && Time.realtimeSinceStartup < until)
+            {
+                yield return null;
+            }
+            if (net != null)
+            {
+                UnityEngine.Object.Destroy(net.gameObject);
+            }
+            closing = false;
+            GoToMenu();
+        }
+
+        static void GoToMenu()
+        {
             sceneLoad = SceneManager.LoadSceneAsync(MenuScene, LoadSceneMode.Single);
+        }
+
+        /// <summary>Runs the closing wait; lives across scenes, does nothing else.</summary>
+        class Runner : MonoBehaviour
+        {
         }
 
         /// <summary>Called every frame by the out-game UI: a client that knocks for too long gives up.</summary>
@@ -281,7 +345,15 @@ namespace DreamMovers
 
         static void OnClientConnected(ulong clientId)
         {
-            if (Net != null && !Net.IsServer && clientId == Net.LocalClientId)
+            if (Net == null)
+            {
+                return;
+            }
+            if (Net.IsServer)
+            {
+                Approved.Remove(clientId);
+            }
+            else if (clientId == Net.LocalClientId)
             {
                 WasConnected = true;
             }
@@ -297,26 +369,37 @@ namespace DreamMovers
             if (net.IsServer)
             {
                 Names.Remove(clientId);
+                Approved.Remove(clientId);
                 return;
             }
             // A client only hears about itself: refused, dropped, or the host left.
-            string reason = net.DisconnectReason;
-            // Netcode's own reasons ("[Disconnect Event]...") are for the log; the host's refusals are for the player.
-            if (!string.IsNullOrEmpty(reason) && reason.StartsWith("["))
-            {
-                Debug.Log($"[DreamMovers] disconnected: {reason}");
-                reason = null;
-            }
-            if (string.IsNullOrEmpty(reason))
-            {
-                reason = WasConnected ? "방장과 연결이 끊겼습니다" : $"{Address}에 접속하지 못했습니다. 주소와 방장 상태를 확인해 주세요";
-            }
-            Leave(reason);
+            Leave(ReasonForPlayer(net.DisconnectReason, WasConnected, Address));
         }
 
         static void OnTransportFailure()
         {
             Leave(Net != null && Net.IsServer ? "네트워크 오류로 방이 닫혔습니다" : "네트워크 오류로 연결이 끊겼습니다");
+        }
+
+        /// <summary>
+        /// What a dropped client is told. The host's own reasons are Korean and shown as they are; Netcode's English ones
+        /// ("[Disconnect Event]...", "Disconnected due to host shutting down.") go to the log and become plain words.
+        /// </summary>
+        public static string ReasonForPlayer(string reason, bool wasConnected, string address)
+        {
+            if (!string.IsNullOrEmpty(reason) && reason.Any(c => c >= '\uAC00' && c <= '\uD7A3'))
+            {
+                return reason;
+            }
+            if (!string.IsNullOrEmpty(reason))
+            {
+                Debug.Log($"[DreamMovers] disconnected: {reason}");
+                if (reason.IndexOf("shutting down", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    return HostClosedRoom;
+                }
+            }
+            return wasConnected ? "방장과 연결이 끊겼습니다" : $"{address}에 접속하지 못했습니다. 주소와 방장 상태를 확인해 주세요";
         }
 
         // ---- Who may come in ----
@@ -370,7 +453,8 @@ namespace DreamMovers
             NetworkManager net = Net;
             JoinRequest join = ReadPayload(request.Payload);
             bool isHost = net != null && request.ClientNetworkId == NetworkManager.ServerClientId;
-            int inRoom = net != null ? net.ConnectedClientsIds.Count : 0;
+            // Players let in on an earlier knock this frame are not in the connected list yet.
+            int inRoom = net != null ? net.ConnectedClientsIds.Count + Approved.Count(id => !net.ConnectedClientsIds.Contains(id)) : 0;
             bool roundRunning = DMGameState.Instance != null && DMGameState.Instance.RoundState == DMRoundState.Playing;
             string reason = string.Empty;
             bool approved = isHost || Evaluate(join, Application.version, inRoom, MaxPlayers, roundRunning, AllowJoinDuringRound, out reason);
@@ -381,6 +465,10 @@ namespace DreamMovers
             response.Pending = false;
             if (approved)
             {
+                if (!isHost)
+                {
+                    Approved.Add(request.ClientNetworkId);
+                }
                 Names[request.ClientNetworkId] = string.IsNullOrEmpty(join.Nickname) ? DefaultName(request.ClientNetworkId) : join.Nickname;
             }
         }

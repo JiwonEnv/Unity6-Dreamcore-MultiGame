@@ -114,6 +114,31 @@ namespace DreamMovers.Tests
         }
 
         [Test]
+        public void ChangingToAKeyInUseSwapsThem()
+        {
+            DMControls.Map.RemoveAllBindingOverrides();
+            DMControls.Rebindable jump = DMControls.Rebindables().Find(k => k.Action == DMControls.Jump);
+            DMControls.Rebindable forward = DMControls.Rebindables().Find(k => k.Action == DMControls.Move && k.Label.EndsWith("앞"));
+            // Jump is changed to W, which Move forward uses.
+            DMControls.Jump.ApplyBindingOverride(jump.BindingIndex, "<Keyboard>/w");
+            string swapped = DMSettingsScreen.SwapDuplicate(jump, "<Keyboard>/space");
+            Assert.AreEqual(forward.Label, swapped);
+            Assert.AreEqual("<Keyboard>/space", DMControls.Move.bindings[forward.BindingIndex].effectivePath, "forward takes jump's old key");
+            Assert.AreEqual("<Keyboard>/w", DMControls.Jump.bindings[jump.BindingIndex].effectivePath);
+            Assert.IsNull(DMSettingsScreen.SwapDuplicate(jump, "<Keyboard>/w"), "no clash, nothing swapped");
+            DMControls.Map.RemoveAllBindingOverrides();
+        }
+
+        [Test]
+        public void DroppedPlayersReadKoreanReasons()
+        {
+            Assert.AreEqual("방이 가득 찼습니다 (최대 4명)", DMSession.ReasonForPlayer("방이 가득 찼습니다 (최대 4명)", false, "1.2.3.4"), "host's refusal shown as is");
+            Assert.AreEqual("방장이 방을 닫았습니다", DMSession.ReasonForPlayer("Disconnected due to host shutting down.", true, "1.2.3.4"));
+            StringAssert.Contains("접속하지 못했습니다", DMSession.ReasonForPlayer("[Disconnect Event][Client-0][MaxConnectionAttempts] Connection closed", false, "1.2.3.4"));
+            Assert.AreEqual("방장과 연결이 끊겼습니다", DMSession.ReasonForPlayer(null, true, "1.2.3.4"));
+        }
+
+        [Test]
         public void HostLetsInOnlyWhoFits()
         {
             DMSession.JoinRequest request = DMSession.ReadPayload(DMSession.Payload("0.1", "토끼"));

@@ -27,6 +27,8 @@ namespace DreamMovers
         readonly List<string> microphones = new List<string>();
         InputActionRebindingExtensions.RebindingOperation rebinding;
         int rebindEndedFrame = -10;
+        /// <summary>Something changed since the last save (saved on close, and on scene change or quit if still open).</summary>
+        bool dirty;
         Label rebindStatus;
         ScrollView bindingList;
 
@@ -118,7 +120,11 @@ namespace DreamMovers
             return field;
         }
 
-        static void Changed() => Settings.Apply();
+        void Changed()
+        {
+            dirty = true;
+            Settings.Apply();
+        }
 
         public void ShowTab(string name)
         {
@@ -221,12 +227,18 @@ namespace DreamMovers
         {
             CancelRebind();
             Settings.Save();
+            dirty = false;
         }
 
         void ResetAll()
         {
             CancelRebind();
             Settings.ResetOptions();
+            // The defaults say nothing about the window, which would stay as it is: put it back to the monitor's own size.
+            Settings.displaySaved = true;
+            Settings.resolutionWidth = Screen.currentResolution.width;
+            Settings.resolutionHeight = Screen.currentResolution.height;
+            Settings.windowMode = FullScreenMode.FullScreenWindow;
             Changed();
             Open();
         }
@@ -266,33 +278,75 @@ namespace DreamMovers
             }
             bool wasEnabled = DMControls.Map.enabled;
             DMControls.Map.Disable();
+            string oldPath = key.Action.bindings[key.BindingIndex].effectivePath;
             button.text = "…";
             if (rebindStatus != null)
             {
                 rebindStatus.text = $"{key.Label}: 새 키를 누르세요 (Esc 취소)";
             }
-            rebinding = key.Action.PerformInteractiveRebinding(key.BindingIndex)
+            // While waiting, clicks must not reach tabs or buttons (they would also become the new key).
+            root.SetEnabled(false);
+            InputActionRebindingExtensions.RebindingOperation operation = key.Action.PerformInteractiveRebinding(key.BindingIndex)
                 .WithCancelingThrough("<Keyboard>/escape")
                 .WithControlsExcluding("<Mouse>/position")
                 .WithControlsExcluding("<Mouse>/delta")
                 .WithControlsExcluding("<Mouse>/scroll")
+                .WithControlsExcluding("<Pointer>/position")
                 .OnMatchWaitForAnother(0.1f)
-                .OnComplete(_ => EndRebind(wasEnabled))
-                .OnCancel(_ => EndRebind(wasEnabled))
-                .Start();
+                .OnComplete(_ => EndRebind(wasEnabled, key, oldPath))
+                .OnCancel(_ => EndRebind(wasEnabled, key, null));
+            if (key.Action != DMControls.Grab)
+            {
+                // The left button is how a menu is clicked; only Grab (its default) may take it.
+                operation.WithControlsExcluding("<Mouse>/leftButton");
+            }
+            rebinding = operation.Start();
         }
 
-        void EndRebind(bool reenable)
+        void EndRebind(bool reenable, DMControls.Rebindable key, string oldPath)
         {
             rebinding?.Dispose();
             rebinding = null;
             rebindEndedFrame = Time.frameCount;
+            root.SetEnabled(true);
+            string swapped = oldPath != null ? SwapDuplicate(key, oldPath) : null;
             Settings.bindingOverrides = DMControls.SaveOverrides();
+            dirty = true;
             if (reenable)
             {
                 DMControls.Map.Enable();
             }
             RefreshBindings();
+            if (swapped != null && rebindStatus != null)
+            {
+                rebindStatus.text = $"같은 키를 쓰던 '{swapped}'에는 원래 키({InputControlPath.ToHumanReadableString(oldPath, InputControlPath.HumanReadableStringOptions.OmitDevice)})를 넣었습니다";
+            }
+        }
+
+        /// <summary>
+        /// One key, one job: if another action already used the new key, it takes over this action's old key.
+        /// Returns that action's label, or null when there was no clash.
+        /// </summary>
+        public static string SwapDuplicate(DMControls.Rebindable changed, string oldPath)
+        {
+            string newPath = changed.Action.bindings[changed.BindingIndex].effectivePath;
+            if (string.IsNullOrEmpty(newPath) || newPath == oldPath)
+            {
+                return null;
+            }
+            foreach (DMControls.Rebindable other in DMControls.Rebindables())
+            {
+                if (other.Action == changed.Action && other.BindingIndex == changed.BindingIndex)
+                {
+                    continue;
+                }
+                if (other.Action.bindings[other.BindingIndex].effectivePath == newPath)
+                {
+                    other.Action.ApplyBindingOverride(other.BindingIndex, oldPath);
+                    return other.Label;
+                }
+            }
+            return null;
         }
 
         void CancelRebind()
@@ -303,17 +357,24 @@ namespace DreamMovers
         void ResetBindings()
         {
             CancelRebind();
+            dirty = true;
             DMControls.Map.RemoveAllBindingOverrides();
             Settings.bindingOverrides = string.Empty;
             Changed();
             RefreshBindings();
         }
 
+        /// <summary>The scene is going away (room dropped, game quitting): keep what was changed.</summary>
         public void Dispose()
         {
             CancelRebind();
             rebinding?.Dispose();
             rebinding = null;
+            if (dirty)
+            {
+                Settings.Save();
+                dirty = false;
+            }
         }
     }
 }

@@ -66,6 +66,8 @@ namespace DreamMovers
         DMOutGameScreen settingsReturn = DMOutGameScreen.Menu;
         bool built;
         int tip;
+        /// <summary>The mouse was playing when only the loading screen took it (round restart): give it back after.</summary>
+        bool relockAfterLoading;
 
         public static DMOutGameUI Instance { get; private set; }
 
@@ -531,8 +533,20 @@ namespace DreamMovers
 
             if (Blocking && Cursor.lockState != CursorLockMode.None)
             {
+                // Only the loading screen (a new map between rounds): play resumes on its own afterwards.
+                relockAfterLoading = LoadingVisible && current == DMOutGameScreen.None && !PopupOpen;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+            }
+            if (current != DMOutGameScreen.None || PopupOpen)
+            {
+                relockAfterLoading = false;
+            }
+            else if (relockAfterLoading && !Blocking && DMDoll.Local != null && Application.isFocused)
+            {
+                relockAfterLoading = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
 
@@ -542,7 +556,12 @@ namespace DreamMovers
             string detail = null;
             bool canCancel = false;
             DMGameState state = DMGameState.Instance;
-            if (DMSession.IsLoadingScene)
+            if (DMSession.IsClosing)
+            {
+                text = "방을 닫는 중…";
+                detail = "다른 사람에게 알리는 중";
+            }
+            else if (DMSession.IsLoadingScene)
             {
                 text = "불러오는 중…";
             }
@@ -552,8 +571,9 @@ namespace DreamMovers
                 detail = $"{DMSession.Address} · {Mathf.FloorToInt(DMSession.ConnectingSeconds)}초";
                 canCancel = true;
             }
-            else if (DMSession.IsListening && (state == null || state.RoundState == DMRoundState.Preparing))
+            else if (DMSession.IsListening && (state == null || state.RoundState == DMRoundState.Preparing || !DMLevelSync.Ready))
             {
+                // Preparing on the host, or this machine still building the map (joined mid-round, slow PC).
                 text = "꿈을 짓는 중…";
                 detail = Tips[tip % Tips.Length];
                 canCancel = true;

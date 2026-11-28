@@ -136,7 +136,10 @@ namespace DreamMovers
             // Let go, tell the client we are done, and give it time to log.
             DMDoll.Local.Grab.ServerDropHeld();
             yield return new WaitForSeconds(3f);
-            net.Shutdown();
+            // Close the room as the pause menu does: players are told, then the network goes.
+            DMSession.Leave();
+            yield return WaitFor(() => !DMSession.IsClosing && NetworkManager.Singleton == null, 10f);
+            Check(!DMSession.IsClosing && NetworkManager.Singleton == null, "host_closed_room", $"closing {DMSession.IsClosing}");
         }
 
         IEnumerator RunClient()
@@ -182,8 +185,9 @@ namespace DreamMovers
             float startY = heavy.transform.position.y;
             yield return new WaitForSeconds(2f);
             Check(heavy.transform.position.y - startY > 0.2f || heavy.transform.position.y > 0.8f, "client_sees_item_lifted", $"item at y {heavy.transform.position.y:0.00}");
-            // The host ends the test by shutting down.
-            yield return WaitFor(() => !net.IsListening || !net.IsConnectedClient, 30f);
+            // The host ends the test by closing the room; this side must say so, not "connection lost".
+            yield return WaitFor(() => DMSession.LastLeaveReason != null, 30f);
+            Check(DMSession.LastLeaveReason == "방장이 방을 닫았습니다", "client_told_host_closed_room", DMSession.LastLeaveReason ?? "no reason");
         }
     }
 }
